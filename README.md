@@ -12,7 +12,7 @@
   - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1129-신기지출조후기.html)
 
 * **[12.13] 신기지 조행기 (B)**
-  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/213-신기지출조후기.html)
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1213-신기지출조후기.html)
 
 * **[12.20] 한터지 조행기**
   - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/251220-한터지후기.html)
