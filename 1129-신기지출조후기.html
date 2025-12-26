@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11/29 신기지 출조 복기 리포트</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f1f5f9; color: #1e293b; }
+        .header-bg { background: linear-gradient(135deg, #0f172a 0%, #334155 100%); }
+        .success-border { border-left: 6px solid #10b981; }
+        .fail-border { border-left: 6px solid #ef4444; }
+        
+        /* 갤러리 스타일 */
+        .gallery-item { cursor: pointer; transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.02); }
+        
+        /* 모달(팝업) 스타일 */
+        #imageModal {
+            display: none; 
+            position: fixed; z-index: 1000; left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+            backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        #modalImage {
+            max-width: 90%; max-height: 90%; 
+            border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .close-btn {
+            position: absolute; top: 20px; right: 30px; 
+            color: white; font-size: 40px; font-weight: bold; cursor: pointer;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 bg-slate-100">
+
+    <!-- 1. 헤더 섹션 -->
+    <header class="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden shadow-2xl bg-white">
+        <div class="relative h-64 md:h-80">
+            <!-- 메인 배경 (fishing.jpg) -->
+            <img src="fishing.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544280173-35bb6347432f?q=80&w=1920&auto=format&fit=crop';" alt="출조 사진" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent flex flex-col justify-end p-6">
+                <div class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-2 w-fit">MISSION COMPLETE</div>
+                <h1 class="text-3xl md:text-5xl font-black text-white mb-2">신기지 출조 복기 리포트</h1>
+                <p class="text-slate-300 font-medium">📅 2024.11.29 (토) | 🎣 낚시대장 (Captain)</p>
+            </div>
+        </div>
+        
+        <!-- 환경 정보 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-white border-b border-slate-100">
+            <div class="text-center">
+                <div class="text-slate-400 text-xs font-bold uppercase">WEATHER</div>
+                <div class="font-bold text-slate-700">☀️ 맑음</div>
+                <div class="text-xs text-slate-500">-5℃ ~ 12℃</div>
+            </div>
+            <div class="text-center border-l border-slate-100">
+                <div class="text-slate-400 text-xs font-bold uppercase">WATER</div>
+                <div class="font-bold text-slate-700">💧 탁함</div>
+                <div class="text-xs text-slate-500">전전날 비 영향</div>
+            </div>
+             <div class="text-center border-l border-slate-100">
+                <div class="text-slate-400 text-xs font-bold uppercase">CROWD</div>
+                <div class="font-bold text-slate-700">👥 만석</div>
+                <div class="text-xs text-slate-500">주말 인파</div>
+            </div>
+            <div class="text-center border-l border-slate-100">
+                <div class="text-slate-400 text-xs font-bold uppercase">TOTAL CATCH</div>
+                <div class="font-black text-3xl text-blue-600">13수</div>
+                <div class="text-xs text-slate-500">송어 50% / 산천어 50%</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto space-y-8">
+
+        <!-- 2. 현장 갤러리 (NEW) -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-2xl mr-2">📸</span> 현장 갤러리 (Photo Log)
+            </h2>
+            <p class="text-sm text-slate-500 mb-4 ml-1">사진을 클릭하면 크게 볼 수 있습니다.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- 이미지 1~6 -->
+                <!-- onerror 코드를 넣어 파일이 없어도 레이아웃이 깨지지 않게 했습니다 -->
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery1.jpg')">
+                    <img src="gallery1.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+1'" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery2.jpg')">
+                    <img src="gallery2.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+2'" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery3.jpg')">
+                    <img src="gallery3.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+3'" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery4.jpg')">
+                    <img src="gallery4.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+4'" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery5.jpg')">
+                    <img src="gallery5.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+5'" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square rounded-xl overflow-hidden shadow-lg gallery-item" onclick="openModal('gallery6.jpg')">
+                    <img src="gallery6.jpg" onerror="this.src='https://placehold.co/400x400?text=No+Image+6'" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 3-Rod 전략 검증 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                <span class="text-2xl mr-2">🧰</span> 3-Rod 전략 검증 (Review)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- ROD 1 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm success-border">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">SUCCESS</span>
+                        <span class="text-slate-400 text-xs font-bold">ROD 1 (Sage)</span>
+                    </div>
+                    <div class="mb-3 pb-3 border-b border-slate-100">
+                        <div class="text-sm font-bold text-slate-800">Sage Foundation 690-4</div>
+                        <div class="text-xs text-slate-500 mt-1">Line: RIO Xtreme Indicator WF6F</div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">인디케이터 채비</h3>
+                    <p class="text-sm text-slate-600 mb-3">부교 끝 바닥권 공략 적중. <br><b>에그 & Balanced Leech</b>가 효자.</p>
+                    <div class="bg-slate-50 p-2 rounded text-xs text-slate-500">🎯 <b>Key:</b> 바닥 + 30cm</div>
+                </div>
+                <!-- ROD 2 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm fail-border">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">FAIL</span>
+                        <span class="text-slate-400 text-xs font-bold">ROD 2 (Scott)</span>
+                    </div>
+                    <div class="mb-3 pb-3 border-b border-slate-100">
+                        <div class="text-sm font-bold text-slate-800">SCOTT CENTRIC 690-4</div>
+                        <div class="text-xs text-slate-500 mt-1">Line: SA Sonar Titan Sink Tip (WF6-F/S3)</div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">싱킹 라인 채비</h3>
+                    <p class="text-sm text-slate-600 mb-3">빠른 액션 반응 無.<br>느리면 밑걸림 발생.</p>
+                    <div class="bg-slate-50 p-2 rounded text-xs text-slate-500">🚫 <b>Result:</b> 30분 만에 철수</div>
+                </div>
+                <!-- ROD 3 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm success-border">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded">FUN PICK</span>
+                        <span class="text-slate-400 text-xs font-bold">ROD 3 (T&T)</span>
+                    </div>
+                    <div class="mb-3 pb-3 border-b border-slate-100">
+                        <div class="text-sm font-bold text-slate-800">T&T Paradigm 590-4</div>
+                        <div class="text-xs text-slate-500 mt-1">Line: RIO Elite Gold Classic WF5F</div>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">피네스/마이크로</h3>
+                    <p class="text-sm text-slate-600 mb-3">마커가 반만 잠기는 미약한 입질 캐치.</p>
+                    <div class="bg-slate-50 p-2 rounded text-xs text-slate-500">✨ <b>Feel:</b> 낚시의 맛!</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 시간대별 조과 흐름 -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm">
+            <h2 class="text-xl font-bold text-slate-800 mb-2">⏰ 시간대별 활성도 흐름</h2>
+            <div class="h-64"><canvas id="timelineChart"></canvas></div>
+        </section>
+
+        <!-- 5. 히트 패턴 & 총평 -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gradient-to-b from-cyan-50 to-blue-100 p-6 rounded-2xl border border-blue-200 text-center">
+                <h3 class="font-bold text-blue-900 mb-4">🎯 오늘의 적중 수심 (Winning Depth)</h3>
+                <div class="border-b border-dashed border-blue-300 pb-4 mb-4 text-center opacity-50"><span class="text-xs">표층: 반응 미미</span></div>
+                <div class="bg-blue-600 text-white p-4 rounded-lg shadow-lg mx-4">
+                    <span class="bg-yellow-400 text-blue-900 text-xs font-black px-2 py-1 rounded uppercase animate-pulse">Hit Zone</span>
+                    <div class="font-black text-xl mt-1">바닥권 (Bottom)</div>
+                    <div class="text-sm font-medium mt-1">바닥에서 딱 <span class="text-yellow-300">30cm</span> 위!</div>
+                </div>
+            </div>
+            <div class="bg-slate-800 text-white p-6 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-4">💡 Captain's Lesson</h3>
+                    <p class="text-sm text-slate-300 mb-4">"예민함의 극치였지만, 피네스 채비로 극복하다."</p>
+                </div>
+                <div class="border-t border-slate-600 pt-4">
+                    <h4 class="font-bold text-green-400 text-sm mb-2">NEXT MISSION</h4>
+                    <ul class="text-sm text-slate-300 list-disc list-inside">
+                        <li>싱킹 라인 봉인</li>
+                        <li>화이트 뉴크 에그 대량 보강</li>
+                        <li><b>바닥 + 30cm</b> 사수</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto mt-10 text-center text-slate-400 text-xs pb-10">
+        <p>Report Generated by Jeff | Based on Captain's Real Data</p>
+    </footer>
+
+    <!-- 이미지 확대 모달 -->
+    <div id="imageModal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <img id="modalImage" src="">
+    </div>
+
+    <script>
+        // 모달 기능 스크립트
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            // 이미지가 로드되지 않은 경우(엑박) 모달을 띄우지 않음
+            const tempImg = new Image();
+            tempImg.src = imgSrc;
+            tempImg.onerror = function() { console.log('이미지 없음'); };
+            tempImg.onload = function() {
+                modal.style.display = "flex";
+                modalImg.src = imgSrc;
+            };
+        }
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+
+        // 차트 설정
+        const ctx = document.getElementById('timelineChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '17:00'],
+                datasets: [
+                    {
+                        label: '기대 활성도', data: [90, 80, 50, 40, 50, 80, 90],
+                        borderColor: '#cbd5e1', borderDash: [5, 5], tension: 0.4
+                    },
+                    {
+                        label: '실제 조과', data: [60, 50, 30, 20, 30, 30, 25],
+                        borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.1)', fill: true, tension: 0.4
+                    }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { display: false }, x: { grid: { display: false } } } }
+        });
+    </script>
+</body>
+</html>
