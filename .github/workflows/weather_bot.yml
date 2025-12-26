@@ -2,15 +2,19 @@ name: Daily Weather Logger
 
 on:
   schedule:
-    - cron: '0 21 * * *' # 한국 시간 매일 오전 6시 (UTC 21:00)
-  workflow_dispatch: # 수동 실행 버튼
+    - cron: '0 21 * * *' # 한국 시간 매일 오전 6시
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 파일 쓰기 권한을 명시적으로 한 번 더 부여
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 모든 기록을 가져와 동기화 오류 방지
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -30,6 +34,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add weather_log.md
-          # 변경사항이 없어도(nothing to commit) 에러를 내지 않고 성공(exit 0) 처리합니다.
-          git commit -m "Update weather log" || exit 0
-          git push || exit 0
+          # 변경사항이 있는지 확인 후 있으면 커밋, 없으면 통과
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Update weather log"
+            git pull --rebase origin main # 서버의 최신 내용과 합치기
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
