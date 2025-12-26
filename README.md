@@ -5,18 +5,18 @@
 
 ## 📅 2025년 출조 기록 목록
 
-* **[12.20] 한터지 조행기**
-  - [📍 발밑 수평 드리프트 비법 보기](https://caddis-gr.github.io/fishing-log/251220-한터지후기.html)
+* **[11.15] 한터지 조행기**
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1115_한터지_조행기.html)
   - *핵심: 예민한 입질을 잡아내는 수평 드리프트 테크닉*
 
-* **[11.15] 한터지 조행기 (A)**
-  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1115_한터지_조행기.html)
+* **[11.29] 신기지 조행기 (A)**
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1129-신기지출조후기.html)
 
-* **[11.15] 한터지 조행기 (B)**
-  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1115_한터지_조행기_1.html)
+* **[12.13] 신기지 조행기 (B)**
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/213-신기지출조후기.html)
 
-* **[미분류] 미션 신기지 조행기**
-  - [📍 신기지 현장 기록 보기](https://caddis-gr.github.io/fishing-log/미션%20신기지.html)
+* **[12.20] 한터지 조행기**
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/251220-한터지후기.html)
 
 ---
 
