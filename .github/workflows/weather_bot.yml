@@ -1,0 +1,33 @@
+name: Daily Weather Logger
+
+on:
+  schedule:
+    - cron: '0 21 * * *' # 한국 시간 매일 오전 6시 (UTC 21:00)
+  workflow_dispatch: # 수동으로 즉시 실행해볼 수 있는 버튼 생성
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: python update_weather.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add weather_log.md
+          git commit -m "Update weather log"
+          git push
