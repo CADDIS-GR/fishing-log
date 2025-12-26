@@ -7,7 +7,6 @@
 
 * **[11.15] 한터지 조행기**
   - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1115_한터지_조행기.html)
-  - *핵심: 예민한 입질을 잡아내는 수평 드리프트 테크닉*
 
 * **[11.29] 신기지 조행기 (A)**
   - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/1129-신기지출조후기.html)
