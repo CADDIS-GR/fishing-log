@@ -8,7 +8,7 @@ My fishing-log
 
 ## 📅 2025년 조행기 목록
 * [📍 [251220-한터지후기] - (https://caddis-gr.github.io/fishing-log/251220-한터지후기.html)
-* [📍 [251129-신기지후기] - (https://caddis-gr.github.io/fishing-log/251220-1129-신기지출조후기.html)
+* [📍 [251129-신기지후기] - (https://caddis-gr.github.io/fishing-log/1129-신기지출조후기.html)
 
 ---
 > "모르면 모른다고 한다." - 낚시대장의 철학
