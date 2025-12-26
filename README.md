@@ -7,7 +7,7 @@ My fishing-log
 ---
 
 ## 📅 2025년 조행기 목록
-* [📍 [12.26] 미션 신기지 - TMC 프리즈마틱 스레드의 위력](https://caddis-gr.github.io/fishing-log/미션%20신기지.html)
+* [📍 [251220-한터지후기] - TMC 프리즈마틱 스레드의 위력](https://caddis-gr.github.io/fishing-log/미션%20신기지.html)
 
 ---
 > "모르면 모른다고 한다." - 낚시대장의 철학
