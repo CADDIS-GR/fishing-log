@@ -2,8 +2,8 @@ name: Daily Weather Logger
 
 on:
   schedule:
-    - cron: '0 21 * * *' # 매일 아침 6시 (한국 시간)
-  workflow_dispatch: # 수동 실행 버튼
+    - cron: '0 21 * * *' # 매일 아침 6시
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -31,13 +31,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
           git add weather_log.md
           
-          # [핵심] 변경사항이 있는지 확인하고 있을 때만 저장합니다.
-          if ! git diff --cached --quiet; then
+          # 변경사항이 있을 때만 저장하고, 없으면 그냥 성공으로 표시합니다.
+          if [ -n "$(git status --porcelain)" ]; then
             git commit -m "Update weather log"
             git push
           else
-            echo "날씨 변화가 없어 기록을 건너뜁니다."
+            echo "기록할 새로운 내용이 없습니다. 다음 물때를 기다립니다."
           fi
