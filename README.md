@@ -18,7 +18,7 @@
   - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/251220-한터지후기.html)
 
 * **[260104] 신기지 조행기**
-  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/26-0104-신기지_조행기.html)  
+  - [📍 조과 기록 확인하기](https://caddis-gr.github.io/fishing-log/26-0104-신기지 조행기.html)  
 
 ---
 
