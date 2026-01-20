@@ -1,557 +1,157 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>플라이낚시 조행기 아카이브</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+# 🎣 낚시대장의 실전 조행기
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+관리형 저수지 플라이 낚시의 생생한 현장 기록과 데이터를 공유합니다.
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://caddis-gr.github.io/fishing-log/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-        header {
-            background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(52, 73, 94, 0.6)),
-                        url('images/field-bg.jpg') center/cover;
-            background-attachment: fixed;
-            color: white;
-            padding: 100px 40px;
-            text-align: center;
-            position: relative;
-        }
+## 📊 2025년 출조 통계
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            font-weight: 800;
-        }
+메인: https://caddis-gr.github.io/fishing-log/index.html
 
-        header p {
-            font-size: 1.3em;
-            opacity: 0.95;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+**총 조행**: 5회  
+**총 캐치**: 63마리  
+**방문 낚시터**: 2곳  
+**평균 마릿수**: 12.6마리
 
-        .filters {
-            padding: 30px;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+### 📍 방문 낚시터
+- 🏔️ **용인 한터낚시터** (2회)
+- 🌊 **신기사낚시터** (3회)
 
-        .filter-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+## 📅 2024-2025 시즌 조행 목록
 
-        .filter-group label {
-            font-weight: 600;
-            color: #495057;
-        }
+### 🍂 가을 시즌
+- **[11.15] 한터치 조행기** - 바닥 공략의 핵심 ([상세보기](logs/2024-11-15-hanteo.html))
+  - 📍 용인 한터낚시터 | 🎯 15마리 | 🌡️ 5°C
+  - 🎣 주요 패턴: Vampire Leech, Chironomid
+  - 💡 핵심: Deep Lining 전략 수립
 
-        select, input {
-            padding: 8px 15px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 0.95em;
-            transition: all 0.3s;
-        }
+- **[11.29] 신기사 조행기 (A)** - 늦가을 저수온 공략 ([상세보기](logs/2024-11-29-singisa.html))
+  - 📍 신기사낚시터 | 🎯 12마리 | 🌡️ 3°C
+  - 🎣 주요 패턴: Streamer, Nymph
+  - 💡 핵심: 저수온기 스트리머 전략
 
-        select:focus, input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
+### ❄️ 겨울 시즌
+- **[12.13] 신기사 조행기 (B)** - 한파 속 송어 공략 ([상세보기](logs/2024-12-13-singisa.html))
+  - 📍 신기사낚시터 | 🎯 8마리 | 🌡️ -2°C
+  - 🎣 주요 패턴: Woolly Bugger, Leech
+  - 💡 핵심: 한파 대응 바닥 집중
 
-        .stats {
-            padding: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            background: #f8f9fa;
-        }
+- **[12.20] 한터치 후기** - Deep Lining 검증 ([상세보기](logs/2024-12-20-hanteo.html))
+  - 📍 용인 한터낚시터 | 🎯 18마리 | 🌡️ 0°C
+  - 🎣 주요 패턴: Chironomid, Bloodworm
+  - 💡 핵심: Deep Lining 효과 재확인
 
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
+- **[01.04] 신기사 조행기 (2025)** - 새해 첫 출조 ([상세보기](logs/2025-01-04-singisa.html))
+  - 📍 신기사낚시터 | 🎯 10마리 | 🌡️ -5°C
+  - 🎣 주요 패턴: Streamer #8, Leech
+  - 💡 핵심: 강추위 느린 리트리브
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
+## 🛠️ 주요 장비
 
-        .stat-card .number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
+### 로드 & 라인
+- **Sage Foundation 690-4** + Rio Elite Stillwater Floater WF5F
+- **SCOTT CENTRIC 690-4** + SA Sonar Titan 3D i/3/5 WF6S
+- **Sage R8 Core 4100-4** + SA Sonar Sink 25 Cold (Sink 6)
 
-        .stat-card .label {
-            color: #6c757d;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+### 효과적인 패턴
+- 🔴 **Vampire Leech** - 한터지 최고 히트 패턴
+- ⚫ **Chironomid Pupa** - 저수온기 필수
+- 🟤 **Woolly Bugger** - 만능 스트리머
+- 🔵 **Bloodworm** - 바닥 공략
 
-        .logs-container {
-            padding: 40px;
-        }
+## 📖 프로젝트 구조
 
-        .logs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
+```
+fishing-log/
+├── index.html              # 메인 대시보드 (조행기 목록)
+├── logs/                   # 개별 조행기 HTML 파일들
+│   ├── 1115_인터치_조행기.html
+│   ├── 1129-신기사춤조후기.html
+│   ├── 1213-신기사춤조후기.html
+│   ├── 251220-한터치후기.html
+│   └── 26-0104-신기사_조행기.html
+├── weather_log.md          # 날씨 기록
+├── update_weather.py       # 날씨 자동화 스크립트
+└── .github/workflows/      # GitHub Actions
+```
 
-        .log-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
+## 🚀 사용 방법
 
-        .log-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            border-color: #667eea;
-        }
+### 웹에서 보기
+[https://caddis-gr.github.io/fishing-log/](https://caddis-gr.github.io/fishing-log/)
 
-        .log-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4em;
-        }
+### 로컬에서 보기
+```bash
+git clone https://github.com/CADDIS-GR/fishing-log.git
+cd fishing-log
+# index.html을 브라우저로 열기
+```
 
-        .log-content {
-            padding: 20px;
-        }
+## 🎯 조행기 작성 가이드
 
-        .log-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 15px;
-        }
+새로운 조행기를 추가하려면:
 
-        .log-date {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+1. `logs/` 폴더에 새 HTML 파일 생성
+2. 기존 조행기 템플릿 참고
+3. `index.html`의 `logsData` 배열에 정보 추가
 
-        .log-weather {
-            font-size: 1.5em;
-        }
+```javascript
+{
+    id: 'filename',
+    date: '2025-01-20',
+    location: '낚시터명',
+    weather: '☀️',
+    temp: 5,
+    waterTemp: 8,
+    season: 'winter',
+    summary: '조행 요약',
+    patterns: ['패턴1', '패턴2'],
+    species: ['어종'],
+    catch: 15,
+    size: 40,
+    notes: '메모',
+    file: 'logs/filename.html'
+}
+```
 
-        .log-location {
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+## 💡 주요 인사이트
 
-        .log-summary {
-            color: #6c757d;
-            font-size: 0.95em;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
+### 한터낚시터 공략법
+- ✅ **수심**: 6m 깊은 저수지
+- ✅ **핵심**: 바닥(Bottom) 공략이 필수
+- ✅ **전략**: 풀싱킹 라인 + Deep Lining 조합
+- ✅ **패턴**: Vampire Leech, Chironomid
 
-        .log-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
+### 신기사낚시터 공략법
+- ✅ **특징**: 저수온기 반응 좋음
+- ✅ **전략**: 스트리머 중심 공략
+- ✅ **패턴**: Woolly Bugger, Leech
+- ✅ **팁**: 느린 리트리브가 효과적
 
-        .tag {
-            padding: 5px 12px;
-            background: #e9ecef;
-            border-radius: 20px;
-            font-size: 0.85em;
-            color: #495057;
-            font-weight: 500;
-        }
+## 📈 시즌별 통계
 
-        .tag.season { background: #d4edda; color: #155724; }
-        .tag.catch { background: #fff3cd; color: #856404; }
-        .tag.method { background: #d1ecf1; color: #0c5460; }
+| 시즌 | 조행 | 캐치 | 평균 |
+|------|------|------|------|
+| 가을 | 2회 | 27마리 | 13.5 |
+| 겨울 | 3회 | 36마리 | 12.0 |
 
-        .log-stats {
-            display: flex;
-            justify-content: space-around;
-            padding-top: 15px;
-            border-top: 1px solid #e9ecef;
-        }
+## 🤝 기여하기
 
-        .log-stat {
-            text-align: center;
-        }
+이 저장소는 개인 조행 기록용이지만, 플라이낚시 커뮤니티를 위해 공개합니다.  
+질문이나 제안사항은 Issue로 남겨주세요!
 
-        .log-stat .value {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.1em;
-        }
+## 📝 라이선스
 
-        .log-stat .label {
-            font-size: 0.8em;
-            color: #6c757d;
-            margin-top: 3px;
-        }
+MIT License - 자유롭게 참고하세요!
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #6c757d;
-        }
+## 📧 연락처
 
-        .empty-state h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #495057;
-            margin-top: 20px;
-        }
+- GitHub: [@CADDIS-GR](https://github.com/CADDIS-GR)
+- Blog: 낚시대장의 실전 조행기
 
-        @media (max-width: 768px) {
-            .logs-grid {
-                grid-template-columns: 1fr;
-            }
+---
 
-            .filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
+**"같은 필드에서도 다양한 기법과 공략으로 서로 다른 결과를 만들어 내는 게 낚시입니다."**
 
-            .filter-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            header h1 {
-                font-size: 1.8em;
-            }
-
-            header {
-                padding: 40px 20px;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>🎣 플라이낚시 조행기</h1>
-            <p>관리형낚시터 플라이낚시 기록 아카이브</p>
-        </header>
-
-        <div class="filters">
-            <div class="filter-group">
-                <label>시즌</label>
-                <select id="seasonFilter">
-                    <option value="all">전체</option>
-                    <option value="spring">봄</option>
-                    <option value="summer">여름</option>
-                    <option value="fall">가을</option>
-                    <option value="winter">겨울</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>장소</label>
-                <select id="locationFilter">
-                    <option value="all">전체</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>검색</label>
-                <input type="text" id="searchInput" placeholder="패턴, 어종 등...">
-            </div>
-        </div>
-
-        <div class="stats">
-            <div class="stat-card">
-                <div class="number" id="totalLogs">0</div>
-                <div class="label">총 조행</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="totalCatch">0</div>
-                <div class="label">총 캐치</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="totalLocations">0</div>
-                <div class="label">방문 낚시터</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="avgCatch">0</div>
-                <div class="label">평균 마릿수</div>
-            </div>
-        </div>
-
-        <div class="logs-container">
-            <div class="logs-grid" id="logsGrid"></div>
-            <div class="empty-state" id="emptyState" style="display: none;">
-                <div style="font-size: 4em;">🎣</div>
-                <h3>아직 조행기가 없습니다</h3>
-                <p>logs/ 폴더에 조행기를 추가해보세요!</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const logsData = [
-            {
-                id: '2024-11-15-hanteo',
-                date: '2024-11-15',
-                location: '용인 한터낚시터',
-                weather: '☀️',
-                temp: 5,
-                waterTemp: 8,
-                season: 'fall',
-                summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략',
-                patterns: ['Vampire Leech', 'Chironomid'],
-                species: ['무지개송어'],
-                catch: 15,
-                size: 38,
-                notes: '6m 수심, 바닥 공략이 핵심',
-                file: 'logs/2024-11-15-hanteo.html'
-            },
-            {
-                id: '2024-11-29-singisa',
-                date: '2024-11-29',
-                location: '신기사낚시터',
-                weather: '☁️',
-                temp: 3,
-                waterTemp: 6,
-                season: 'fall',
-                summary: '늦가을 신기사 공략. 저수온 대응 전략',
-                patterns: ['Streamer', 'Nymph'],
-                species: ['무지개송어'],
-                catch: 12,
-                size: 35,
-                notes: '저수온기 스트리머 공략',
-                file: 'logs/2024-11-29-singisa.html'
-            },
-            {
-                id: '2024-12-13-singisa',
-                date: '2024-12-13',
-                location: '신기사낚시터',
-                weather: '❄️',
-                temp: -2,
-                waterTemp: 4,
-                season: 'winter',
-                summary: '겨울 신기사 재방문. 한파 속 송어 공략',
-                patterns: ['Woolly Bugger', 'Leech'],
-                species: ['무지개송어', '산천어'],
-                catch: 8,
-                size: 40,
-                notes: '한파 대응, 바닥 집중',
-                file: 'logs/2024-12-13-singisa.html'
-            },
-            {
-                id: '2024-12-20-hanteo',
-                date: '2024-12-20',
-                location: '용인 한터낚시터',
-                weather: '⛅',
-                temp: 0,
-                waterTemp: 5,
-                season: 'winter',
-                summary: '겨울 한터지 재공략. Deep Lining 검증',
-                patterns: ['Chironomid', 'Bloodworm'],
-                species: ['무지개송어'],
-                catch: 18,
-                size: 42,
-                notes: 'Deep Lining 효과 재확인',
-                file: 'logs/2024-12-20-hanteo.html'
-            },
-            {
-                id: '2025-01-04-singisa',
-                date: '2025-01-04',
-                location: '신기사낚시터',
-                weather: '☀️',
-                temp: -5,
-                waterTemp: 3,
-                season: 'winter',
-                summary: '2025년 첫 조행. 강추위 속 신기사 공략',
-                patterns: ['Streamer #8', 'Leech'],
-                species: ['무지개송어'],
-                catch: 10,
-                size: 36,
-                notes: '강추위, 느린 리트리브',
-                file: 'logs/2025-01-04-singisa.html'
-            }
-        ];
-
-        let filteredLogs = [...logsData];
-
-        function initPage() {
-            updateStats();
-            populateLocationFilter();
-            renderLogs();
-        }
-
-        function updateStats() {
-            document.getElementById('totalLogs').textContent = logsData.length;
-            
-            const totalCatch = logsData.reduce((sum, log) => sum + log.catch, 0);
-            document.getElementById('totalCatch').textContent = totalCatch;
-            
-            const locations = new Set(logsData.map(log => log.location));
-            document.getElementById('totalLocations').textContent = locations.size;
-            
-            const avgCatch = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
-            document.getElementById('avgCatch').textContent = avgCatch;
-        }
-
-        function populateLocationFilter() {
-            const locations = [...new Set(logsData.map(log => log.location))];
-            const select = document.getElementById('locationFilter');
-            
-            locations.forEach(location => {
-                const option = document.createElement('option');
-                option.value = location;
-                option.textContent = location;
-                select.appendChild(option);
-            });
-        }
-
-        function renderLogs() {
-            const grid = document.getElementById('logsGrid');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (filteredLogs.length === 0) {
-                grid.style.display = 'none';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            grid.style.display = 'grid';
-            emptyState.style.display = 'none';
-            
-            grid.innerHTML = filteredLogs.map(log => `
-                <div class="log-card" onclick="viewLog('${log.file}')">
-                    <div class="log-image">🎣</div>
-                    <div class="log-content">
-                        <div class="log-header">
-                            <div class="log-date">${formatDate(log.date)}</div>
-                            <div class="log-weather">${log.weather}</div>
-                        </div>
-                        <div class="log-location">📍 ${log.location}</div>
-                        <div class="log-summary">${log.summary}</div>
-                        <div class="log-tags">
-                            <span class="tag season">${getSeasonName(log.season)}</span>
-                            <span class="tag catch">${log.catch}마리</span>
-                            <span class="tag method">${log.patterns[0]}</span>
-                        </div>
-                        <div class="log-stats">
-                            <div class="log-stat">
-                                <div class="value">${log.temp}°C</div>
-                                <div class="label">기온</div>
-                            </div>
-                            <div class="log-stat">
-                                <div class="value">${log.waterTemp}°C</div>
-                                <div class="label">수온</div>
-                            </div>
-                            <div class="log-stat">
-                                <div class="value">${log.size}cm</div>
-                                <div class="label">최대</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            const month = date.getMonth() + 1;
-            const day = date.getDate();
-            const days = ['일', '월', '화', '수', '목', '금', '토'];
-            const dayName = days[date.getDay()];
-            return `${month}월 ${day}일 (${dayName})`;
-        }
-
-        function getSeasonName(season) {
-            const seasons = {
-                spring: '봄',
-                summer: '여름',
-                fall: '가을',
-                winter: '겨울'
-            };
-            return seasons[season] || season;
-        }
-
-        function viewLog(file) {
-            window.location.href = file;
-        }
-
-        document.getElementById('seasonFilter').addEventListener('change', applyFilters);
-        document.getElementById('locationFilter').addEventListener('change', applyFilters);
-        document.getElementById('searchInput').addEventListener('input', applyFilters);
-
-        function applyFilters() {
-            const season = document.getElementById('seasonFilter').value;
-            const location = document.getElementById('locationFilter').value;
-            const search = document.getElementById('searchInput').value.toLowerCase();
-
-            filteredLogs = logsData.filter(log => {
-                const matchSeason = season === 'all' || log.season === season;
-                const matchLocation = location === 'all' || log.location === location;
-                const matchSearch = search === '' || 
-                    log.summary.toLowerCase().includes(search) ||
-                    log.patterns.some(p => p.toLowerCase().includes(search)) ||
-                    log.species.some(s => s.toLowerCase().includes(search)) ||
-                    log.location.toLowerCase().includes(search);
-
-                return matchSeason && matchLocation && matchSearch;
-            });
-
-            renderLogs();
-        }
-
-        initPage();
-    </script>
-</body>
-</html>
+🎣 Tight Lines!
