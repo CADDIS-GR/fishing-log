@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플라이낚시 조행기 아카이브</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .filters {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        select, input {
+            padding: 8px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .stats {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #6c757d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logs-container {
+            padding: 40px;
+        }
+
+        .logs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .log-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .log-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .log-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+        }
+
+        .log-content {
+            padding: 20px;
+        }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .log-date {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .log-weather {
+            font-size: 1.5em;
+        }
+
+        .log-location {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .log-summary {
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .log-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: #e9ecef;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .tag.season { background: #d4edda; color: #155724; }
+        .tag.catch { background: #fff3cd; color: #856404; }
+        .tag.method { background: #d1ecf1; color: #0c5460; }
+
+        .log-stats {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .log-stat {
+            text-align: center;
+        }
+
+        .log-stat .value {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .log-stat .label {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 3px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #495057;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .logs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎣 플라이낚시 조행기</h1>
+            <p>관리형낚시터 플라이낚시 기록 아카이브</p>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>시즌</label>
+                <select id="seasonFilter">
+                    <option value="all">전체</option>
+                    <option value="spring">봄</option>
+                    <option value="summer">여름</option>
+                    <option value="fall">가을</option>
+                    <option value="winter">겨울</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>장소</label>
+                <select id="locationFilter">
+                    <option value="all">전체</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>검색</label>
+                <input type="text" id="searchInput" placeholder="패턴, 어종 등...">
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number" id="totalLogs">0</div>
+                <div class="label">총 조행</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="totalCatch">0</div>
+                <div class="label">총 캐치</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="totalLocations">0</div>
+                <div class="label">방문 낚시터</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="avgCatch">0</div>
+                <div class="label">평균 마릿수</div>
+            </div>
+        </div>
+
+        <div class="logs-container">
+            <div class="logs-grid" id="logsGrid"></div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div style="font-size: 4em;">🎣</div>
+                <h3>아직 조행기가 없습니다</h3>
+                <p>logs/ 폴더에 조행기를 추가해보세요!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const logsData = [
+            {
+                id: '1115_인터치_조행기',
+                date: '2024-11-15',
+                location: '용인 한터낚시터',
+                weather: '☀️',
+                temp: 5,
+                waterTemp: 8,
+                season: 'fall',
+                summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략',
+                patterns: ['Vampire Leech', 'Chironomid'],
+                species: ['무지개송어'],
+                catch: 15,
+                size: 38,
+                notes: '6m 수심, 바닥 공략이 핵심',
+                file: 'logs/1115_인터치_조행기.html'
+            },
+            {
+                id: '1129-신기사춤조후기',
+                date: '2024-11-29',
+                location: '신기사낚시터',
+                weather: '☁️',
+                temp: 3,
+                waterTemp: 6,
+                season: 'fall',
+                summary: '늦가을 신기사 공략. 저수온 대응 전략',
+                patterns: ['Streamer', 'Nymph'],
+                species: ['무지개송어'],
+                catch: 12,
+                size: 35,
+                notes: '저수온기 스트리머 공략',
+                file: 'logs/1129-신기사춤조후기.html'
+            },
+            {
+                id: '1213-신기사춤조후기',
+                date: '2024-12-13',
+                location: '신기사낚시터',
+                weather: '❄️',
+                temp: -2,
+                waterTemp: 4,
+                season: 'winter',
+                summary: '겨울 신기사 재방문. 한파 속 송어 공략',
+                patterns: ['Woolly Bugger', 'Leech'],
+                species: ['무지개송어', '산천어'],
+                catch: 8,
+                size: 40,
+                notes: '한파 대응, 바닥 집중',
+                file: 'logs/1213-신기사춤조후기.html'
+            },
+            {
+                id: '251220-한터치후기',
+                date: '2024-12-20',
+                location: '용인 한터낚시터',
+                weather: '⛅',
+                temp: 0,
+                waterTemp: 5,
+                season: 'winter',
+                summary: '겨울 한터지 재공략. Deep Lining 검증',
+                patterns: ['Chironomid', 'Bloodworm'],
+                species: ['무지개송어'],
+                catch: 18,
+                size: 42,
+                notes: 'Deep Lining 효과 재확인',
+                file: 'logs/251220-한터치후기.html'
+            },
+            {
+                id: '26-0104-신기사_조행기',
+                date: '2025-01-04',
+                location: '신기사낚시터',
+                weather: '☀️',
+                temp: -5,
+                waterTemp: 3,
+                season: 'winter',
+                summary: '2025년 첫 조행. 강추위 속 신기사 공략',
+                patterns: ['Streamer #8', 'Leech'],
+                species: ['무지개송어'],
+                catch: 10,
+                size: 36,
+                notes: '강추위, 느린 리트리브',
+                file: 'logs/26-0104-신기사_조행기.html'
+            }
+        ];
+
+        let filteredLogs = [...logsData];
+
+        function initPage() {
+            updateStats();
+            populateLocationFilter();
+            renderLogs();
+        }
+
+        function updateStats() {
+            document.getElementById('totalLogs').textContent = logsData.length;
+            
+            const totalCatch = logsData.reduce((sum, log) => sum + log.catch, 0);
+            document.getElementById('totalCatch').textContent = totalCatch;
+            
+            const locations = new Set(logsData.map(log => log.location));
+            document.getElementById('totalLocations').textContent = locations.size;
+            
+            const avgCatch = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
+            document.getElementById('avgCatch').textContent = avgCatch;
+        }
+
+        function populateLocationFilter() {
+            const locations = [...new Set(logsData.map(log => log.location))];
+            const select = document.getElementById('locationFilter');
+            
+            locations.forEach(location => {
+                const option = document.createElement('option');
+                option.value = location;
+                option.textContent = location;
+                select.appendChild(option);
+            });
+        }
+
+        function renderLogs() {
+            const grid = document.getElementById('logsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (filteredLogs.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            emptyState.style.display = 'none';
+            
+            grid.innerHTML = filteredLogs.map(log => `
+                <div class="log-card" onclick="viewLog('${log.file}')">
+                    <div class="log-image">🎣</div>
+                    <div class="log-content">
+                        <div class="log-header">
+                            <div class="log-date">${formatDate(log.date)}</div>
+                            <div class="log-weather">${log.weather}</div>
+                        </div>
+                        <div class="log-location">📍 ${log.location}</div>
+                        <div class="log-summary">${log.summary}</div>
+                        <div class="log-tags">
+                            <span class="tag season">${getSeasonName(log.season)}</span>
+                            <span class="tag catch">${log.catch}마리</span>
+                            <span class="tag method">${log.patterns[0]}</span>
+                        </div>
+                        <div class="log-stats">
+                            <div class="log-stat">
+                                <div class="value">${log.temp}°C</div>
+                                <div class="label">기온</div>
+                            </div>
+                            <div class="log-stat">
+                                <div class="value">${log.waterTemp}°C</div>
+                                <div class="label">수온</div>
+                            </div>
+                            <div class="log-stat">
+                                <div class="value">${log.size}cm</div>
+                                <div class="label">최대</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const dayName = days[date.getDay()];
+            return `${month}월 ${day}일 (${dayName})`;
+        }
+
+        function getSeasonName(season) {
+            const seasons = {
+                spring: '봄',
+                summer: '여름',
+                fall: '가을',
+                winter: '겨울'
+            };
+            return seasons[season] || season;
+        }
+
+        function viewLog(file) {
+            window.location.href = file;
+        }
+
+        document.getElementById('seasonFilter').addEventListener('change', applyFilters);
+        document.getElementById('locationFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const season = document.getElementById('seasonFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            filteredLogs = logsData.filter(log => {
+                const matchSeason = season === 'all' || log.season === season;
+                const matchLocation = location === 'all' || log.location === location;
+                const matchSearch = search === '' || 
+                    log.summary.toLowerCase().includes(search) ||
+                    log.patterns.some(p => p.toLowerCase().includes(search)) ||
+                    log.species.some(s => s.toLowerCase().includes(search)) ||
+                    log.location.toLowerCase().includes(search);
+
+                return matchSeason && matchLocation && matchSearch;
+            });
+
+            renderLogs();
+        }
+
+        initPage();
+    </script>
+</body>
+</html>
