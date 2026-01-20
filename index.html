@@ -31,7 +31,7 @@
 
         header {
             background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(52, 73, 94, 0.6)),
-                        url('images/field-bg.jpg')  center 99%/cover no-repeat;
+                        url('images/field-bg.jpg') center 70%/cover no-repeat;
             background-attachment: fixed;
             color: white;
             padding: 100px 40px;
@@ -362,7 +362,7 @@
             {
                 id: '2024-11-29-singisa',
                 date: '2024-11-29',
-                location: '신기사낚시터',
+                location: '신기낚시터',
                 weather: '☁️',
                 temp: 3,
                 waterTemp: 6,
@@ -371,14 +371,13 @@
                 patterns: ['Streamer', 'Nymph'],
                 species: ['무지개송어'],
                 catch: 12,
-                size: 35,
                 notes: '저수온기 스트리머 공략',
                 file: 'logs/2024-11-29-singisa.html'
             },
             {
                 id: '2024-12-13-singisa',
                 date: '2024-12-13',
-                location: '신기사낚시터',
+                location: '신기낚시터',
                 weather: '❄️',
                 temp: -2,
                 waterTemp: 4,
@@ -387,7 +386,6 @@
                 patterns: ['Woolly Bugger', 'Leech'],
                 species: ['무지개송어', '산천어'],
                 catch: 8,
-                size: 40,
                 notes: '한파 대응, 바닥 집중',
                 file: 'logs/2024-12-13-singisa.html'
             },
@@ -403,14 +401,13 @@
                 patterns: ['Chironomid', 'Bloodworm'],
                 species: ['무지개송어'],
                 catch: 18,
-                size: 42,
                 notes: 'Deep Lining 효과 재확인',
                 file: 'logs/2024-12-20-hanteo.html'
             },
             {
                 id: '2025-01-04-singisa',
                 date: '2025-01-04',
-                location: '신기사낚시터',
+                location: '신기낚시터',
                 weather: '☀️',
                 temp: -5,
                 waterTemp: 3,
@@ -509,9 +506,7 @@
             const date = new Date(dateStr);
             const month = date.getMonth() + 1;
             const day = date.getDate();
-            const days = ['일', '월', '화', '수', '목', '금', '토'];
-            const dayName = days[date.getDay()];
-            return `${month}월 ${day}일 (${dayName})`;
+            return `${month}월 ${day}일 (토)`;
         }
 
         function getSeasonName(season) {
