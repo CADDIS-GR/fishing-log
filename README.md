@@ -15,7 +15,7 @@
 📍 주요 링크
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
-GitHub: https://github.com/CADDIS-GR/fishing-log
+
 
 ### 📍 방문 낚시터
 - 🏔️ **용인 한터낚시터** (2회)
