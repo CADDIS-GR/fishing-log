@@ -10,12 +10,88 @@
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
         body { font-family: 'Pretendard', sans-serif; }
         .chart-container { position: relative; width: 100%; height: 300px; }
-        .animate-fade-in { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out; }
         canvas { touch-action: none; }
+
+        /* 히어로 배경 이미지 */
+        .hero-bg {
+            background: linear-gradient(rgba(15,23,42,0.65), rgba(15,23,42,0.80)),
+                        url('../images/HanTer.JPEG') center center / cover no-repeat;
+        }
+
+        /* 라이트박스 */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox-overlay.active { display: flex; }
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 82vh;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+        .lightbox-caption {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            margin-top: 14px;
+            letter-spacing: 0.05em;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 10px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+        .lightbox-nav.prev { left: 20px; }
+        .lightbox-nav.next { right: 20px; }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 24px;
+            background: none; border: none;
+            color: white; font-size: 2rem;
+            cursor: pointer; opacity: 0.7;
+        }
+        .lightbox-close:hover { opacity: 1; }
+
+        /* 갤러리 썸네일 */
+        .gallery-thumb {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-thumb:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+        .gallery-thumb:hover img { transform: scale(1.06); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" id="lbClose">✕</button>
+        <button class="lightbox-nav prev" id="lbPrev">‹</button>
+        <img id="lbImg" src="" alt="">
+        <div class="lightbox-caption" id="lbCaption"></div>
+        <button class="lightbox-nav next" id="lbNext">›</button>
+    </div>
 
     <!-- Navigation -->
     <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
@@ -30,18 +106,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative bg-slate-900 text-white py-20 overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
-        </div>
+    <!-- Hero Section — HanTer.JPEG 배경 -->
+    <header class="hero-bg relative text-white py-24 overflow-hidden">
         <div class="container mx-auto px-4 relative z-10 text-center">
             <span class="inline-block px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full mb-4 uppercase tracking-widest">Post-Cold Snap Analysis</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">한파 끝, 32수의 정교한 기록</h1>
-            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">한파 끝, 32수의 정교한 기록</h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 drop-shadow">
                 깊은 수심 6m의 한터낚시터에서 발견한<br class="hidden md:block"> 수평에서 수직으로 상승하는 슬로프 구간의 마법
             </p>
-            
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
                 <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
                     <div class="text-3xl font-black text-blue-400">32</div>
@@ -82,6 +154,31 @@
             </div>
         </section>
 
+        <!-- 🐟 Trout Gallery — Trout01~05.JPEG -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-black text-slate-800">🐟 오늘의 조과 갤러리</h2>
+                <p class="text-slate-500 mt-2">클릭하면 크게 볼 수 있습니다.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                <div class="gallery-thumb h-48" data-gallery="trout" data-index="0">
+                    <img src="../images/Trout01.JPEG" alt="Trout 01" loading="lazy">
+                </div>
+                <div class="gallery-thumb h-48" data-gallery="trout" data-index="1">
+                    <img src="../images/Trout02.JPEG" alt="Trout 02" loading="lazy">
+                </div>
+                <div class="gallery-thumb h-48" data-gallery="trout" data-index="2">
+                    <img src="../images/Trout03.JPEG" alt="Trout 03" loading="lazy">
+                </div>
+                <div class="gallery-thumb h-48" data-gallery="trout" data-index="3">
+                    <img src="../images/Trout04.JPEG" alt="Trout 04" loading="lazy">
+                </div>
+                <div class="gallery-thumb h-48" data-gallery="trout" data-index="4">
+                    <img src="../images/Trout05.JPEG" alt="Trout 05" loading="lazy">
+                </div>
+            </div>
+        </section>
+
         <!-- Interactive Simulator -->
         <section>
             <div class="flex flex-col md:flex-row items-end justify-between mb-8 gap-4">
@@ -93,7 +190,6 @@
                     다시 캐스팅하기
                 </button>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div class="lg:col-span-3 bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl relative">
                     <canvas id="slopeCanvas" width="900" height="450" class="w-full h-full cursor-crosshair"></canvas>
@@ -112,7 +208,53 @@
                     </div>
                     <div class="bg-rose-50 p-6 rounded-2xl border border-rose-100 ring-2 ring-rose-200">
                         <h4 class="font-bold text-rose-900 mb-2">3. 수직 상승 (HIT)</h4>
-                        <p class="text-xs text-rose-800/80 font-medium font-bold italic">수직으로 솟구치는 'Rising Action'에 송어가 본능적으로 반응합니다.</p>
+                        <p class="text-xs text-rose-800/80 font-bold italic">수직으로 솟구치는 'Rising Action'에 송어가 본능적으로 반응합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🪰 Fly Pattern — Fly01~03.JPEG -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-black text-slate-800">🪰 오늘의 패턴</h2>
+                <p class="text-slate-500 mt-2">실제 사용한 플라이 패턴들입니다. 클릭하면 크게 볼 수 있습니다.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Fly 01 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="0">
+                        <img src="../images/Fly01.JPEG" alt="Fly Pattern 01" loading="lazy">
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">MVP Pattern</div>
+                        <div class="font-black text-slate-800 text-lg">White Chironomid</div>
+                        <div class="text-sm text-slate-500 mt-1">바닥 ~ 슬로프 수직 상승 구간 전용</div>
+                        <span class="inline-block mt-3 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">White MVP</span>
+                    </div>
+                </div>
+                <!-- Fly 02 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="1">
+                        <img src="../images/Fly02.JPEG" alt="Fly Pattern 02" loading="lazy">
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Sub Pattern</div>
+                        <div class="font-black text-slate-800 text-lg">Chironomid Larva</div>
+                        <div class="text-sm text-slate-500 mt-1">사료타임 마이크로 님핑 활약</div>
+                        <span class="inline-block mt-3 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">Feeding Frenzy</span>
+                    </div>
+                </div>
+                <!-- Fly 03 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="2">
+                        <img src="../images/Fly03.JPEG" alt="Fly Pattern 03" loading="lazy">
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Support Pattern</div>
+                        <div class="font-black text-slate-800 text-lg">Black Leech</div>
+                        <div class="text-sm text-slate-500 mt-1">바닥 수평 리트리브 보조</div>
+                        <span class="inline-block mt-3 px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">Bottom Game</span>
                     </div>
                 </div>
             </div>
@@ -120,41 +262,43 @@
 
         <!-- Data Dashboard -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Gear Profile -->
-            <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col lg:col-span-1">
-                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span class="p-2 bg-blue-100 rounded-lg text-blue-600">🛠️</span> Gear Profile
-                </h3>
-                
-                <div class="space-y-6">
-                    <!-- Main Tackle -->
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Main</div>
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">메인 채비 (Bottom Game)</h4>
-                        <div class="space-y-2">
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
-                                <div class="text-sm font-bold text-slate-800 tracking-tight">SCOTT CENTRIC 690-4</div>
-                            </div>
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
-                                <div class="text-sm font-bold text-blue-600 tracking-tight leading-tight">SA Sonar Titan 3D i/3/5 WF6S</div>
+
+            <!-- 🛠️ Gear Profile — Gear.JPEG -->
+            <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden lg:col-span-1 flex flex-col">
+                <div class="gallery-thumb h-52" data-gallery="gear" data-index="0" style="border-radius:0">
+                    <img src="../images/Gear.JPEG" alt="Today's Gear Setup" loading="lazy" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex flex-col flex-1">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="p-2 bg-blue-100 rounded-lg text-blue-600">🛠️</span> Gear Profile
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Main</div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">메인 채비 (Bottom Game)</h4>
+                            <div class="space-y-2">
+                                <div>
+                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
+                                    <div class="text-sm font-bold text-slate-800 tracking-tight">SCOTT CENTRIC 690-4</div>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
+                                    <div class="text-sm font-bold text-blue-600 tracking-tight leading-tight">SA Sonar Titan 3D i/3/5 WF6S</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Sub Tackle -->
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Sub / Test</div>
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">서브 테스트 채비 (Finesse)</h4>
-                        <div class="space-y-2">
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
-                                <div class="text-sm font-bold text-slate-800 tracking-tight">Vision Onki 3100-4</div>
-                            </div>
-                            <div>
-                                <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
-                                <div class="text-sm font-bold text-amber-600 tracking-tight leading-tight text-[11px] md:text-sm">Rio Elite Technical Trout WF4F</div>
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Sub / Test</div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">서브 테스트 채비 (Finesse)</h4>
+                            <div class="space-y-2">
+                                <div>
+                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
+                                    <div class="text-sm font-bold text-slate-800 tracking-tight">Vision Onki 3100-4</div>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
+                                    <div class="text-sm font-bold text-amber-600 tracking-tight leading-tight">Rio Elite Technical Trout WF4F</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -177,22 +321,18 @@
                 <div class="absolute -right-4 -top-4 opacity-20 transform rotate-12">
                     <span class="text-9xl">🐟</span>
                 </div>
-                
                 <h3 class="text-xl font-bold mb-6 flex items-center gap-2 relative z-10">
                     <span class="p-2 bg-white/20 rounded-lg">🔥</span> 우당탕탕 사료타임
                 </h3>
-                
                 <div class="space-y-5 relative z-10 flex-1">
                     <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
                         <div class="text-xs font-bold opacity-70 uppercase mb-1">Situation</div>
                         <div class="text-sm font-bold">사료 투입 후 표층 활성도 폭발</div>
                     </div>
-                    
                     <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
                         <div class="text-xs font-bold opacity-70 uppercase mb-1">Winning Pattern</div>
                         <div class="text-sm font-bold italic">Chironomid Larva (Micro Nymphing)</div>
                     </div>
-
                     <div class="pt-2">
                         <div class="flex items-center gap-2 mb-2">
                             <span class="w-2 h-2 bg-yellow-300 rounded-full animate-ping"></span>
@@ -203,7 +343,6 @@
                         </p>
                     </div>
                 </div>
-
                 <div class="mt-auto pt-6 text-center border-t border-white/10">
                     <span class="text-xs font-black tracking-widest bg-black/20 px-4 py-1 rounded-full">FEEDING FRENZY</span>
                 </div>
@@ -231,24 +370,90 @@
                 </div>
             </div>
         </footer>
-
     </main>
 
     <script>
-        // --- DATA ---
-        const colorData = {
-            labels: ['Black', 'White (MVP)', 'Purple', 'Brown', 'Olive'],
-            values: [45, 100, 60, 30, 25]
+        // ── 갤러리 데이터 ──
+        const galleries = {
+            trout: [
+                { src: '../images/Trout01.JPEG', caption: 'Trout 01 · 2026.02.14 한터낚시터' },
+                { src: '../images/Trout02.JPEG', caption: 'Trout 02 · 2026.02.14 한터낚시터' },
+                { src: '../images/Trout03.JPEG', caption: 'Trout 03 · 2026.02.14 한터낚시터' },
+                { src: '../images/Trout04.JPEG', caption: 'Trout 04 · 2026.02.14 한터낚시터' },
+                { src: '../images/Trout05.JPEG', caption: 'Trout 05 · 2026.02.14 한터낚시터' },
+            ],
+            fly: [
+                { src: '../images/Fly01.JPEG', caption: 'White Chironomid — MVP Pattern' },
+                { src: '../images/Fly02.JPEG', caption: 'Chironomid Larva — Micro Nymphing' },
+                { src: '../images/Fly03.JPEG', caption: 'Black Leech — Bottom Game' },
+            ],
+            gear: [
+                { src: '../images/Gear.JPEG', caption: "Today's Setup · SCOTT CENTRIC 690-4 + Vision Onki 3100-4" },
+            ]
         };
 
-        // --- CHARTS ---
+        let currentGallery = [];
+        let currentIndex   = 0;
+
+        const lb        = document.getElementById('lightbox');
+        const lbImg     = document.getElementById('lbImg');
+        const lbCaption = document.getElementById('lbCaption');
+        const lbClose   = document.getElementById('lbClose');
+        const lbPrev    = document.getElementById('lbPrev');
+        const lbNext    = document.getElementById('lbNext');
+
+        function openLightbox(gallery, index) {
+            currentGallery = galleries[gallery];
+            currentIndex   = index;
+            showItem();
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showItem() {
+            const item      = currentGallery[currentIndex];
+            lbImg.src       = item.src;
+            lbCaption.textContent = item.caption;
+            lbPrev.style.display  = currentGallery.length > 1 ? 'block' : 'none';
+            lbNext.style.display  = currentGallery.length > 1 ? 'block' : 'none';
+        }
+
+        function closeLightbox() {
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+        lbPrev.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            showItem();
+        });
+        lbNext.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            showItem();
+        });
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape')      closeLightbox();
+            if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showItem(); }
+            if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentGallery.length; showItem(); }
+        });
+
+        document.querySelectorAll('[data-gallery]').forEach(el => {
+            el.addEventListener('click', () => {
+                openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
+            });
+        });
+
+        // ── 차트 ──
         window.onload = function() {
             new Chart(document.getElementById('colorChart'), {
                 type: 'bar',
                 data: {
-                    labels: colorData.labels,
+                    labels: ['Black', 'White (MVP)', 'Purple', 'Brown', 'Olive'],
                     datasets: [{
-                        data: colorData.values,
+                        data: [45, 100, 60, 30, 25],
                         backgroundColor: ['#1e293b', '#f8fafc', '#9333ea', '#78350f', '#4d7c0f'],
                         borderColor: '#e2e8f0',
                         borderWidth: 2,
@@ -266,22 +471,22 @@
             initSimulation();
         };
 
-        // --- SIMULATION ---
+        // ── 시뮬레이션 ──
         function initSimulation() {
-            const canvas = document.getElementById('slopeCanvas');
-            const ctx = canvas.getContext('2d');
-            const statusEl = document.getElementById('simStatus');
-            const resetBtn = document.getElementById('resetSim');
+            const canvas      = document.getElementById('slopeCanvas');
+            const ctx         = canvas.getContext('2d');
+            const statusEl    = document.getElementById('simStatus');
+            const resetBtn    = document.getElementById('resetSim');
 
-            let state = 'idle'; 
-            let fly = { x: 800, y: 100 };
+            let state = 'idle';
+            let fly  = { x: 800, y: 100 };
             let fish = { x: 650, y: 320, opacity: 0, active: false };
-            
-            const bankX = 820;
-            const waterY = 120;
-            const bottomY = 400;
+
+            const bankX       = 820;
+            const waterY      = 120;
+            const bottomY     = 400;
             const slopeStartX = 600;
-            const castX = 150;
+            const castX       = 150;
 
             function drawScene() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -291,18 +496,14 @@
                 grad.addColorStop(1, '#1e293b');
                 ctx.fillStyle = grad;
                 ctx.beginPath();
-                ctx.moveTo(0, waterY);
-                ctx.lineTo(canvas.width, waterY);
-                ctx.lineTo(canvas.width, canvas.height);
-                ctx.lineTo(0, canvas.height);
+                ctx.moveTo(0, waterY); ctx.lineTo(canvas.width, waterY);
+                ctx.lineTo(canvas.width, canvas.height); ctx.lineTo(0, canvas.height);
                 ctx.fill();
 
                 ctx.fillStyle = '#020617';
                 ctx.beginPath();
-                ctx.moveTo(0, bottomY);
-                ctx.lineTo(slopeStartX, bottomY);
-                ctx.lineTo(bankX, waterY);
-                ctx.lineTo(canvas.width, waterY);
+                ctx.moveTo(0, bottomY); ctx.lineTo(slopeStartX, bottomY);
+                ctx.lineTo(bankX, waterY); ctx.lineTo(canvas.width, waterY);
                 ctx.lineTo(canvas.width, canvas.height);
                 ctx.fill();
 
@@ -336,7 +537,7 @@
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(bankX, waterY - 40);
-                ctx.quadraticCurveTo((bankX + fly.x)/2, waterY - 100, fly.x, fly.y);
+                ctx.quadraticCurveTo((bankX + fly.x) / 2, waterY - 100, fly.x, fly.y);
                 ctx.stroke();
 
                 ctx.fillStyle = 'white';
@@ -351,23 +552,19 @@
             }
 
             function update() {
-                switch(state) {
+                switch (state) {
                     case 'idle':
-                        statusEl.innerText = 'Click anywhere to Cast!';
-                        break;
+                        statusEl.innerText = 'Click anywhere to Cast!'; break;
                     case 'casting':
                         statusEl.innerText = 'Casting (18m)...';
                         fly.x -= 15;
-                        fly.y = (waterY - 30) - Math.sin((fly.x - castX)/(bankX - castX) * Math.PI) * 80;
+                        fly.y = (waterY - 30) - Math.sin((fly.x - castX) / (bankX - castX) * Math.PI) * 80;
                         if (fly.x <= castX) state = 'sinking';
                         break;
                     case 'sinking':
                         statusEl.innerText = 'Sinking to Bottom...';
                         fly.y += 3;
-                        if (fly.y >= bottomY - 10) {
-                            fly.y = bottomY - 10;
-                            state = 'retrieving';
-                        }
+                        if (fly.y >= bottomY - 10) { fly.y = bottomY - 10; state = 'retrieving'; }
                         break;
                     case 'retrieving':
                         statusEl.innerText = 'Horizontal Retrieve (수평 유지)';
@@ -378,28 +575,24 @@
                         break;
                     case 'rising':
                         statusEl.innerText = 'Vertical Rising Action (수직 상승!)';
-                        fly.x += 2;
-                        fly.y -= 1.8;
+                        fly.x += 2; fly.y -= 1.8;
                         if (fly.x >= slopeStartX + 40) {
                             state = 'hit';
-                            fish.x = fly.x;
-                            fish.y = fly.y;
-                            fish.opacity = 1;
+                            fish.x = fly.x; fish.y = fly.y; fish.opacity = 1;
                         }
                         break;
                     case 'hit':
-                        statusEl.innerText = '🎣 HIT! (수직 상승 구간의 승리)';
-                        break;
+                        statusEl.innerText = '🎣 HIT! (수직 상승 구간의 승리)'; break;
                 }
             }
 
-            canvas.addEventListener('mousedown', () => { if(state === 'idle' || state === 'hit') reset(); });
+            canvas.addEventListener('mousedown', () => { if (state === 'idle' || state === 'hit') reset(); });
             resetBtn.addEventListener('click', reset);
 
             function reset() {
                 state = 'casting';
-                fly = { x: bankX, y: waterY - 40 };
-                fish = { x: slopeStartX + 60, y: bottomY - 50, opacity: 0, active: false };
+                fly   = { x: bankX, y: waterY - 40 };
+                fish  = { x: slopeStartX + 60, y: bottomY - 50, opacity: 0, active: false };
             }
 
             drawScene();
