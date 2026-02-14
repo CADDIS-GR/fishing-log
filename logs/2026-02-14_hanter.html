@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -14,589 +15,668 @@
         .animate-fade-in { animation: fadeIn 0.5s ease-out; }
         canvas { touch-action: none; }
 
-        /* 히어로 배경 이미지 */
-        .hero-bg {
-            background: linear-gradient(rgba(15,23,42,0.65), rgba(15,23,42,0.80)),
-                        url('../images/HanTer.JPEG') center center / cover no-repeat;
-        }
+```
+    /* 히어로 배경 이미지 */
+    .hero-bg {
+        background: linear-gradient(rgba(15,23,42,0.65), rgba(15,23,42,0.80)),
+                    url('../images/HanTer.JPEG') center center / cover no-repeat;
+    }
 
-        /* 라이트박스 */
-        .lightbox-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.92);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .lightbox-overlay.active { display: flex; }
-        .lightbox-overlay img {
-            max-width: 90vw;
-            max-height: 82vh;
-            border-radius: 12px;
-            object-fit: contain;
-            box-shadow: 0 0 60px rgba(0,0,0,0.8);
-        }
-        .lightbox-caption {
-            color: #cbd5e1;
-            font-size: 0.85rem;
-            margin-top: 14px;
-            letter-spacing: 0.05em;
-        }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.12);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            padding: 10px 18px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
-        .lightbox-nav.prev { left: 20px; }
-        .lightbox-nav.next { right: 20px; }
-        .lightbox-close {
-            position: absolute;
-            top: 20px; right: 24px;
-            background: none; border: none;
-            color: white; font-size: 2rem;
-            cursor: pointer; opacity: 0.7;
-        }
-        .lightbox-close:hover { opacity: 1; }
+    /* 라이트박스 */
+    .lightbox-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+        max-width: 90vw;
+        max-height: 82vh;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+    .lightbox-caption {
+        color: #cbd5e1;
+        font-size: 0.85rem;
+        margin-top: 14px;
+        letter-spacing: 0.05em;
+    }
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.12);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        padding: 10px 18px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+    .lightbox-nav.prev { left: 20px; }
+    .lightbox-nav.next { right: 20px; }
+    .lightbox-close {
+        position: absolute;
+        top: 20px; right: 24px;
+        background: none; border: none;
+        color: white; font-size: 2rem;
+        cursor: pointer; opacity: 0.7;
+    }
+    .lightbox-close:hover { opacity: 1; }
 
-        /* 갤러리 썸네일 */
-        .gallery-thumb {
-            cursor: pointer;
-            overflow: hidden;
-            border-radius: 12px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .gallery-thumb:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
-        .gallery-thumb:hover img { transform: scale(1.06); }
-    </style>
+    /* 갤러리 썸네일 */
+    .gallery-thumb {
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 12px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-thumb:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .gallery-thumb:hover img { transform: scale(1.06); }
+</style>
+```
+
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed">
 
-    <!-- Lightbox -->
-    <div class="lightbox-overlay" id="lightbox">
-        <button class="lightbox-close" id="lbClose">✕</button>
-        <button class="lightbox-nav prev" id="lbPrev">‹</button>
-        <img id="lbImg" src="" alt="">
-        <div class="lightbox-caption" id="lbCaption"></div>
-        <button class="lightbox-nav next" id="lbNext">›</button>
+```
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lbClose">✕</button>
+    <button class="lightbox-nav prev" id="lbPrev">‹</button>
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-caption" id="lbCaption"></div>
+    <button class="lightbox-nav next" id="lbNext">›</button>
+</div>
+
+<!-- Navigation -->
+<nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl">🎣</span>
+            <span class="font-extrabold text-xl tracking-tight text-slate-800">HANTER REPORT</span>
+        </div>
+        <div class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+            2026.02.14 | 낚시대장 X Jeff
+        </div>
     </div>
+</nav>
 
-    <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl">🎣</span>
-                <span class="font-extrabold text-xl tracking-tight text-slate-800">HANTER REPORT</span>
+<!-- Hero Section — HanTer.JPEG 배경 -->
+<header class="hero-bg relative text-white py-24 overflow-hidden">
+    <div class="container mx-auto px-4 relative z-10 text-center">
+        <span class="inline-block px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full mb-4 uppercase tracking-widest">Post-Cold Snap Analysis</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">한파 끝, 32수의 정교한 기록</h1>
+        <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 drop-shadow">
+            깊은 수심 6m의 한터낚시터에서 발견한<br class="hidden md:block"> 수평에서 수직으로 상승하는 슬로프 구간의 마법
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
+                <div class="text-3xl font-black text-blue-400">32</div>
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter">Total Landings</div>
             </div>
-            <div class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                2026.02.14 | 낚시대장 X Jeff
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
+                <div class="text-3xl font-black text-white">White</div>
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter">MVP Color</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
+                <div class="text-lg md:text-xl font-black text-emerald-400 leading-tight text-center">수평에서 수직으로<br>상승하는</div>
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter mt-1">Strike Area</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
+                <div class="text-lg md:text-xl font-black text-amber-400 leading-tight text-center">Technical<br>Trout Line</div>
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter mt-1 text-center">New Gear</div>
             </div>
         </div>
-    </nav>
+    </div>
+</header>
 
-    <!-- Hero Section — HanTer.JPEG 배경 -->
-    <header class="hero-bg relative text-white py-24 overflow-hidden">
-        <div class="container mx-auto px-4 relative z-10 text-center">
-            <span class="inline-block px-4 py-1 bg-blue-500 text-white text-xs font-bold rounded-full mb-4 uppercase tracking-widest">Post-Cold Snap Analysis</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">한파 끝, 32수의 정교한 기록</h1>
-            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 drop-shadow">
-                깊은 수심 6m의 한터낚시터에서 발견한<br class="hidden md:block"> 수평에서 수직으로 상승하는 슬로프 구간의 마법
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
-                    <div class="text-3xl font-black text-blue-400">32</div>
-                    <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter">Total Landings</div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
-                    <div class="text-3xl font-black text-white">White</div>
-                    <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter">MVP Color</div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
-                    <div class="text-lg md:text-xl font-black text-emerald-400 leading-tight text-center">수평에서 수직으로<br>상승하는</div>
-                    <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter mt-1">Strike Area</div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[110px]">
-                    <div class="text-lg md:text-xl font-black text-amber-400 leading-tight text-center">Technical<br>Trout Line</div>
-                    <div class="text-[10px] uppercase text-slate-400 font-bold tracking-tighter mt-1 text-center">New Gear</div>
-                </div>
-            </div>
-        </div>
-    </header>
+<main class="container mx-auto px-4 py-12 space-y-20">
 
-    <main class="container mx-auto px-4 py-12 space-y-20">
-
-        <!-- Executive Summary -->
-        <section class="max-w-4xl mx-auto">
-            <div class="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
-                    <span class="text-blue-500">■</span> Jeff의 전략 분석 서머리
-                </h2>
-                <div class="text-slate-600 leading-relaxed">
-                    <p class="text-lg mb-6">
-                        이번 출조의 핵심은 단순한 비거리 확보가 아닌, <strong>'수평에서 수직으로의 변화'</strong>를 만들어낸 액션에 있었습니다. 바닥을 긁어오던 플라이가 수평적 위치에서 수직으로 움직임이 꺾이는 구간에서, 송어의 반응이 유독 집중됩니다.
-                    </p>
-                    <p class="text-2xl font-black text-blue-600 text-center tracking-wider animate-pulse">
-                        송어도 집중!! 나도 집중!!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 🐟 Trout Gallery — Trout01~05.JPEG -->
-        <section>
-            <div class="mb-8">
-                <h2 class="text-3xl font-black text-slate-800">🐟 오늘의 조과 갤러리</h2>
-                <p class="text-slate-500 mt-2">클릭하면 크게 볼 수 있습니다.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                <div class="gallery-thumb h-48" data-gallery="trout" data-index="0">
-                    <img src="../images/Trout01.JPEG" alt="Trout 01" loading="lazy">
-                </div>
-                <div class="gallery-thumb h-48" data-gallery="trout" data-index="1">
-                    <img src="../images/Trout02.JPEG" alt="Trout 02" loading="lazy">
-                </div>
-                <div class="gallery-thumb h-48" data-gallery="trout" data-index="2">
-                    <img src="../images/Trout03.JPEG" alt="Trout 03" loading="lazy">
-                </div>
-                <div class="gallery-thumb h-48" data-gallery="trout" data-index="3">
-                    <img src="../images/Trout04.JPEG" alt="Trout 04" loading="lazy">
-                </div>
-                <div class="gallery-thumb h-48" data-gallery="trout" data-index="4">
-                    <img src="../images/Trout05.JPEG" alt="Trout 05" loading="lazy">
-                </div>
-            </div>
-        </section>
-
-        <!-- Interactive Simulator -->
-        <section>
-            <div class="flex flex-col md:flex-row items-end justify-between mb-8 gap-4">
-                <div>
-                    <h2 class="text-3xl font-black text-slate-800">🎯 수평에서 수직으로 상승하는 슬로프 공략</h2>
-                    <p class="text-slate-500 mt-2">입질이 집중된 'Rising Action' 구간의 메커니즘을 확인하세요.</p>
-                </div>
-                <button id="resetSim" class="bg-slate-900 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-blue-600 transition-colors">
-                    다시 캐스팅하기
-                </button>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <div class="lg:col-span-3 bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl relative">
-                    <canvas id="slopeCanvas" width="900" height="450" class="w-full h-full cursor-crosshair"></canvas>
-                    <div class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-white text-xs">
-                        <span id="simStatus">대기 중...</span>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-                        <h4 class="font-bold text-blue-900 mb-2">1. 수평 유지 (Bottom)</h4>
-                        <p class="text-xs text-blue-800/80 font-medium">바닥층을 따라 수평으로 초저속 리트리브를 하며 추격을 유도합니다.</p>
-                    </div>
-                    <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
-                        <h4 class="font-bold text-indigo-900 mb-2">2. 변화의 지점 (Corner)</h4>
-                        <p class="text-xs text-indigo-800/80 font-medium">수평 이동이 끝나고 슬로프의 경사를 만나는 변곡점입니다.</p>
-                    </div>
-                    <div class="bg-rose-50 p-6 rounded-2xl border border-rose-100 ring-2 ring-rose-200">
-                        <h4 class="font-bold text-rose-900 mb-2">3. 수직 상승 (HIT)</h4>
-                        <p class="text-xs text-rose-800/80 font-bold italic">수직으로 솟구치는 'Rising Action'에 송어가 본능적으로 반응합니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 🪰 Fly Pattern — Fly01~03.JPEG -->
-        <section>
-            <div class="mb-8">
-                <h2 class="text-3xl font-black text-slate-800">🪰 오늘의 패턴</h2>
-                <p class="text-slate-500 mt-2">실제 사용한 플라이 패턴들입니다. 클릭하면 크게 볼 수 있습니다.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Fly 01 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="0">
-                        <img src="../images/Fly01.JPEG" alt="Fly Pattern 01" loading="lazy">
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">MVP Pattern</div>
-                        <div class="font-black text-slate-800 text-lg">Zonker Tail Mini Leech #16</div>
-                        <div class="text-sm text-slate-500 mt-1">바닥 ~ 슬로프 수직 상승 구간 전용</div>
-                        <span class="inline-block mt-3 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">White MVP</span>
-                    </div>
-                </div>
-                <!-- Fly 02 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="1">
-                        <img src="../images/Fly02.JPEG" alt="Fly Pattern 02" loading="lazy">
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Sub Pattern</div>
-                        <div class="font-black text-slate-800 text-lg">White Chironomid</div>
-                        <div class="text-sm text-slate-500 mt-1">마이크로 님핑</div>
-                        <span class="inline-block mt-3 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">Feeding Frenzy</span>
-                    </div>
-                </div>
-                <!-- Fly 03 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
-                    <div class="gallery-thumb h-48" data-gallery="fly" data-index="2">
-                        <img src="../images/Fly03.JPEG" alt="Fly Pattern 03" loading="lazy">
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Support Pattern</div>
-                        <div class="font-black text-slate-800 text-lg">Chironomid Larva (Red Dot)</div>
-                        <div class="text-sm text-slate-500 mt-1">마이크로 님핑</div>
-                        <span class="inline-block mt-3 px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">Bottom Game</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Data Dashboard -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-            <!-- 🛠️ Gear Profile — Gear.JPEG -->
-            <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden lg:col-span-1 flex flex-col">
-                <div class="gallery-thumb h-52" data-gallery="gear" data-index="0" style="border-radius:0">
-                    <img src="../images/Gear.JPEG" alt="Today's Gear Setup" loading="lazy" class="w-full h-full object-cover">
-                </div>
-                <div class="p-8 flex flex-col flex-1">
-                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <span class="p-2 bg-blue-100 rounded-lg text-blue-600">🛠️</span> Gear Profile
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Main</div>
-                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">메인 채비 (Bottom Game)</h4>
-                            <div class="space-y-2">
-                                <div>
-                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
-                                    <div class="text-sm font-bold text-slate-800 tracking-tight">SCOTT CENTRIC 690-4</div>
-                                </div>
-                                <div>
-                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
-                                    <div class="text-sm font-bold text-blue-600 tracking-tight leading-tight">SA Sonar Titan 3D i/3/5 WF6S</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Sub / Test</div>
-                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">서브 테스트 채비 (Finesse)</h4>
-                            <div class="space-y-2">
-                                <div>
-                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
-                                    <div class="text-sm font-bold text-slate-800 tracking-tight">Vision Onki 3100-4</div>
-                                </div>
-                                <div>
-                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
-                                    <div class="text-sm font-bold text-amber-600 tracking-tight leading-tight">Rio Elite Technical Trout WF4F</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Color Analytics -->
-            <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
-                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span class="p-2 bg-purple-100 rounded-lg text-purple-600">🎨</span> 컬러별 반응도
-                </h3>
-                <div class="chart-container">
-                    <canvas id="colorChart"></canvas>
-                </div>
-                <p class="text-[11px] text-slate-400 mt-4 text-center italic">White 컬러에 대한 압도적인 반응 확인</p>
-            </div>
-
-            <!-- 우당탕탕 사료타임 -->
-            <div class="bg-gradient-to-br from-amber-500 to-orange-600 p-8 rounded-3xl shadow-lg flex flex-col text-white relative overflow-hidden">
-                <div class="absolute -right-4 -top-4 opacity-20 transform rotate-12">
-                    <span class="text-9xl">🐟</span>
-                </div>
-                <h3 class="text-xl font-bold mb-6 flex items-center gap-2 relative z-10">
-                    <span class="p-2 bg-white/20 rounded-lg">🔥</span> 우당탕탕 사료타임
-                </h3>
-                <div class="space-y-5 relative z-10 flex-1">
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
-                        <div class="text-xs font-bold opacity-70 uppercase mb-1">Situation</div>
-                        <div class="text-sm font-bold">사료 투입 후 표층 활성도 폭발</div>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
-                        <div class="text-xs font-bold opacity-70 uppercase mb-1">Winning Pattern</div>
-                        <div class="text-sm font-bold italic">Chironomid Larva (Micro Nymphing)</div>
-                    </div>
-                    <div class="pt-2">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="w-2 h-2 bg-yellow-300 rounded-full animate-ping"></span>
-                            <span class="text-xs font-bold tracking-wider">SMOOTH OPERATOR 활약</span>
-                        </div>
-                        <p class="text-[11px] leading-relaxed opacity-90">
-                            Technical Trout Line의 부드러운 턴오버가 근거리 표층 님핑에서 정교함을 더해, 사료 타임의 짧고 강렬한 기회를 완벽하게 수확했습니다.
-                        </p>
-                    </div>
-                </div>
-                <div class="mt-auto pt-6 text-center border-t border-white/10">
-                    <span class="text-xs font-black tracking-widest bg-black/20 px-4 py-1 rounded-full">FEEDING FRENZY</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final Reflection -->
-        <footer class="bg-slate-900 rounded-[3rem] p-12 text-center text-white">
-            <div class="max-w-2xl mx-auto">
-                <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto flex items-center justify-center text-3xl mb-6">📝</div>
-                <h3 class="text-2xl font-bold mb-4">낚시대장의 승부수</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">
-                    오늘의 32수는 단순한 조과가 아닌, <strong>'수평에서 수직으로 상승하는'</strong> 입질 메커니즘을 정확히 파악하고 공략한 전략의 승리입니다. 메인 채비의 강력한 바닥 공략과 서브 채비의 정교한 대응이 완벽한 시너지를 낸 하루였습니다.
+    <!-- Executive Summary -->
+    <section class="max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                <span class="text-blue-500">■</span> Jeff의 전략 분석 서머리
+            </h2>
+            <div class="text-slate-600 leading-relaxed">
+                <p class="text-lg mb-6">
+                    이번 출조의 핵심은 단순한 비거리 확보가 아닌, <strong>'수평에서 수직으로의 변화'</strong>를 만들어낸 액션에 있었습니다. 바닥을 긁어오던 플라이가 수평적 위치에서 수직으로 움직임이 꺾이는 구간에서, 송어의 반응이 유독 집중됩니다.
                 </p>
-                <div class="flex justify-center items-center gap-6 border-t border-white/10 pt-8">
-                    <div>
-                        <div class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-1">Field</div>
-                        <div class="text-sm font-bold">Yongin Hanter</div>
+                <p class="text-2xl font-black text-blue-600 text-center tracking-wider animate-pulse">
+                    송어도 집중!! 나도 집중!!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🐟 Trout Gallery — Trout01~05.JPEG -->
+    <section>
+        <div class="mb-8">
+            <h2 class="text-3xl font-black text-slate-800">🐟 오늘의 조과 갤러리</h2>
+            <p class="text-slate-500 mt-2">클릭하면 크게 볼 수 있습니다.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div class="gallery-thumb h-48" data-gallery="trout" data-index="0">
+                <img src="../images/Trout01.JPEG" alt="Trout 01" loading="lazy">
+            </div>
+            <div class="gallery-thumb h-48" data-gallery="trout" data-index="1">
+                <img src="../images/Trout02.JPEG" alt="Trout 02" loading="lazy">
+            </div>
+            <div class="gallery-thumb h-48" data-gallery="trout" data-index="2">
+                <img src="../images/Trout03.JPEG" alt="Trout 03" loading="lazy">
+            </div>
+            <div class="gallery-thumb h-48" data-gallery="trout" data-index="3">
+                <img src="../images/Trout04.JPEG" alt="Trout 04" loading="lazy">
+            </div>
+            <div class="gallery-thumb h-48" data-gallery="trout" data-index="4">
+                <img src="../images/Trout05.JPEG" alt="Trout 05" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ⏱ 시간대별 조과 분포 -->
+    <section class="max-w-4xl mx-auto w-full">
+        <div class="mb-8">
+            <h2 class="text-3xl font-black text-slate-800">⏱ 시간대별 조과 분포</h2>
+            <p class="text-slate-500 mt-2">종일 뜨문뜨문 고른 흐름 속, 새벽~오전 11시와 저녁 피딩타임에 집중.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+            <div class="chart-container" style="height:220px;">
+                <canvas id="timeChart"></canvas>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 mt-6 text-xs font-bold text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-blue-400 inline-block"></span>새벽~오전 (06:00–11:00)
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-slate-300 inline-block"></span>오후 지속 (11:00–16:00)
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>피딩타임 (16:00–17:00)
+                </div>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-4 text-center italic">* 체감 기반 추정 분포 — 기록용 참고치</p>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator -->
+    <section>
+        <div class="flex flex-col md:flex-row items-end justify-between mb-8 gap-4">
+            <div>
+                <h2 class="text-3xl font-black text-slate-800">🎯 수평에서 수직으로 상승하는 슬로프 공략</h2>
+                <p class="text-slate-500 mt-2">입질이 집중된 'Rising Action' 구간의 메커니즘을 확인하세요.</p>
+            </div>
+            <button id="resetSim" class="bg-slate-900 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-blue-600 transition-colors">
+                다시 캐스팅하기
+            </button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3 bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl relative">
+                <canvas id="slopeCanvas" width="900" height="450" class="w-full h-full cursor-crosshair"></canvas>
+                <div class="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-white text-xs">
+                    <span id="simStatus">대기 중...</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                    <h4 class="font-bold text-blue-900 mb-2">1. 수평 유지 (Bottom)</h4>
+                    <p class="text-xs text-blue-800/80 font-medium">바닥층을 따라 수평으로 초저속 리트리브를 하며 추격을 유도합니다.</p>
+                </div>
+                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
+                    <h4 class="font-bold text-indigo-900 mb-2">2. 변화의 지점 (Corner)</h4>
+                    <p class="text-xs text-indigo-800/80 font-medium">수평 이동이 끝나고 슬로프의 경사를 만나는 변곡점입니다.</p>
+                </div>
+                <div class="bg-rose-50 p-6 rounded-2xl border border-rose-100 ring-2 ring-rose-200">
+                    <h4 class="font-bold text-rose-900 mb-2">3. 수직 상승 (HIT)</h4>
+                    <p class="text-xs text-rose-800/80 font-bold italic">수직으로 솟구치는 'Rising Action'에 송어가 본능적으로 반응합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🪰 Fly Pattern — Fly01~03.JPEG -->
+    <section>
+        <div class="mb-8">
+            <h2 class="text-3xl font-black text-slate-800">🪰 오늘의 패턴</h2>
+            <p class="text-slate-500 mt-2">실제 사용한 플라이 패턴들입니다. 클릭하면 크게 볼 수 있습니다.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Fly 01 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                <div class="gallery-thumb h-48" data-gallery="fly" data-index="0">
+                    <img src="../images/Fly01.JPEG" alt="Fly Pattern 01" loading="lazy">
+                </div>
+                <div class="p-5">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">MVP Pattern</div>
+                    <div class="font-black text-slate-800 text-lg">Zonker Tail Mini Leech #16</div>
+                    <div class="text-sm text-slate-500 mt-1">바닥 ~ 슬로프 수직 상승 구간 전용</div>
+                    <span class="inline-block mt-3 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">White MVP</span>
+                </div>
+            </div>
+            <!-- Fly 02 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                <div class="gallery-thumb h-48" data-gallery="fly" data-index="1">
+                    <img src="../images/Fly02.JPEG" alt="Fly Pattern 02" loading="lazy">
+                </div>
+                <div class="p-5">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Sub Pattern</div>
+                    <div class="font-black text-slate-800 text-lg">White Chironomid</div>
+                    <div class="text-sm text-slate-500 mt-1">마이크로 님핑</div>
+                    <span class="inline-block mt-3 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">Feeding Frenzy</span>
+                </div>
+            </div>
+            <!-- Fly 03 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+                <div class="gallery-thumb h-48" data-gallery="fly" data-index="2">
+                    <img src="../images/Fly03.JPEG" alt="Fly Pattern 03" loading="lazy">
+                </div>
+                <div class="p-5">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Support Pattern</div>
+                    <div class="font-black text-slate-800 text-lg">Chironomid Larva (Red Dot)</div>
+                    <div class="text-sm text-slate-500 mt-1">마이크로 님핑</div>
+                    <span class="inline-block mt-3 px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">Bottom Game</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Dashboard -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- 🛠️ Gear Profile — Gear.JPEG -->
+        <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden lg:col-span-1 flex flex-col">
+            <div class="gallery-thumb h-52" data-gallery="gear" data-index="0" style="border-radius:0">
+                <img src="../images/Gear.JPEG" alt="Today's Gear Setup" loading="lazy" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8 flex flex-col flex-1">
+                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="p-2 bg-blue-100 rounded-lg text-blue-600">🛠️</span> Gear Profile
+                </h3>
+                <div class="space-y-6">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Main</div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">메인 채비 (Bottom Game)</h4>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
+                                <div class="text-sm font-bold text-slate-800 tracking-tight">SCOTT CENTRIC 690-4</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
+                                <div class="text-sm font-bold text-blue-600 tracking-tight leading-tight">SA Sonar Titan 3D i/3/5 WF6S</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Leader / Tippet</div>
+                                <div class="text-sm font-bold text-slate-700 tracking-tight leading-snug">카본 0X 0.8m<br><span class="text-slate-400 font-normal">+ 티펫링 +</span><br>카본 5X 0.8m</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="w-px h-8 bg-white/10"></div>
-                    <div>
-                        <div class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-1">Analyst</div>
-                        <div class="text-sm font-bold">Jeff</div>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-tighter">Sub / Test</div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">서브 테스트 채비 (Finesse)</h4>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Rod</div>
+                                <div class="text-sm font-bold text-slate-800 tracking-tight">Vision Onki 3100-4</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Line</div>
+                                <div class="text-sm font-bold text-amber-600 tracking-tight leading-tight">Rio Elite Technical Trout WF4F</div>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-slate-500 font-bold uppercase">Leader / Tippet</div>
+                                <div class="text-sm font-bold text-slate-700 tracking-tight leading-snug">테이퍼드 리더(버트) 4X 1m<br><span class="text-slate-400 font-normal">+ 2X 2m 티펫 +</span><br><span class="text-slate-400 font-normal">스위벨 도래 +</span><br>카본 6X 1.5m</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
 
-    <script>
-        // ── 갤러리 데이터 ──
-        const galleries = {
-            trout: [
-                { src: '../images/Trout01.JPEG', caption: 'Trout 01 · 2026.02.14 한터낚시터' },
-                { src: '../images/Trout02.JPEG', caption: 'Trout 02 · 2026.02.14 한터낚시터' },
-                { src: '../images/Trout03.JPEG', caption: 'Trout 03 · 2026.02.14 한터낚시터' },
-                { src: '../images/Trout04.JPEG', caption: 'Trout 04 · 2026.02.14 한터낚시터' },
-                { src: '../images/Trout05.JPEG', caption: 'Trout 05 · 2026.02.14 한터낚시터' },
-            ],
-            fly: [
-                { src: '../images/Fly01.JPEG', caption: 'Zonker Tail Mini Leech #16 — MVP Pattern' },
-                { src: '../images/Fly02.JPEG', caption: 'White Chironomid — Micro Nymphing' },
-                { src: '../images/Fly03.JPEG', caption: 'Chironomid Larva (Red Dot) — Micro Nymphing' },
-            ],
-            gear: [
-                { src: '../images/Gear.JPEG', caption: "Today's Setup · SCOTT CENTRIC 690-4 + Vision Onki 3100-4" },
-            ]
-        };
+        <!-- Color Analytics -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                <span class="p-2 bg-purple-100 rounded-lg text-purple-600">🎨</span> 컬러별 반응도
+            </h3>
+            <div class="chart-container">
+                <canvas id="colorChart"></canvas>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-4 text-center italic">White 컬러에 대한 압도적인 반응 확인</p>
+        </div>
 
-        let currentGallery = [];
-        let currentIndex   = 0;
+        <!-- 우당탕탕 사료타임 -->
+        <div class="bg-gradient-to-br from-amber-500 to-orange-600 p-8 rounded-3xl shadow-lg flex flex-col text-white relative overflow-hidden">
+            <div class="absolute -right-4 -top-4 opacity-20 transform rotate-12">
+                <span class="text-9xl">🐟</span>
+            </div>
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2 relative z-10">
+                <span class="p-2 bg-white/20 rounded-lg">🔥</span> 우당탕탕 사료타임
+            </h3>
+            <div class="space-y-5 relative z-10 flex-1">
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                    <div class="text-xs font-bold opacity-70 uppercase mb-1">Situation</div>
+                    <div class="text-sm font-bold">사료 투입 후 표층 활성도 폭발</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                    <div class="text-xs font-bold opacity-70 uppercase mb-1">Winning Pattern</div>
+                    <div class="text-sm font-bold italic">Chironomid Larva (Micro Nymphing)</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                    <div class="text-xs font-bold opacity-70 uppercase mb-1">📍 정교함의 연습장</div>
+                    <p class="text-[11px] leading-relaxed opacity-95">
+                        늘 짧고 강렬하게 지나가는 사료타임이지만, 표층권에 부글부글 반응하는 <strong>정확한 그 지점으로의 캐스팅</strong>을 연습하는 귀한 시간입니다.
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                    <div class="text-xs font-bold opacity-70 uppercase mb-1">⏳ 사료타임 이후</div>
+                    <p class="text-[11px] leading-relaxed opacity-95">
+                        사료타임이 끝나도 한동안은 이미 떠오른 송어를 상대로 <strong>표층 → 중층으로 이어지는 마이크로 님핑</strong>이 가능합니다.
+                    </p>
+                </div>
+                <div class="pt-1 text-center">
+                    <p class="text-sm font-black tracking-wide opacity-90">
+                        "사료타임은 참 좋은 시간입니다." 🙂
+                    </p>
+                </div>
+            </div>
+            <div class="mt-auto pt-6 text-center border-t border-white/10">
+                <span class="text-xs font-black tracking-widest bg-black/20 px-4 py-1 rounded-full">FEEDING FRENZY</span>
+            </div>
+        </div>
+    </section>
 
-        const lb        = document.getElementById('lightbox');
-        const lbImg     = document.getElementById('lbImg');
-        const lbCaption = document.getElementById('lbCaption');
-        const lbClose   = document.getElementById('lbClose');
-        const lbPrev    = document.getElementById('lbPrev');
-        const lbNext    = document.getElementById('lbNext');
+    <!-- Final Reflection -->
+    <footer class="bg-slate-900 rounded-[3rem] p-12 text-center text-white">
+        <div class="max-w-2xl mx-auto">
+            <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto flex items-center justify-center text-3xl mb-6">📝</div>
+            <h3 class="text-2xl font-bold mb-4">낚시대장의 승부수</h3>
+            <p class="text-slate-400 mb-8 leading-relaxed">
+                오늘의 32수는 단순한 조과가 아닌, <strong>'수평에서 수직으로 상승하는'</strong> 입질 메커니즘을 정확히 파악하고 공략한 전략의 승리입니다. 메인 채비의 강력한 바닥 공략과 서브 채비의 정교한 대응이 완벽한 시너지를 낸 하루였습니다.
+            </p>
+            <div class="flex justify-center items-center gap-6 border-t border-white/10 pt-8">
+                <div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-1">Field</div>
+                    <div class="text-sm font-bold">Yongin Hanter</div>
+                </div>
+                <div class="w-px h-8 bg-white/10"></div>
+                <div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest mb-1">Analyst</div>
+                    <div class="text-sm font-bold">Jeff</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
 
-        function openLightbox(gallery, index) {
-            currentGallery = galleries[gallery];
-            currentIndex   = index;
-            showItem();
-            lb.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+<script>
+    // ── 갤러리 데이터 ──
+    const galleries = {
+        trout: [
+            { src: '../images/Trout01.JPEG', caption: 'Trout 01 · 2026.02.14 한터낚시터' },
+            { src: '../images/Trout02.JPEG', caption: 'Trout 02 · 2026.02.14 한터낚시터' },
+            { src: '../images/Trout03.JPEG', caption: 'Trout 03 · 2026.02.14 한터낚시터' },
+            { src: '../images/Trout04.JPEG', caption: 'Trout 04 · 2026.02.14 한터낚시터' },
+            { src: '../images/Trout05.JPEG', caption: 'Trout 05 · 2026.02.14 한터낚시터' },
+        ],
+        fly: [
+            { src: '../images/Fly01.JPEG', caption: 'Zonker Tail Mini Leech #16 — MVP Pattern' },
+            { src: '../images/Fly02.JPEG', caption: 'White Chironomid — Micro Nymphing' },
+            { src: '../images/Fly03.JPEG', caption: 'Chironomid Larva (Red Dot) — Micro Nymphing' },
+        ],
+        gear: [
+            { src: '../images/Gear.JPEG', caption: "Today's Setup · SCOTT CENTRIC 690-4 + Vision Onki 3100-4" },
+        ]
+    };
 
-        function showItem() {
-            const item      = currentGallery[currentIndex];
-            lbImg.src       = item.src;
-            lbCaption.textContent = item.caption;
-            lbPrev.style.display  = currentGallery.length > 1 ? 'block' : 'none';
-            lbNext.style.display  = currentGallery.length > 1 ? 'block' : 'none';
-        }
+    let currentGallery = [];
+    let currentIndex   = 0;
 
-        function closeLightbox() {
-            lb.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+    const lb        = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbClose   = document.getElementById('lbClose');
+    const lbPrev    = document.getElementById('lbPrev');
+    const lbNext    = document.getElementById('lbNext');
 
-        lbClose.addEventListener('click', closeLightbox);
-        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-        lbPrev.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-            showItem();
+    function openLightbox(gallery, index) {
+        currentGallery = galleries[gallery];
+        currentIndex   = index;
+        showItem();
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showItem() {
+        const item      = currentGallery[currentIndex];
+        lbImg.src       = item.src;
+        lbCaption.textContent = item.caption;
+        lbPrev.style.display  = currentGallery.length > 1 ? 'block' : 'none';
+        lbNext.style.display  = currentGallery.length > 1 ? 'block' : 'none';
+    }
+
+    function closeLightbox() {
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    lbPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        showItem();
+    });
+    lbNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        showItem();
+    });
+    document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('active')) return;
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showItem(); }
+        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentGallery.length; showItem(); }
+    });
+
+    document.querySelectorAll('[data-gallery]').forEach(el => {
+        el.addEventListener('click', () => {
+            openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
         });
-        lbNext.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % currentGallery.length;
-            showItem();
-        });
-        document.addEventListener('keydown', e => {
-            if (!lb.classList.contains('active')) return;
-            if (e.key === 'Escape')      closeLightbox();
-            if (e.key === 'ArrowLeft')  { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showItem(); }
-            if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentGallery.length; showItem(); }
+    });
+
+    // ── 차트 ──
+    window.onload = function() {
+        new Chart(document.getElementById('colorChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Black', 'White (MVP)', 'Purple', 'Brown', 'Olive'],
+                datasets: [{
+                    data: [45, 100, 60, 30, 25],
+                    backgroundColor: ['#1e293b', '#f8fafc', '#9333ea', '#78350f', '#4d7c0f'],
+                    borderColor: '#e2e8f0',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { display: false }, x: { grid: { display: false } } }
+            }
         });
 
-        document.querySelectorAll('[data-gallery]').forEach(el => {
-            el.addEventListener('click', () => {
-                openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
-            });
-        });
-
-        // ── 차트 ──
-        window.onload = function() {
-            new Chart(document.getElementById('colorChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Black', 'White (MVP)', 'Purple', 'Brown', 'Olive'],
-                    datasets: [{
-                        data: [45, 100, 60, 30, 25],
-                        backgroundColor: ['#1e293b', '#f8fafc', '#9333ea', '#78350f', '#4d7c0f'],
-                        borderColor: '#e2e8f0',
-                        borderWidth: 2,
-                        borderRadius: 8
-                    }]
+        // 시간대별 조과 차트
+        const timeLabels = ['06–07시', '07–08시', '08–09시', '09–10시', '10–11시', '11–12시', '12–13시', '13–14시', '14–15시', '15–16시', '16–17시'];
+        const timeValues = [3, 4, 4, 3, 3, 2, 2, 2, 2, 2, 5];
+        const timeColors = timeLabels.map((_, i) =>
+            i <= 4 ? '#60a5fa' :   // 새벽~오전 — 파랑
+            i <= 9 ? '#cbd5e1' :   // 오후 지속 — 슬레이트
+                     '#fbbf24'     // 피딩타임 — 앰버
+        );
+        new Chart(document.getElementById('timeChart'), {
+            type: 'bar',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    data: timeValues,
+                    backgroundColor: timeColors,
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => ` 약 ${ctx.raw}마리` } }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { display: false }, x: { grid: { display: false } } }
-                }
-            });
-
-            initSimulation();
-        };
-
-        // ── 시뮬레이션 ──
-        function initSimulation() {
-            const canvas      = document.getElementById('slopeCanvas');
-            const ctx         = canvas.getContext('2d');
-            const statusEl    = document.getElementById('simStatus');
-            const resetBtn    = document.getElementById('resetSim');
-
-            let state = 'idle';
-            let fly  = { x: 800, y: 100 };
-            let fish = { x: 650, y: 320, opacity: 0, active: false };
-
-            const bankX       = 820;
-            const waterY      = 120;
-            const bottomY     = 400;
-            const slopeStartX = 600;
-            const castX       = 150;
-
-            function drawScene() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                const grad = ctx.createLinearGradient(0, waterY, 0, canvas.height);
-                grad.addColorStop(0, '#0f172a');
-                grad.addColorStop(1, '#1e293b');
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.moveTo(0, waterY); ctx.lineTo(canvas.width, waterY);
-                ctx.lineTo(canvas.width, canvas.height); ctx.lineTo(0, canvas.height);
-                ctx.fill();
-
-                ctx.fillStyle = '#020617';
-                ctx.beginPath();
-                ctx.moveTo(0, bottomY); ctx.lineTo(slopeStartX, bottomY);
-                ctx.lineTo(bankX, waterY); ctx.lineTo(canvas.width, waterY);
-                ctx.lineTo(canvas.width, canvas.height);
-                ctx.fill();
-
-                ctx.setLineDash([5, 5]);
-                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-                ctx.beginPath(); ctx.moveTo(castX, 0); ctx.lineTo(castX, canvas.height); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(slopeStartX, 0); ctx.lineTo(slopeStartX, canvas.height); ctx.stroke();
-                ctx.setLineDash([]);
-
-                ctx.fillStyle = 'rgba(255,255,255,0.4)';
-                ctx.font = '10px sans-serif';
-                ctx.fillText('18M CAST POINT', castX + 10, 50);
-                ctx.fillText('STRIKE AREA START', slopeStartX - 90, 50);
-
-                if (fish.active) {
-                    ctx.save();
-                    ctx.globalAlpha = fish.opacity;
-                    ctx.fillStyle = '#fbbf24';
-                    ctx.beginPath();
-                    ctx.ellipse(fish.x, fish.y, 25, 12, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.moveTo(fish.x - 20, fish.y);
-                    ctx.lineTo(fish.x - 35, fish.y - 15);
-                    ctx.lineTo(fish.x - 35, fish.y + 15);
-                    ctx.fill();
-                    ctx.restore();
-                }
-
-                ctx.strokeStyle = '#bef264';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(bankX, waterY - 40);
-                ctx.quadraticCurveTo((bankX + fly.x) / 2, waterY - 100, fly.x, fly.y);
-                ctx.stroke();
-
-                ctx.fillStyle = 'white';
-                ctx.beginPath();
-                ctx.arc(fly.x, fly.y, 6, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.strokeStyle = '#ef4444';
-                ctx.stroke();
-
-                update();
-                requestAnimationFrame(drawScene);
-            }
-
-            function update() {
-                switch (state) {
-                    case 'idle':
-                        statusEl.innerText = 'Click anywhere to Cast!'; break;
-                    case 'casting':
-                        statusEl.innerText = 'Casting (18m)...';
-                        fly.x -= 15;
-                        fly.y = (waterY - 30) - Math.sin((fly.x - castX) / (bankX - castX) * Math.PI) * 80;
-                        if (fly.x <= castX) state = 'sinking';
-                        break;
-                    case 'sinking':
-                        statusEl.innerText = 'Sinking to Bottom...';
-                        fly.y += 3;
-                        if (fly.y >= bottomY - 10) { fly.y = bottomY - 10; state = 'retrieving'; }
-                        break;
-                    case 'retrieving':
-                        statusEl.innerText = 'Horizontal Retrieve (수평 유지)';
-                        fly.x += 1.5;
-                        if (fly.x >= slopeStartX - 50) fish.active = true;
-                        if (fish.active && fish.opacity < 0.6) fish.opacity += 0.01;
-                        if (fly.x >= slopeStartX) state = 'rising';
-                        break;
-                    case 'rising':
-                        statusEl.innerText = 'Vertical Rising Action (수직 상승!)';
-                        fly.x += 2; fly.y -= 1.8;
-                        if (fly.x >= slopeStartX + 40) {
-                            state = 'hit';
-                            fish.x = fly.x; fish.y = fly.y; fish.opacity = 1;
-                        }
-                        break;
-                    case 'hit':
-                        statusEl.innerText = '🎣 HIT! (수직 상승 구간의 승리)'; break;
+                scales: {
+                    y: { display: false, max: 8 },
+                    x: { grid: { display: false }, ticks: { font: { size: 10 } } }
                 }
             }
+        });
 
-            canvas.addEventListener('mousedown', () => { if (state === 'idle' || state === 'hit') reset(); });
-            resetBtn.addEventListener('click', reset);
+        initSimulation();
+    };
 
-            function reset() {
-                state = 'casting';
-                fly   = { x: bankX, y: waterY - 40 };
-                fish  = { x: slopeStartX + 60, y: bottomY - 50, opacity: 0, active: false };
+    // ── 시뮬레이션 ──
+    function initSimulation() {
+        const canvas      = document.getElementById('slopeCanvas');
+        const ctx         = canvas.getContext('2d');
+        const statusEl    = document.getElementById('simStatus');
+        const resetBtn    = document.getElementById('resetSim');
+
+        let state = 'idle';
+        let fly  = { x: 800, y: 100 };
+        let fish = { x: 650, y: 320, opacity: 0, active: false };
+
+        const bankX       = 820;
+        const waterY      = 120;
+        const bottomY     = 400;
+        const slopeStartX = 600;
+        const castX       = 150;
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const grad = ctx.createLinearGradient(0, waterY, 0, canvas.height);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(1, '#1e293b');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(0, waterY); ctx.lineTo(canvas.width, waterY);
+            ctx.lineTo(canvas.width, canvas.height); ctx.lineTo(0, canvas.height);
+            ctx.fill();
+
+            ctx.fillStyle = '#020617';
+            ctx.beginPath();
+            ctx.moveTo(0, bottomY); ctx.lineTo(slopeStartX, bottomY);
+            ctx.lineTo(bankX, waterY); ctx.lineTo(canvas.width, waterY);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.fill();
+
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.beginPath(); ctx.moveTo(castX, 0); ctx.lineTo(castX, canvas.height); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(slopeStartX, 0); ctx.lineTo(slopeStartX, canvas.height); ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.font = '10px sans-serif';
+            ctx.fillText('MAX CAST POINT', castX + 10, 50);
+            ctx.fillText('STRIKE AREA START', slopeStartX - 90, 50);
+
+            if (fish.active) {
+                ctx.save();
+                ctx.globalAlpha = fish.opacity;
+                ctx.fillStyle = '#fbbf24';
+                ctx.beginPath();
+                ctx.ellipse(fish.x, fish.y, 25, 12, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(fish.x - 20, fish.y);
+                ctx.lineTo(fish.x - 35, fish.y - 15);
+                ctx.lineTo(fish.x - 35, fish.y + 15);
+                ctx.fill();
+                ctx.restore();
             }
 
-            drawScene();
+            ctx.strokeStyle = '#bef264';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(bankX, waterY - 40);
+            ctx.quadraticCurveTo((bankX + fly.x) / 2, waterY - 100, fly.x, fly.y);
+            ctx.stroke();
+
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(fly.x, fly.y, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#ef4444';
+            ctx.stroke();
+
+            update();
+            requestAnimationFrame(drawScene);
         }
-    </script>
+
+        function update() {
+            switch (state) {
+                case 'idle':
+                    statusEl.innerText = 'Click anywhere to Cast!'; break;
+                case 'casting':
+                    statusEl.innerText = 'Casting (최대 비거리)...';
+                    fly.x -= 15;
+                    fly.y = (waterY - 30) - Math.sin((fly.x - castX) / (bankX - castX) * Math.PI) * 80;
+                    if (fly.x <= castX) state = 'sinking';
+                    break;
+                case 'sinking':
+                    statusEl.innerText = 'Sinking to Bottom...';
+                    fly.y += 3;
+                    if (fly.y >= bottomY - 10) { fly.y = bottomY - 10; state = 'retrieving'; }
+                    break;
+                case 'retrieving':
+                    statusEl.innerText = 'Horizontal Retrieve (수평 유지)';
+                    fly.x += 1.5;
+                    if (fly.x >= slopeStartX - 50) fish.active = true;
+                    if (fish.active && fish.opacity < 0.6) fish.opacity += 0.01;
+                    if (fly.x >= slopeStartX) state = 'rising';
+                    break;
+                case 'rising':
+                    statusEl.innerText = 'Vertical Rising Action (수직 상승!)';
+                    fly.x += 2; fly.y -= 1.8;
+                    if (fly.x >= slopeStartX + 40) {
+                        state = 'hit';
+                        fish.x = fly.x; fish.y = fly.y; fish.opacity = 1;
+                    }
+                    break;
+                case 'hit':
+                    statusEl.innerText = '🎣 HIT! (수직 상승 구간의 승리)'; break;
+            }
+        }
+
+        canvas.addEventListener('mousedown', () => { if (state === 'idle' || state === 'hit') reset(); });
+        resetBtn.addEventListener('click', reset);
+
+        function reset() {
+            state = 'casting';
+            fly   = { x: bankX, y: waterY - 40 };
+            fish  = { x: slopeStartX + 60, y: bottomY - 50, opacity: 0, active: false };
+        }
+
+        drawScene();
+    }
+</script>
+```
+
 </body>
 </html>
