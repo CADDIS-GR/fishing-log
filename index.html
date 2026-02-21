@@ -367,6 +367,22 @@
     <script>
         const logsData = [
             {
+                id: '2026-02-21-daedae',
+                date: '2026-02-21',
+                location: '용인 대대낚시터',
+                weather: '☀️',
+                temp: 17,
+                waterTemp: null,
+                season: 'winter',
+                summary: '해빙기 초입, 풀싱킹으로 6m 바닥층 공략. 컬러 로테이션(퍼플→화이트→올리브→블랙)으로 리액션 바이트 유도. 존커테일 미니 리치 단일 패턴으로 20수 달성.',
+                patterns: ['Zonker Tail Mini Leech'],
+                species: ['무지개송어'],
+                catch: 20,
+                notes: '컬러 로테이션 전략, 리액션 바이트, 주둥이 측면 훅킹',
+                file: 'logs/2026-02-21_daedae.html',
+                latest: true
+            },
+            {
                 id: '2026-02-14-hanter',
                 date: '2026-02-14',
                 location: '용인 한터낚시터',
@@ -379,8 +395,7 @@
                 species: ['무지개송어'],
                 catch: 32,
                 notes: '슬로프 수직 상승 구간 입질 집중, White MVP',
-                file: 'logs/2026-02-14_hanter.html',
-                latest: true
+                file: 'logs/2026-02-14_hanter.html'
             },
             {
                 id: '2024-11-15-hanteo',
@@ -534,7 +549,7 @@
                                 <div class="label">기온</div>
                             </div>
                             <div class="log-stat">
-                                <div class="value">${log.waterTemp}°C</div>
+                                <div class="value">${log.waterTemp !== null ? log.waterTemp + '°C' : '-'}</div>
                                 <div class="label">수온</div>
                             </div>
                             <div class="log-stat">
