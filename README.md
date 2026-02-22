@@ -9,20 +9,26 @@
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
 
-**총 조행**: 6회  
-**총 캐치**: 95마리  
+**총 조행**: 7회  
+**총 캐치**: 115마리  
 **방문 낚시터**: 2곳  
-**평균 마릿수**: 15.8마리
+**평균 마릿수**: 16.4마리
 
 ### 📍 방문 낚시터
-- 🏔️ **용인 한터낚시터** (3회)
+- 🏔️ **용인 한터낚시터** (4회)
 - 🌊 **신기사낚시터** (3회)
 
 ## 📅 조행 목록
 
 ### ❄️ 2026 겨울 시즌
 
-- **[02.14] 한터낚시터** - 한파 끝, 32수의 정교한 기록 ⭐ NEW ([상세보기](logs/2026-02-14_hanter.html))
+- **[02.21] 한터낚시터** - 수중의 변주곡: 컬러 로테이션과 리액션 바이트 ⭐ NEW ([상세보기](logs/2026-02-21_daedae.html))
+  - 📍 용인 한터낚시터 | 🎯 20마리 | 🌡️ 1~17°C
+  - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (올리브·블랙·화이트·퍼플 컬러 로테이션)
+  - 💡 핵심: 컬러 교체 직후 입질 재개 반복 확인 / 측면 훅킹으로 리액션 바이트 검증 / 해빙기 바닥층(4°C) 집결 패턴
+  - 📎 관련 문서: [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
+
+- **[02.14] 한터낚시터** - 한파 끝, 32수의 정교한 기록 ([상세보기](logs/2026-02-14_hanter.html))
   - 📍 용인 한터낚시터 | 🎯 32마리 | 🌡️ 3°C
   - 🎣 주요 패턴: Zonker Tail Mini Leech #16, White Chironomid, Chironomid Larva (Red Dot)
   - 💡 핵심: 수평에서 수직으로 상승하는 슬로프 구간 입질 집중 / White MVP / Technical Trout Line 첫 투입
@@ -65,7 +71,7 @@
 - **Sage R8 Core 4100-4** + SA Sonar Sink 25 Cold (Sink 6)
 
 ### 효과적인 패턴
-- 🤍 **Zonker Tail Mini Leech** - 슬로프 수직 상승 구간 MVP *(2026 신규)*
+- 🤍 **Zonker Tail Mini Leech** - 슬로프 수직 상승 구간 MVP / 컬러 로테이션 핵심 패턴 *(2026)*
 - 🔴 **Vampire Leech** - 한터지 최고 히트 패턴
 - ⚫ **Chironomid Pupa / Larva** - 저수온기 필수
 - 🟤 **Woolly Bugger** - 만능 스트리머
@@ -81,9 +87,11 @@ fishing-log/
 │   ├── Fly01~03.JPEG
 │   ├── Trout01~05.JPEG
 │   ├── Gear.JPEG
-│   └── field-bg.jpg
+│   ├── field-bg.jpg
+│   └── 0221-*.jpg/JPEG     # 2026-02-21 출조 사진
 ├── logs/                   # 개별 조행기 HTML 파일들
-│   ├── 2026-02-14_hanter.html   ⭐ NEW
+│   ├── 2026-02-21_daedae.html   ⭐ NEW
+│   ├── 2026-02-14_hanter.html
 │   ├── 2025-01-04-singisa.html
 │   ├── 2024-12-20-hanteo.html
 │   ├── 2024-12-13-singisa.html
@@ -113,19 +121,18 @@ cd fishing-log
 
 ```javascript
 {
-    id: '2026-02-14-hanter',
-    date: '2026-02-14',
+    id: '2026-02-21-daedae',
+    date: '2026-02-21',
     location: '용인 한터낚시터',
     weather: '☀️',
-    temp: 3,
-    waterTemp: 5,
+    temp: 17,
     season: 'winter',
-    summary: '조행 요약',
-    patterns: ['패턴1', '패턴2'],
+    summary: '컬러 로테이션과 리액션 바이트',
+    patterns: ['Zonker Tail Mini Leech #16'],
     species: ['무지개송어'],
-    catch: 32,
-    notes: '메모',
-    file: 'logs/2026-02-14_hanter.html'
+    catch: 20,
+    notes: '컬러 교체 직후 입질 재개 반복 확인',
+    file: 'logs/2026-02-21_daedae.html'
 }
 ```
 
@@ -137,6 +144,7 @@ cd fishing-log
 - ✅ **전략**: 풀싱킹 라인 + Deep Lining 조합
 - ✅ **패턴**: Zonker Tail Mini Leech, Vampire Leech, Chironomid
 - ✅ **2026 발견**: 수평 리트리브 → 수직 상승 변화 구간에서 입질 집중
+- ✅ **2026 검증**: 컬러 로테이션으로 Habituation 차단 → 리액션 바이트 지속 유발
 
 ### 신기사낚시터 공략법
 - ✅ **특징**: 저수온기 반응 좋음
@@ -150,8 +158,15 @@ cd fishing-log
 |------|------|------|------|
 | 2024 가을 | 2회 | 27마리 | 13.5 |
 | 2024-25 겨울 | 3회 | 36마리 | 12.0 |
-| 2026 겨울 | 1회 | 32마리 | 32.0 |
-| **합계** | **6회** | **95마리** | **15.8** |
+| 2026 겨울 | 2회 | 52마리 | 26.0 |
+| **합계** | **7회** | **115마리** | **16.4** |
+
+## 🔗 관련 프로젝트
+
+- **[Fly Fishing Techniques](https://caddis-gr.github.io/fishing-technique/)**: 테크닉 아카이브
+  - 이 조행기에서 도출된 → [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
+- **[Fly Tying Archive](https://caddis-gr.github.io/fly-tying-archive/)**: 플라이 타잉 패턴 아카이브
+- **[Fishing Gear](https://github.com/CADDIS-GR/fishing-gear)**: 낚시 장비 정보
 
 ## 🤝 기여하기
 
@@ -171,4 +186,4 @@ MIT License - 자유롭게 참고하세요!
 
 **"같은 필드에서도 다양한 기법과 공략으로 서로 다른 결과를 만들어 내는 게 낚시입니다."**
 
-🎣 Tight Lines!
+🎣 Tight Lines!ㄴ
