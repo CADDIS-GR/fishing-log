@@ -148,7 +148,6 @@
             border-color: #667eea;
         }
 
-        /* 최신 카드 강조 */
         .log-card.latest {
             border-color: #667eea;
             box-shadow: 0 4px 20px rgba(102,126,234,0.25);
@@ -367,6 +366,22 @@
     <script>
         const logsData = [
             {
+                id: '2026-03-01-daedae',
+                date: '2026-03-01',
+                location: '용인 한터낚시터',
+                weather: '💨',
+                temp: 6,
+                waterTemp: null,
+                season: 'spring',
+                summary: '맞바람을 뚫은 39수의 기록. 5색 컬러 로테이션(올리브→블랙→챠트루즈→퍼플→화이트) 첫 실전 검증. 3D 싱킹 + 짧은 카본리더로 6m 바닥권을 완벽 공략.',
+                patterns: ['Zonker Tail Mini Leech #16'],
+                species: ['무지개송어'],
+                catch: 39,
+                notes: '5색 컬러 로테이션, Sage DS2, 풀싱킹 바닥 공략',
+                file: 'logs/2026-03-01_daedae.html',
+                latest: true
+            },
+            {
                 id: '2026-02-21-daedae',
                 date: '2026-02-21',
                 location: '용인 대대낚시터',
@@ -380,7 +395,7 @@
                 catch: 20,
                 notes: '컬러 로테이션 전략, 리액션 바이트, 주둥이 측면 훅킹',
                 file: 'logs/2026-02-21_daedae.html',
-                latest: true
+                latest: false
             },
             {
                 id: '2026-02-14-hanter',
@@ -409,7 +424,6 @@
                 patterns: ['Vampire Leech', 'Chironomid'],
                 species: ['무지개송어'],
                 catch: 15,
-                size: 38,
                 notes: '6m 수심, 바닥 공략이 핵심',
                 file: 'logs/2024-11-15-hanteo.html'
             },
@@ -470,7 +484,6 @@
                 patterns: ['Streamer #8', 'Leech'],
                 species: ['무지개송어'],
                 catch: 10,
-                size: 36,
                 notes: '강추위, 느린 리트리브',
                 file: 'logs/2025-01-04-singisa.html'
             }
