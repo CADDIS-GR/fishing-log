@@ -15,7 +15,6 @@
             background-color: #f8fafc;
         }
         .hero-bg {
-            /* 은은한 저수지 느낌의 그라데이션 배경 */
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1504700610630-ac6aba3536d8?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
         }
         .timeline-item::before {
@@ -25,14 +24,97 @@
             top: 0.3rem;
             width: 0.8rem;
             height: 0.8rem;
-            background-color: #3b82f6; /* blue-500 */
+            background-color: #3b82f6;
             border-radius: 50%;
             border: 2px solid #fff;
             box-shadow: 0 0 0 4px #eff6ff;
         }
+
+        /* Gallery */
+        .gallery-thumb {
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            cursor: zoom-in;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+        .gallery-thumb:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            cursor: default;
+        }
+        #lightbox-prev, #lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #lightbox-prev:hover, #lightbox-next:hover { background: rgba(255,255,255,0.3); }
+        #lightbox-prev { left: 1rem; }
+        #lightbox-next { right: 1rem; }
+        #lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #lightbox-close:hover { background: rgba(255,255,255,0.3); }
+        #lightbox-counter {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body class="text-slate-800 antialiased">
+
+    <!-- Back Navigation -->
+    <div class="bg-slate-800 text-white py-3 px-6">
+        <div class="max-w-4xl mx-auto">
+            <a href="../index.html" class="inline-flex items-center text-slate-300 hover:text-white text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                조행기 목록으로 돌아가기
+            </a>
+        </div>
+    </div>
 
     <!-- Header / Hero Section -->
     <header class="hero-bg text-white py-20 px-6 lg:px-8 relative">
@@ -125,7 +207,6 @@
         <section class="mb-12">
             <h2 class="text-2xl font-bold mb-6 text-slate-900 text-center">💡 오늘의 Key Point 리뷰</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Point 1 -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
                         <i data-lucide="activity"></i>
@@ -135,7 +216,6 @@
                         20년이 넘은 명기의 진가. 미디엄 패스트 액션이 풀싱킹 라인의 로딩 타임을 길게 확보해 주어 강한 맞바람에도 유연하게 대응 가능. 훌륭한 휨새로 찰진 손맛 제공.
                     </p>
                 </div>
-                <!-- Point 2 -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
                     <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-emerald-600">
                         <i data-lucide="target"></i>
@@ -145,7 +225,6 @@
                         3D 싱킹라인 + 1.5m 짧은 카본리더 + 느린 8자 리트리브. 15m 이상 캐스팅해도 꼬임 없이 타겟 수심에 안착. 한터지 바닥 공략 테크닉의 정점을 찍다.
                     </p>
                 </div>
-                <!-- Point 3 -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
                     <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 text-purple-600">
                         <i data-lucide="palette"></i>
@@ -158,29 +237,30 @@
             </div>
         </section>
 
-        <!-- Photo Gallery (Placeholders for User's images) -->
+        <!-- Photo Gallery -->
         <section class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-12">
             <h2 class="text-xl font-bold mb-6 flex items-center text-slate-900 border-b pb-4">
                 <i data-lucide="camera" class="w-6 h-6 mr-2 text-blue-500"></i> 현장 기록 갤러리
+                <span class="ml-auto text-sm font-normal text-slate-400">클릭하면 확대됩니다</span>
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Image 1 placeholder -->
-                <div class="relative group rounded-xl overflow-hidden bg-slate-100 aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300">
-                    <i data-lucide="image" class="w-10 h-10 text-slate-400 mb-2"></i>
-                    <span class="text-sm font-medium text-slate-500">5색 미니리치 사진 삽입</span>
-                </div>
-                <!-- Image 2 placeholder -->
-                <div class="relative group rounded-xl overflow-hidden bg-slate-100 aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300">
-                    <i data-lucide="image" class="w-10 h-10 text-slate-400 mb-2"></i>
-                    <span class="text-sm font-medium text-slate-500">송어 랜딩 사진 삽입</span>
-                </div>
-                <!-- Image 3 placeholder -->
-                <div class="relative group rounded-xl overflow-hidden bg-slate-100 aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300">
-                    <i data-lucide="image" class="w-10 h-10 text-slate-400 mb-2"></i>
-                    <span class="text-sm font-medium text-slate-500">39수 카운터 사진 삽입</span>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout01.JPEG" alt="송어 01" onclick="openLightbox(0)">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout02.JPEG" alt="송어 02" onclick="openLightbox(1)">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout03.JPEG" alt="송어 03" onclick="openLightbox(2)">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout04.JPEG" alt="송어 04" onclick="openLightbox(3)">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout05.JPEG" alt="송어 05" onclick="openLightbox(4)">
+                <img class="gallery-thumb" src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout06.JPEG" alt="송어 06" onclick="openLightbox(5)">
             </div>
         </section>
+
+        <!-- Lightbox -->
+        <div id="lightbox" onclick="closeLightbox(event)">
+            <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+            <button id="lightbox-prev" onclick="event.stopPropagation(); moveLightbox(-1)">‹</button>
+            <img id="lightbox-img" src="" alt="">
+            <button id="lightbox-next" onclick="event.stopPropagation(); moveLightbox(1)">›</button>
+            <div id="lightbox-counter"></div>
+        </div>
 
         <!-- Conclusion -->
         <div class="bg-slate-900 text-white rounded-2xl p-8 text-center mt-12 relative overflow-hidden">
@@ -202,9 +282,50 @@
         <p>ⓒ 2026 낚시대장의 플라이 피싱 다이어리. All rights reserved.</p>
     </footer>
 
-    <!-- Initialize Lucide Icons -->
     <script>
         lucide.createIcons();
+
+        // Lightbox
+        const images = [
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout01.JPEG',
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout02.JPEG',
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout03.JPEG',
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout04.JPEG',
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout05.JPEG',
+            'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0301-Trout06.JPEG',
+        ];
+        let currentIdx = 0;
+
+        function openLightbox(idx) {
+            currentIdx = idx;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target !== document.getElementById('lightbox') && e.target !== document.getElementById('lightbox-close')) return;
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function moveLightbox(dir) {
+            currentIdx = (currentIdx + dir + images.length) % images.length;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            document.getElementById('lightbox-img').src = images[currentIdx];
+            document.getElementById('lightbox-counter').textContent = `${currentIdx + 1} / ${images.length}`;
+        }
+
+        // 키보드 지원
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') moveLightbox(-1);
+            if (e.key === 'ArrowRight') moveLightbox(1);
+            if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow = ''; }
+        });
     </script>
 </body>
 </html>
