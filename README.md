@@ -9,24 +9,36 @@
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
 
-**총 조행**: 7회  
-**총 캐치**: 115마리  
-**방문 낚시터**: 2곳  
-**평균 마릿수**: 16.4마리
+**총 조행**: 9회
+**총 캐치**: 165마리
+**방문 낚시터**: 2곳
+**평균 마릿수**: 18.3마리
 
 ### 📍 방문 낚시터
-- 🏔️ **용인 한터낚시터** (4회)
+- 🏔️ **용인 한터낚시터** (6회)
 - 🌊 **신기사낚시터** (3회)
 
 ## 📅 조행 목록
 
+### 🌸 2026 봄 시즌
+
+- **[03.14] 한터낚시터** - 작전명 "침잠(沈潛)" — 51수 고지 달성 & 뉴노멀 정립 ⭐ NEW ([상세보기](logs/2026-03-14_daedae.html))
+  - 📍 용인 한터낚시터 | 🎯 51마리 | 🌡️ 0~12°C
+  - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (3대 컬러군 로테이션), Glow Bead Marabou #14
+  - 💡 핵심: 오직 싱킹채비만으로 바닥→중층 확장 / 새벽 싱킹 바닥 선점 성공 / 3대 컬러군 로테이션 뉴노멀 정립 / Camolux 인터미디어트 중층 첫 출전
+  - 📎 관련 문서: [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
+
+- **[03.01] 한터낚시터** - 작전명 "서울 대전 대구 부산 찍고!!" — 5색 컬러 로테이션 첫 실전 ([상세보기](logs/2026-03-01_daedae.html))
+  - 📍 용인 한터낚시터 | 🎯 39마리 | 🌡️ 5~12°C
+  - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (올리브→블랙→챠트루즈→퍼플→화이트)
+  - 💡 핵심: 5색 컬러 로테이션 첫 실전 검증 / Sage DS2 맞바람 대응 / 풀싱킹 바닥 39수
+
 ### ❄️ 2026 겨울 시즌
 
-- **[02.21] 한터낚시터** - 수중의 변주곡: 컬러 로테이션과 리액션 바이트 ⭐ NEW ([상세보기](logs/2026-02-21_daedae.html))
+- **[02.21] 한터낚시터** - 수중의 변주곡: 컬러 로테이션과 리액션 바이트 ([상세보기](logs/2026-02-21_daedae.html))
   - 📍 용인 한터낚시터 | 🎯 20마리 | 🌡️ 1~17°C
   - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (올리브·블랙·화이트·퍼플 컬러 로테이션)
   - 💡 핵심: 컬러 교체 직후 입질 재개 반복 확인 / 측면 훅킹으로 리액션 바이트 검증 / 해빙기 바닥층(4°C) 집결 패턴
-  - 📎 관련 문서: [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
 
 - **[02.14] 한터낚시터** - 한파 끝, 32수의 정교한 기록 ([상세보기](logs/2026-02-14_hanter.html))
   - 📍 용인 한터낚시터 | 🎯 32마리 | 🌡️ 3°C
@@ -65,13 +77,15 @@
 ## 🛠️ 주요 장비
 
 ### 로드 & 라인
-- **Sage Foundation 690-4** + Rio Elite Stillwater Floater WF5F
-- **SCOTT CENTRIC 690-4** + SA Sonar Titan 3D i/3/5 WF6S
-- **Vision Onki 3100-4** + Rio Elite Technical Trout WF4F *(2026 신규 투입)*
-- **Sage R8 Core 4100-4** + SA Sonar Sink 25 Cold (Sink 6)
+- **SCOTT CENTRIC 690-4** + SA Sonar Titan 3D i/3/5 WF6S *(바닥 주력)*
+- **Sage Foundation 690-4** + RIO Sub-surface Camolux WF5I *(중층 탐색)*
+- **Sage R8 Core 4100-4** + RIO Elite Sub-Surface CamoLux WF5I
+- **T&T Paradigm 905-4** + RIO Elite Gold Classic WF5F *(표층)*
+- **Sage DS2 690-2** + SA Sonar Titan 3D i/3/5 WF6S
 
 ### 효과적인 패턴
-- 🤍 **Zonker Tail Mini Leech** - 슬로프 수직 상승 구간 MVP / 컬러 로테이션 핵심 패턴 *(2026)*
+- 🤍 **Zonker Tail Mini Leech #16** - 한터 바닥 뉴노멀 / 3대 컬러군 로테이션 *(2026)*
+- 💜 **Glow Bead Marabou Leech #14** - 새벽 깜깜 바닥 전용 *(2026 신규)*
 - 🔴 **Vampire Leech** - 한터지 최고 히트 패턴
 - ⚫ **Chironomid Pupa / Larva** - 저수온기 필수
 - 🟤 **Woolly Bugger** - 만능 스트리머
@@ -83,14 +97,14 @@
 fishing-log/
 ├── index.html              # 메인 대시보드 (조행기 목록)
 ├── images/                 # 현장 사진
-│   ├── HanTer.JPEG
-│   ├── Fly01~03.JPEG
-│   ├── Trout01~05.JPEG
-│   ├── Gear.JPEG
 │   ├── field-bg.jpg
+│   ├── 0314-*.JPEG/PNG     # 2026-03-14 출조 사진
+│   ├── 0301-*.JPEG/PNG     # 2026-03-01 출조 사진
 │   └── 0221-*.jpg/JPEG     # 2026-02-21 출조 사진
 ├── logs/                   # 개별 조행기 HTML 파일들
-│   ├── 2026-02-21_daedae.html   ⭐ NEW
+│   ├── 2026-03-14_daedae.html   ⭐ NEW
+│   ├── 2026-03-01_daedae.html
+│   ├── 2026-02-21_daedae.html
 │   ├── 2026-02-14_hanter.html
 │   ├── 2025-01-04-singisa.html
 │   ├── 2024-12-20-hanteo.html
@@ -121,18 +135,19 @@ cd fishing-log
 
 ```javascript
 {
-    id: '2026-02-21-daedae',
-    date: '2026-02-21',
+    id: '2026-03-14-daedae',
+    date: '2026-03-14',
     location: '용인 한터낚시터',
-    weather: '☀️',
-    temp: 17,
-    season: 'winter',
-    summary: '컬러 로테이션과 리액션 바이트',
+    weather: '💨',
+    temp: 6,
+    season: 'spring',
+    summary: '작전명 "침잠(沈潛)". 51수 Goal Reached!',
     patterns: ['Zonker Tail Mini Leech #16'],
     species: ['무지개송어'],
-    catch: 20,
-    notes: '컬러 교체 직후 입질 재개 반복 확인',
-    file: 'logs/2026-02-21_daedae.html'
+    catch: 51,
+    notes: '3대 컬러군 로테이션 뉴노멀 정립',
+    file: 'logs/2026-03-14_daedae.html',
+    latest: true
 }
 ```
 
@@ -140,11 +155,12 @@ cd fishing-log
 
 ### 한터낚시터 공략법
 - ✅ **수심**: 6m 깊은 저수지
-- ✅ **핵심**: 바닥(Bottom) 공략 후 슬로프 수직 상승 구간 노리기
-- ✅ **전략**: 풀싱킹 라인 + Deep Lining 조합
+- ✅ **핵심**: 바닥(Bottom) 공략 — 새벽부터 싱킹채비로 선점
+- ✅ **전략**: 풀싱킹 라인 + 1.5m 짧은 형광카본 + 느린 8자 리트리브
 - ✅ **패턴**: Zonker Tail Mini Leech, Vampire Leech, Chironomid
-- ✅ **2026 발견**: 수평 리트리브 → 수직 상승 변화 구간에서 입질 집중
-- ✅ **2026 검증**: 컬러 로테이션으로 Habituation 차단 → 리액션 바이트 지속 유발
+- ✅ **2026 발견**: 새벽 깜깜 바닥 = Glow Bead로 선점
+- ✅ **2026 뉴노멀**: 3대 컬러군 로테이션 (다크군 / 유채색군 / 브라이트군)
+- ✅ **2026 확장**: 인터미디어트(Camolux)로 중층권 탐색 시작
 
 ### 신기사낚시터 공략법
 - ✅ **특징**: 저수온기 반응 좋음
@@ -159,12 +175,13 @@ cd fishing-log
 | 2024 가을 | 2회 | 27마리 | 13.5 |
 | 2024-25 겨울 | 3회 | 36마리 | 12.0 |
 | 2026 겨울 | 2회 | 52마리 | 26.0 |
-| **합계** | **7회** | **115마리** | **16.4** |
+| 2026 봄 | 2회 | 90마리 | 45.0 |
+| **합계** | **9회** | **205마리** | **22.8** |
 
 ## 🔗 관련 프로젝트
 
 - **[Fly Fishing Techniques](https://caddis-gr.github.io/fishing-technique/)**: 테크닉 아카이브
-  - 이 조행기에서 도출된 → [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
+  - [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
 - **[Fly Tying Archive](https://caddis-gr.github.io/fly-tying-archive/)**: 플라이 타잉 패턴 아카이브
 - **[Fishing Gear](https://github.com/CADDIS-GR/fishing-gear)**: 낚시 장비 정보
 
@@ -184,6 +201,6 @@ MIT License - 자유롭게 참고하세요!
 
 ---
 
-**"같은 필드에서도 다양한 기법과 공략으로 서로 다른 결과를 만들어 내는 게 낚시입니다."**
+**"32 + 20 + 39 + 51 = 沈潛"**
 
-🎣 Tight Lines!ㄴ
+🎣 Tight Lines!
