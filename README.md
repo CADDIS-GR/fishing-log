@@ -9,20 +9,25 @@
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
 
-**총 조행**: 9회
-**총 캐치**: 165마리
+**총 조행**: 10회
+**총 캐치**: 188마리
 **방문 낚시터**: 2곳
-**평균 마릿수**: 18.3마리
+**평균 마릿수**: 18.8마리
 
 ### 📍 방문 낚시터
-- 🏔️ **용인 한터낚시터** (6회)
+- 🏔️ **용인 한터낚시터** (7회)
 - 🌊 **신기사낚시터** (3회)
 
 ## 📅 조행 목록
 
 ### 🌸 2026 봄 시즌
 
-- **[03.14] 한터낚시터** - 작전명 "침잠(沈潛)" — 51수 고지 달성 & 뉴노멀 정립 ⭐ NEW ([상세보기](logs/2026-03-14_daedae.html))
+- **[03.29] 한터낚시터** - 작전명 "적공(積功), 판을 흔들다" — 침묵하는 바텀, 마이크로 님핑!! ⭐ NEW ([상세보기](logs/2026-03-29-hanter.html))
+  - 📍 용인 한터낚시터 | 🎯 23마리 | 🌡️ 5~20°C
+  - 🎣 주요 패턴: Chironomid Larva (Zebra Midge), White Chironomid Pupa, Egg Pattern
+  - 💡 핵심: 연일 통하던 바닥 패턴 침묵 / Airflo SS2 DI5 첫 등판 / 에그 실마리로 마이크로 님핑 전환 게임체인저 / Biostrike 인디케이터 3개 사선 입질
+
+- **[03.14] 한터낚시터** - 작전명 "침잠(沈潛)" — 51수 고지 달성 & 뉴노멀 정립 ([상세보기](logs/2026-03-14_daedae.html))
   - 📍 용인 한터낚시터 | 🎯 51마리 | 🌡️ 0~12°C
   - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (3대 컬러군 로테이션), Glow Bead Marabou #14
   - 💡 핵심: 오직 싱킹채비만으로 바닥→중층 확장 / 새벽 싱킹 바닥 선점 성공 / 3대 컬러군 로테이션 뉴노멀 정립 / Camolux 인터미디어트 중층 첫 출전
@@ -78,16 +83,18 @@
 
 ### 로드 & 라인
 - **SCOTT CENTRIC 690-4** + SA Sonar Titan 3D i/3/5 WF6S *(바닥 주력)*
-- **Sage Foundation 690-4** + RIO Sub-surface Camolux WF5I *(중층 탐색)*
+- **Sage Foundation 690-4** + Airflo Sixth Sense 2 DI5 *(바닥 서브 / 2026 신규)*
 - **Sage R8 Core 4100-4** + RIO Elite Sub-Surface CamoLux WF5I
-- **T&T Paradigm 905-4** + RIO Elite Gold Classic WF5F *(표층)*
+- **Vision Onki 3100-4** + Airflo Euro Nymph Short 22ft *(네오스타일 드리프트)*
+- **T&T Paradigm 905-4** + RIO Elite Gold Classic WF5F *(표층 / 마이크로님핑)*
 - **Sage DS2 690-2** + SA Sonar Titan 3D i/3/5 WF6S
 
 ### 효과적인 패턴
 - 🤍 **Zonker Tail Mini Leech #16** - 한터 바닥 뉴노멀 / 3대 컬러군 로테이션 *(2026)*
 - 💜 **Glow Bead Marabou Leech #14** - 새벽 깜깜 바닥 전용 *(2026 신규)*
 - 🔴 **Vampire Leech** - 한터지 최고 히트 패턴
-- ⚫ **Chironomid Pupa / Larva** - 저수온기 필수
+- ⚫ **Chironomid Larva / Zebra Midge** - 봄 수온 전환기 마이크로님핑 필수 *(2026 신규)*
+- 🤍 **White Chironomid Pupa** - 봄 상층 활성기 게임체인저 *(2026 신규)*
 - 🟤 **Woolly Bugger** - 만능 스트리머
 - 🔵 **Bloodworm** - 바닥 공략
 
@@ -98,11 +105,13 @@ fishing-log/
 ├── index.html              # 메인 대시보드 (조행기 목록)
 ├── images/                 # 현장 사진
 │   ├── field-bg.jpg
+│   ├── 0329-*.JPEG/PNG     # 2026-03-29 출조 사진
 │   ├── 0314-*.JPEG/PNG     # 2026-03-14 출조 사진
 │   ├── 0301-*.JPEG/PNG     # 2026-03-01 출조 사진
 │   └── 0221-*.jpg/JPEG     # 2026-02-21 출조 사진
 ├── logs/                   # 개별 조행기 HTML 파일들
-│   ├── 2026-03-14_daedae.html   ⭐ NEW
+│   ├── 2026-03-29-hanter.html   ⭐ NEW
+│   ├── 2026-03-14_daedae.html
 │   ├── 2026-03-01_daedae.html
 │   ├── 2026-02-21_daedae.html
 │   ├── 2026-02-14_hanter.html
@@ -135,18 +144,18 @@ cd fishing-log
 
 ```javascript
 {
-    id: '2026-03-14-daedae',
-    date: '2026-03-14',
+    id: '2026-03-29-hanter',
+    date: '2026-03-29',
     location: '용인 한터낚시터',
-    weather: '💨',
-    temp: 6,
+    weather: '☀️',
+    temp: 20,
     season: 'spring',
-    summary: '작전명 "침잠(沈潛)". 51수 Goal Reached!',
-    patterns: ['Zonker Tail Mini Leech #16'],
+    summary: '작전명 "적공(積功), 판을 흔들다". 마이크로 님핑 게임체인저. 23수.',
+    patterns: ['Chironomid Larva (Zebra Midge)', 'White Chironomid Pupa'],
     species: ['무지개송어'],
-    catch: 51,
-    notes: '3대 컬러군 로테이션 뉴노멀 정립',
-    file: 'logs/2026-03-14_daedae.html',
+    catch: 23,
+    notes: '마이크로 님핑 전환, Airflo DI5 첫 실전',
+    file: 'logs/2026-03-29-hanter.html',
     latest: true
 }
 ```
@@ -161,6 +170,7 @@ cd fishing-log
 - ✅ **2026 발견**: 새벽 깜깜 바닥 = Glow Bead로 선점
 - ✅ **2026 뉴노멀**: 3대 컬러군 로테이션 (다크군 / 유채색군 / 브라이트군)
 - ✅ **2026 확장**: 인터미디어트(Camolux)로 중층권 탐색 시작
+- ✅ **2026 봄 발견**: 수온 전환기(3월 말~) 송어 중층 부상 → 마이크로 님핑 + 인디케이터로 대응
 
 ### 신기사낚시터 공략법
 - ✅ **특징**: 저수온기 반응 좋음
@@ -172,11 +182,11 @@ cd fishing-log
 
 | 시즌 | 조행 | 캐치 | 평균 |
 |------|------|------|------|
-| 2024 가을 | 2회 | 27마리 | 13.5 |
-| 2024-25 겨울 | 3회 | 36마리 | 12.0 |
+| 2025 가을 | 2회 | 27마리 | 13.5 |
+| 2025-26 겨울 | 3회 | 36마리 | 12.0 |
 | 2026 겨울 | 2회 | 52마리 | 26.0 |
-| 2026 봄 | 2회 | 90마리 | 45.0 |
-| **합계** | **9회** | **205마리** | **22.8** |
+| 2026 봄 | 3회 | 113마리 | 37.7 |
+| **합계** | **10회** | **228마리** | **22.8** |
 
 ## 🔗 관련 프로젝트
 
@@ -201,6 +211,6 @@ MIT License - 자유롭게 참고하세요!
 
 ---
 
-**"32 + 20 + 39 + 51 = 沈潛"**
+**"32 + 20 + 39 + 51 + 23 = 積功"**
 
 🎣 Tight Lines!
