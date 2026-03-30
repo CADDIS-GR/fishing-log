@@ -666,6 +666,16 @@
         <div class="gear-note">
             <strong>DI5 첫인상:</strong> 사전 스트레치 후에도 약간의 탱글링이 느껴졌다. 6% 연신율 덕분에 라인이 거의 늘어나지 않아 다소 딱딱한 첫 느낌이었지만, 그만큼 훅셋은 쪼금 더 빠르게 들어가는 듯했다. 40·20·10ft 행마커(Hang marker)는 수심층을 가늠하는 데 쌍따봉 👍🏻👍🏻. <strong>"충분히 메인 라인이 될 수 있겠다"</strong>는 좋은 느낌.
         </div>
+        <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,.1);">
+            <a href="https://caddis-gr.github.io/fishing-gear/reviews/Airflo_Sixth_Sense2_DI5_Review.html"
+               target="_blank"
+               style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.12em; color:var(--water-lt);
+                      text-decoration:none; display:inline-flex; align-items:center; gap:6px; opacity:.85;
+                      transition:opacity .2s;"
+               onmouseover="this.style.opacity=1" onmouseout="this.style.opacity='.85'">
+                ↗ AIRFLO SIXTH SENSE 2 WF6·7 DI5 — 라인 리뷰 전문 보기
+            </a>
+        </div>
     </div>
 
     <div class="sec-title">바닥의 침묵</div>
@@ -779,6 +789,25 @@
 
 </main>
 
+<!-- ══ BEST FLY GALLERY ══════════════════════════ -->
+<section class="gallery-section wrap">
+    <h2>오늘의 베스트 훅</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:0;">
+        <div class="gallery-item" style="aspect-ratio:1;" onclick="openLbFly(0)">
+            <img src="https://raw.githubusercontent.com/CADDIS-GR/fly-tying-archive/main/images/WhitePupa.jpg" alt="White Chironomid Pupa" loading="lazy">
+            <div class="gallery-cap">White Chironomid Pupa</div>
+        </div>
+        <div class="gallery-item" style="aspect-ratio:1;" onclick="openLbFly(1)">
+            <img src="https://raw.githubusercontent.com/CADDIS-GR/tying-recipe/main/photos/RedDotLarva.jpg" alt="Red Dot Larva" loading="lazy">
+            <div class="gallery-cap">Red Dot Larva</div>
+        </div>
+        <div class="gallery-item" style="aspect-ratio:1;" onclick="openLbFly(2)">
+            <img src="https://raw.githubusercontent.com/CADDIS-GR/fly-tying-archive/main/flies/streamer/0329-WhiteZonkerLeech.jpg" alt="White Zonker Leech" loading="lazy">
+            <div class="gallery-cap">White Zonker Leech</div>
+        </div>
+    </div>
+</section>
+
 <!-- ══ GALLERY 2 ═══════════════════════════════════ -->
 <section class="gallery-section wrap">
     <h2>현장 갤러리</h2>
@@ -849,6 +878,7 @@
         renderLb();
         document.getElementById('lb').classList.add('active');
         document.body.style.overflow = 'hidden';
+        document.getElementById('lb').dataset.mode = 'field';
     }
     function closeLb() {
         document.getElementById('lb').classList.remove('active');
@@ -857,9 +887,36 @@
     function closeLbOutside(e) {
         if (e.target === document.getElementById('lb')) closeLb();
     }
+    const FLY_ITEMS = [
+        { src: 'https://raw.githubusercontent.com/CADDIS-GR/fly-tying-archive/main/images/WhitePupa.jpg',                          cap: 'White Chironomid Pupa' },
+        { src: 'https://raw.githubusercontent.com/CADDIS-GR/tying-recipe/main/photos/RedDotLarva.jpg',                             cap: 'Red Dot Larva' },
+        { src: 'https://raw.githubusercontent.com/CADDIS-GR/fly-tying-archive/main/flies/streamer/0329-WhiteZonkerLeech.jpg',      cap: 'White Zonker Leech' },
+    ];
+    let flyIdx = 0;
+
+    function openLbFly(i) {
+        flyIdx = i;
+        renderLbFly();
+        document.getElementById('lb').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('lb').dataset.mode = 'fly';
+    }
+    function renderLbFly() {
+        document.getElementById('lb-img').src = FLY_ITEMS[flyIdx].src;
+        document.getElementById('lb-img').alt = FLY_ITEMS[flyIdx].cap;
+        document.getElementById('lb-cap').textContent = FLY_ITEMS[flyIdx].cap;
+    }
+
+    // 기존 moveLb 오버라이드 — 모드에 따라 분기
     function moveLb(dir) {
-        lbIdx = (lbIdx + dir + LB_ITEMS.length) % LB_ITEMS.length;
-        renderLb();
+        const mode = document.getElementById('lb').dataset.mode;
+        if (mode === 'fly') {
+            flyIdx = (flyIdx + dir + FLY_ITEMS.length) % FLY_ITEMS.length;
+            renderLbFly();
+        } else {
+            lbIdx = (lbIdx + dir + LB_ITEMS.length) % LB_ITEMS.length;
+            renderLb();
+        }
     }
     function renderLb() {
         document.getElementById('lb-img').src = LB_ITEMS[lbIdx].src;
