@@ -195,6 +195,33 @@ h2.ch-title{
 .mg-counter-item:hover img{opacity:1}
 .mg-counter-label{position:absolute;bottom:0;left:0;right:0;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.55);padding:8px 10px;text-align:center}
 
+/* ── 궤적 위젯 ── */
+.trajectory-widget{
+  border-radius:14px;padding:24px 20px 20px;
+  border:1px solid var(--rule);margin:32px 0;
+  background-color:#faf7f2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23fff8f0' surfaceScale='1.2'%3E%3CfeDistantLight azimuth='50' elevation='65'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23p)' opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:500px 500px;
+}
+.traj-meta-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;flex-wrap:wrap;gap:8px}
+.traj-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+#traj-phase{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:#fff;background:var(--water-dk);padding:3px 10px;border-radius:4px}
+.traj-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink);margin-bottom:4px;font-weight:400}
+.traj-sub{font-size:13px;color:var(--ink-mid);margin-bottom:18px;line-height:1.6}
+.traj-controls{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.traj-btn-play{background:var(--water-dk);color:#fff;border:none;padding:9px 18px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase}
+.traj-btn-reset{background:transparent;color:var(--ink-mid);border:1px solid var(--rule);padding:9px 16px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase}
+.traj-scrub-wrap{flex:1;min-width:140px;display:flex;align-items:center;gap:8px}
+.traj-scrub-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);letter-spacing:1px}
+.traj-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.traj-stat{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:12px 14px}
+.traj-stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--ink-soft);text-transform:uppercase;margin-bottom:6px}
+.traj-stat-val{display:flex;align-items:baseline;gap:6px}
+.traj-vector-bar{background:var(--ink);border-radius:6px;padding:14px 16px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.traj-vector-bar-left div:first-child{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--water-lt);text-transform:uppercase}
+.traj-vector-bar-left div:last-child{font-size:13px;color:#fff;margin-top:4px}
+.traj-insight{margin-top:10px;padding:12px 16px;background:rgba(74,124,111,.08);border-left:3px solid var(--water);border-radius:0 6px 6px 0;font-size:12px;color:var(--ink-mid);line-height:1.7}
+
 /* ── CLOSING ── */
 .closing{
   background:var(--water-dk);color:rgba(255,255,255,.88);
@@ -263,6 +290,7 @@ footer p{font-size:12px}
   .mg-row-a{grid-template-columns:1fr}
   .mg-row-b{grid-template-columns:repeat(2,1fr)}
   .mg-small-stack{flex-direction:row}
+  .traj-stats{grid-template-columns:1fr}
 }
 @media(max-width:540px){.lb-arr{display:none}}
 </style>
@@ -340,7 +368,6 @@ footer p{font-size:12px}
 <!-- ── ARTICLE ── -->
 <main class="article wrap">
 
-  <!-- 조과 시리즈 -->
   <div class="sec-title">2026 시즌 조과 시리즈</div>
   <div class="count-wrap">
     <div class="count-item">
@@ -381,7 +408,6 @@ footer p{font-size:12px}
 
   <p>사실 지난 조행(3/1)에서 한 번 경험한 적이 있었는데, 이번엔 딱 맞아떨어진 셈이다. 그렇게 종일 내내 인터미디어트 라인과 Chironomid는 감칠맛 나는 조연의 역할을 톡톡히 해댔다. 그것이 첫 번째 챕터였다 — <strong>"올리고~ 올리고 🎶"</strong></p>
 
-  <!-- 채비 라인업 -->
   <div class="gear-box">
     <h3>4 · 25 채비 라인업</h3>
     <div class="gear-item">
@@ -427,14 +453,14 @@ footer p{font-size:12px}
         <span class="data-label">1카운트 추정 (초)</span>
       </div>
       <div class="data-item">
-        <span class="data-val">2.5<span style="font-size:16px;font-family:'DM Mono',monospace">~4</span></span>
-        <span class="data-label">인터미디어트 싱크율 (cm/초)</span>
+        <span class="data-val">3.8<span style="font-size:16px;font-family:'DM Mono',monospace">~</span>5.1</span>
+        <span class="data-label">실제 싱크율 (cm/초)</span>
       </div>
     </div>
     <p style="font-size:13px;color:var(--ink-soft);margin-top:16px;font-family:'DM Mono',monospace;letter-spacing:.06em;line-height:1.7">
-      총 시간과 실제 카운트 수를 대조하면 1카운트의 초 단위가 확정된다.<br>
-      예시: 총 120초 / 100카운트 = 1.2초/카운트<br>
-      DI5(13cm/초) × 1.2초 × 카운트 20 = <strong style="color:var(--water-dk)">약 312cm(3.1m)층</strong><br>
+      공식 스펙 1.5~2.0 ips = 3.8~5.1 cm/초 (평균 4.5 cm/초)<br>
+      회수 속도: 15m ÷ 150초 = 10 cm/초<br>
+      합성 궤적 각도: arctan(4.5 / 10) = <strong style="color:var(--water-dk)">약 24° — 완만한 사선</strong><br>
       <span style="color:var(--gold)">→ 다음 출조: 스톱워치 + 카운트 동시 측정으로 보정 완료!</span>
     </p>
   </div>
@@ -455,7 +481,6 @@ footer p{font-size:12px}
 
   <p>12시 넘어 2시 즈음까진 거짓말처럼 반응이 제로였다. 머리 위 햇살도 너무 강하고, 불어대던 바람도 뚝. 낚시하기 정말 힘든 시간대였다. 그리고 다시 2시 넘어 3시로 접어들면서 조금씩 반응이 살아나더니, <strong>4시 이후론 바닥에서 거침없는 입질</strong>이 쏟아지기 시작하는데 — 이런 송어의 반응이 참 경이롭기까지 하다. 컬러 로테이션을 꾸준히 해가면서 30에서 멈춰 있던 카운트를 <strong>48!</strong>로 마무리.</p>
 
-  <!-- 타임테이블 -->
   <div class="time-table">
     <div class="tt-head">
       <span>시간</span>
@@ -509,7 +534,6 @@ footer p{font-size:12px}
     </div>
   </div>
 
-  <!-- 갤러리 중간 -->
   <div class="gallery-2col">
     <div class="gallery-item tall" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout02.JPEG','새벽 첫 수 · 인터미디어트')">
       <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout02.JPEG" alt="새벽 첫 수" loading="lazy">
@@ -551,8 +575,6 @@ footer p{font-size:12px}
     <p>"짜장면에 질린 녀석을 짬뽕으로 달래는 것이 아니라, 애초에 짬뽕을 좋아하는 녀석들을 찾아내는 일에 가깝다."</p>
   </div>
 
-  <p>굳이 활성도가 좋은 상황에서 Roly-Poly를 쓰는 이유도 여기에 있다. 첫 번째는 단순히 <strong>"재미"</strong> — 잘 잡히는 상황에서 새로운 기법을 시험해보는 즐거움. 두 번째는 <strong>"다른 개체 찾기"</strong>. 느린 리트리브에는 반응하지 않지만, 빠른 움직임에는 즉각 추격하는 성향의 개체가 같은 공간에 함께 있다. Roly-Poly는 그 개체들에게 처음으로 인식되는 순간을 만드는 것이다 — <em>"먹을까 말까"</em>가 아니라 <em>"쫓을까 말까"</em>의 반응 코드를 가진 녀석들을.</p>
-
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0">
     <div style="background:#faf7f2;border:1px solid var(--rule);border-radius:10px;padding:20px">
       <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--water);margin-bottom:10px">색상 로테이션</div>
@@ -573,8 +595,6 @@ footer p{font-size:12px}
       </div>
     </div>
   </div>
-
-  <p>색상 로테이션과 Roly-Poly — 겉으로 보면 같은 "변화를 주는" 행위처럼 보이지만, 작동하는 원리는 다르다. 하나는 같은 개체의 반응을 바꾸려는 시도고, 다른 하나는 다른 성향의 개체를 새롭게 만나려는 시도다. 오늘의 경험이 그 차이를 처음으로 명확하게 드러냈다.</p>
 
   <!-- EPISODE 4 -->
   <div class="sec-title">Episode 04</div>
@@ -616,6 +636,140 @@ footer p{font-size:12px}
     </div>
   </div>
 
+  <!-- ── 수중 궤적 애니메이션 ── -->
+  <div class="trajectory-widget">
+    <div class="traj-meta-row">
+      <span class="traj-label">Underwater Trajectory · Rio CamoLux WF5I</span>
+      <span id="traj-phase">Cast</span>
+    </div>
+    <div class="traj-title">실제 수중 궤적 — 1.5~2.0 ips 적용</div>
+    <div class="traj-sub">싱크율 3.8~5.1 cm/초 · 회수 10 cm/초 · 합성 각도 ~24° · 로드 끝(오른쪽) → 착수(왼쪽 15m)</div>
+
+    <svg id="traj-svg" viewBox="0 0 680 340" width="100%" style="display:block;background:linear-gradient(to bottom,#fef9ee 0%,#fef9ee 18%,#a8c5be 18%,#5d8a82 60%,#2d5248 100%);border-radius:8px">
+      <defs>
+        <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.55"/>
+        </linearGradient>
+        <marker id="tVArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <text x="20" y="26" font-family="'DM Mono',monospace" font-size="10" fill="#7a5c00" letter-spacing="1">━━ AIR ━━</text>
+      <text x="20" y="76" font-family="'DM Mono',monospace" font-size="10" fill="#fff" letter-spacing="1" opacity="0.85">━━ WATER ━━</text>
+
+      <g font-family="'DM Mono',monospace" font-size="9" fill="#fff" opacity="0.4">
+        <line x1="20" y1="60" x2="660" y2="60" stroke="#fff" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.3"/>
+        <line x1="20" y1="108" x2="660" y2="108" stroke="#fff" stroke-width="0.4" stroke-dasharray="2 5" opacity="0.25"/>
+        <text x="598" y="106" text-anchor="end">2m</text>
+        <line x1="20" y1="164" x2="660" y2="164" stroke="#fff" stroke-width="0.4" stroke-dasharray="2 5" opacity="0.25"/>
+        <text x="598" y="162" text-anchor="end">3m</text>
+        <line x1="20" y1="220" x2="660" y2="220" stroke="#fff" stroke-width="0.4" stroke-dasharray="2 5" opacity="0.25"/>
+        <text x="598" y="218" text-anchor="end">4m</text>
+        <line x1="20" y1="272" x2="660" y2="272" stroke="#fff" stroke-width="0.4" stroke-dasharray="2 5" opacity="0.25"/>
+        <text x="598" y="270" text-anchor="end">5m</text>
+        <line x1="20" y1="315" x2="660" y2="315" stroke="#fff" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.45"/>
+        <text x="598" y="313" text-anchor="end" fill="#FCDE5A" opacity="1">6m bottom</text>
+      </g>
+
+      <rect x="0" y="325" width="680" height="18" fill="#1a1a1a" opacity="0.85"/>
+      <g font-family="'DM Mono',monospace" font-size="8" fill="#fff" opacity="0.55">
+        <text x="80" y="337">15m (착수)</text>
+        <text x="220" y="337">10m</text>
+        <text x="370" y="337">5m</text>
+        <text x="490" y="337">20ft hang</text>
+        <text x="604" y="337">로드 끝 0m</text>
+      </g>
+
+      <!-- 로드 -->
+      <rect x="635" y="30" width="6" height="30" rx="2" fill="#1a1a1a"/>
+      <line x1="638" y1="30" x2="638" y2="8" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="638" cy="8" r="3" fill="#b8952a"/>
+
+      <!-- 라인 -->
+      <path id="traj-line" d="M 638 8 L 638 8" fill="none" stroke="url(#tlg)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- 20ft hang 마커 -->
+      <g id="traj-hang" opacity="0">
+        <line x1="495" y1="52" x2="495" y2="68" stroke="#FCDE5A" stroke-width="1.5"/>
+        <text x="495" y="49" font-family="'DM Mono',monospace" font-size="9" fill="#FCDE5A" text-anchor="middle">20ft</text>
+      </g>
+
+      <!-- 벡터 라벨 (8자 리트리브 구간에서 페이드인) -->
+      <g id="traj-vector" opacity="0">
+        <rect x="120" y="118" width="148" height="80" rx="6" fill="#1a1a1a" opacity="0.82"/>
+        <text x="194" y="133" font-family="'DM Mono',monospace" font-size="9" fill="#a8c5be" text-anchor="middle" letter-spacing="0.8">VECTOR ANALYSIS</text>
+        <!-- 침강 벡터 -->
+        <line x1="138" y1="148" x2="138" y2="172" stroke="#FCDE5A" stroke-width="1.5" marker-end="url(#tVArr)"/>
+        <text x="145" y="165" font-family="'DM Mono',monospace" font-size="9" fill="#FCDE5A">↓ 4.5 cm/s</text>
+        <!-- 회수 벡터 -->
+        <line x1="138" y1="148" x2="172" y2="148" stroke="#fff" stroke-width="1.5" marker-end="url(#tVArr)"/>
+        <text x="175" y="145" font-family="'DM Mono',monospace" font-size="9" fill="#fff">← 10 cm/s</text>
+        <!-- 합성 벡터 -->
+        <line x1="138" y1="148" x2="172" y2="162" stroke="#c0392b" stroke-width="1.8" marker-end="url(#tVArr)"/>
+        <text x="175" y="168" font-family="'DM Mono',monospace" font-size="9" fill="#c0392b">~24°</text>
+        <text x="194" y="190" font-family="'DM Mono',monospace" font-size="8" fill="#a8c5be" text-anchor="middle">침강 : 회수 = 1 : 2.2</text>
+      </g>
+
+      <!-- 플라이 -->
+      <circle id="traj-fly" cx="100" cy="55" r="4" fill="#c0392b" stroke="#fff" stroke-width="1"/>
+      <circle id="traj-glow" cx="100" cy="55" r="8" fill="#c0392b" opacity="0.25"/>
+
+      <!-- 트레일 -->
+      <g id="traj-trail"></g>
+
+      <!-- DEPTH / SINK / TIME readout -->
+      <g font-family="'DM Mono',monospace">
+        <rect x="14" y="258" width="172" height="58" rx="6" fill="#1a1a1a" opacity="0.82"/>
+        <text x="22" y="273" fill="#a8c5be" font-size="9" letter-spacing="0.8">DEPTH</text>
+        <text id="traj-depth" x="76" y="273" fill="#FCDE5A" font-size="12" font-weight="500">0.00 m</text>
+        <text x="22" y="289" fill="#a8c5be" font-size="9" letter-spacing="0.8">SINK</text>
+        <text id="traj-sink" x="76" y="289" fill="#fff" font-size="11">— cm/s</text>
+        <text x="22" y="305" fill="#a8c5be" font-size="9" letter-spacing="0.8">TIME</text>
+        <text id="traj-time" x="76" y="305" fill="#fff" font-size="11">0:00</text>
+      </g>
+    </svg>
+
+    <div class="traj-controls">
+      <button id="traj-play-btn" class="traj-btn-play" onclick="trajMain.play()">▶ Play</button>
+      <button class="traj-btn-reset" onclick="trajMain.reset()">↺ Reset</button>
+      <div class="traj-scrub-wrap">
+        <span class="traj-scrub-label">SCRUB</span>
+        <input type="range" id="traj-scrub" min="0" max="1000" value="0" step="1" style="flex:1;accent-color:#2d5248" oninput="trajMain.scrub(this.value)">
+      </div>
+    </div>
+
+    <div class="traj-stats">
+      <div class="traj-stat">
+        <div class="traj-stat-label">Vertical · 침강 (스펙 평균)</div>
+        <div class="traj-stat-val">
+          <span style="font-family:'DM Serif Display',serif;font-size:26px;color:#FCDE5A;background:#1a1a1a;padding:2px 10px;border-radius:4px">4.5</span>
+          <span style="font-size:11px;color:var(--ink-soft)">cm/s ↓ · 1.5~2.0 ips</span>
+        </div>
+      </div>
+      <div class="traj-stat">
+        <div class="traj-stat-label">Horizontal · 회수 (15m ÷ 150s)</div>
+        <div class="traj-stat-val">
+          <span style="font-family:'DM Serif Display',serif;font-size:26px;color:#fff;background:var(--water-dk);padding:2px 10px;border-radius:4px">10</span>
+          <span style="font-size:11px;color:var(--ink-soft)">cm/s ← · 8자 리트리브</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="traj-vector-bar">
+      <div class="traj-vector-bar-left">
+        <div>합성 벡터 · 실제 궤적의 각도</div>
+        <div>arctan(4.5 / 10) = <span style="color:#c0392b;font-weight:500">약 24°</span> <span style="color:#888;font-size:12px">— 수면 기준</span></div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:#FCDE5A">침강 : 회수 = 1 : 2.2</div>
+    </div>
+
+    <div class="traj-insight">
+      <strong style="color:var(--water-dk)">사선의 의미:</strong> 침강 4.5 cm/s와 회수 10 cm/s의 합성 결과가 약 24°의 완만한 사선입니다. 회수를 빠르게 하면 각도가 더 완만해져 얕은 수층을 유지하고, 천천히 끌수록 침강이 우세해져 바닥권에 도달합니다. 8자 리트리브 구간(30~90초)에서 벡터 라벨이 나타납니다 — "끌수록 더 깊이 내려간다"의 기하학적 본질입니다.
+    </div>
+  </div><!-- /.trajectory-widget -->
+
   <!-- 클로징 -->
   <div class="closing">
     <h3>Closing Note</h3>
@@ -631,20 +785,12 @@ footer p{font-size:12px}
 </main>
 
 <!-- ── 시즌 총결산 ── -->
-<section style="
-  background-color:#faf7f2;
-  background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27500%27 height=%27500%27%3E%3Cfilter id=%27p%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.55%27 numOctaves=%276%27 stitchTiles=%27stitch%27/%3E%3CfeDiffuseLighting in=%27noise%27 lighting-color=%27%23fff8f0%27 surfaceScale=%271.2%27%3E%3CfeDistantLight azimuth=%2750%27 elevation=%2765%27/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width=%27500%27 height=%27500%27 filter=%27url(%23p)%27 opacity=%270.7%27/%3E%3C/svg%3E');
-  background-repeat:repeat;background-size:500px 500px;
-  padding:72px 0;border-top:1px solid var(--rule);">
+<section style="background-color:#faf7f2;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27500%27 height=%27500%27%3E%3Cfilter id=%27p%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.55%27 numOctaves=%276%27 stitchTiles=%27stitch%27/%3E%3CfeDiffuseLighting in=%27noise%27 lighting-color=%27%23fff8f0%27 surfaceScale=%271.2%27%3E%3CfeDistantLight azimuth=%2750%27 elevation=%2765%27/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width=%27500%27 height=%27500%27 filter=%27url(%23p)%27 opacity=%270.7%27/%3E%3C/svg%3E');background-repeat:repeat;background-size:500px 500px;padding:72px 0;border-top:1px solid var(--rule);">
   <div class="wrap">
-
     <div class="sec-title">2026 시즌 총결산</div>
     <h2 class="ch-title" style="margin-bottom:8px">한터낚시터 수층 캘린더</h2>
-    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:48px;font-family:'DM Mono',monospace;letter-spacing:.06em">
-      2026 시즌 5회 출조 · 데이터 기반 수층 전략 맵 · 초안 — 5/1 유종의 미 후 완결
-    </p>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:48px;font-family:'DM Mono',monospace;letter-spacing:.06em">2026 시즌 5회 출조 · 데이터 기반 수층 전략 맵 · 초안 — 5/1 유종의 미 후 완결</p>
 
-    <!-- 시즌 조과 흐름 -->
     <div style="display:flex;gap:0;margin-bottom:56px;overflow-x:auto">
       <div style="flex:1;min-width:90px;text-align:center;padding:20px 8px;background:var(--water-dk);color:#fff;border-radius:12px 0 0 12px">
         <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--water-lt);margin-bottom:8px">03·01</div>
@@ -678,7 +824,6 @@ footer p{font-size:12px}
       </div>
     </div>
 
-    <!-- 수층 캘린더 -->
     <div style="overflow-x:auto;margin-bottom:48px">
     <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:600px">
       <thead>
@@ -693,44 +838,31 @@ footer p{font-size:12px}
         <tr style="border-bottom:1px solid var(--rule);background:rgba(45,82,72,.04)">
           <td style="padding:14px 16px;font-weight:700;color:var(--ink)">개장~동절기<br><span style="font-size:11px;font-weight:400;color:var(--ink-soft)">10월~2월</span></td>
           <td style="padding:14px 16px;font-family:'DM Mono',monospace;color:var(--water-dk)">-5~10°C</td>
-          <td style="padding:14px 16px">
-            <span style="background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">바텀 종일</span>
-          </td>
+          <td style="padding:14px 16px"><span style="background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">바텀 종일</span></td>
           <td style="padding:14px 16px;color:var(--ink-mid);font-size:13px">풀싱킹 단독 · 저수온 바닥 집결 · 느린 8자 리트리브</td>
         </tr>
         <tr style="border-bottom:1px solid var(--rule)">
           <td style="padding:14px 16px;font-weight:700;color:var(--ink)">해빙 · 초봄<br><span style="font-size:11px;font-weight:400;color:var(--ink-soft)">2월~3월 초</span></td>
           <td style="padding:14px 16px;font-family:'DM Mono',monospace;color:var(--water-dk)">0~15°C</td>
-          <td style="padding:14px 16px">
-            <span style="background:#444;color:#ccc;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">바텀</span>
-            <span style="color:var(--ink-soft);margin:0 4px">→</span>
-            <span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">중층 시작</span>
-          </td>
+          <td style="padding:14px 16px"><span style="background:#444;color:#ccc;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">바텀</span><span style="color:var(--ink-soft);margin:0 4px">→</span><span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">중층 시작</span></td>
           <td style="padding:14px 16px;color:var(--ink-mid);font-size:13px">풀싱킹 주력 + 인터미디어트 탐색 병행 · 컬러 로테이션</td>
         </tr>
         <tr style="border-bottom:1px solid var(--rule);background:rgba(45,82,72,.04)">
           <td style="padding:14px 16px;font-weight:700;color:var(--ink)">봄<br><span style="font-size:11px;font-weight:400;color:var(--ink-soft)">3월 중~4월 초</span></td>
           <td style="padding:14px 16px;font-family:'DM Mono',monospace;color:var(--water-dk)">5~18°C</td>
-          <td style="padding:14px 16px">
-            <span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">중층→표층</span>
-          </td>
+          <td style="padding:14px 16px"><span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">중층→표층</span></td>
           <td style="padding:14px 16px;color:var(--ink-mid);font-size:13px">인터미디어트 전층 커버 · 마이크로 님핑 · Chironomid Larva/Pupa</td>
         </tr>
         <tr style="border-bottom:1px solid var(--rule)">
           <td style="padding:14px 16px;font-weight:700;color:var(--ink)">늦봄 폐장기<br><span style="font-size:11px;font-weight:400;color:var(--ink-soft)">4월 중~5월</span></td>
           <td style="padding:14px 16px;font-family:'DM Mono',monospace;color:var(--accent)">18~25°C ⚠</td>
-          <td style="padding:14px 16px">
-            <span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">오전 표층</span>
-            <span style="color:var(--ink-soft);margin:0 4px">→</span>
-            <span style="background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">오후 바텀</span>
-          </td>
+          <td style="padding:14px 16px"><span style="background:var(--water);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">오전 표층</span><span style="color:var(--ink-soft);margin:0 4px">→</span><span style="background:var(--ink);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px">오후 바텀</span></td>
           <td style="padding:14px 16px;color:var(--ink-mid);font-size:13px">고온 → 새벽 피딩 확인 후 분기 · 오후 고온엔 바텀 역전 가능</td>
         </tr>
       </tbody>
     </table>
     </div>
 
-    <!-- 핵심 전략 3가지 -->
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:40px">
       <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid var(--rule)">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--water);margin-bottom:12px">전략 01</div>
@@ -749,7 +881,6 @@ footer p{font-size:12px}
       </div>
     </div>
 
-    <!-- 5/1 예고 -->
     <div style="background:var(--water-dk);border-radius:12px;padding:28px 32px;position:relative;overflow:hidden">
       <div style="position:absolute;right:-10px;top:-20px;font-family:'DM Serif Display',serif;font-size:120px;color:rgba(255,255,255,.04);line-height:1;pointer-events:none">美</div>
       <div style="position:relative;z-index:1">
@@ -761,7 +892,6 @@ footer p{font-size:12px}
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -782,135 +912,20 @@ footer p{font-size:12px}
       <span class="sci-num">분석 02</span>
       <h3>Hang 기법 — 속도의 질이 만드는 차이</h3>
       <p>Chironomid 퓨파는 수면을 향해 수직으로 상승한다. Hang 위치에 들어서면 라인은 이미 수직에 가까운 상태 — 손으로 당기든 로드를 세우든 플라이는 똑같이 수직으로 올라온다. 그럼에도 반응의 차이가 있었다면, 그것은 <strong>움직임의 속도와 질</strong>에서 비롯된 것으로 추측된다.</p>
-      <p>손으로 당기면 일정한 속도로 끌어올리는 느낌인 반면, 로드를 천천히 세우는 동작은 처음엔 느리게 시작해서 점점 가속되는 부드러운 곡선형 상승을 만들어낸다. 이것이 퓨파가 수면을 향해 치솟는 마지막 찰나의 움직임에 더 가까울 수 있다. 아직 단정할 수 없지만 — 데이터를 더 쌓아볼 가치가 있는 발견이다.</p>
+      <p>손으로 당기면 일정한 속도로 끌어올리는 느낌인 반면, 로드를 천천히 세우는 동작은 처음엔 느리게 시작해서 점점 가속되는 부드러운 곡선형 상승을 만들어낸다. 이것이 퓨파가 수면을 향해 치솟는 마지막 찰나의 움직임에 더 가까울 수 있다.</p>
     </div>
 
     <div class="sci-item">
       <span class="sci-num">분석 03</span>
-      <h3>Roly-Poly — 리셋이 아니라, 다른 개체를 찾는 프레젠테이션 전환</h3>
-
-      <p>색을 바꾸면 다른 시각 반응을 찾고, 속도를 바꾸면 다른 행동 반응을 찾는다. <strong>Roly-Poly는 그중 속도와 궤적을 바꾸는 적극적인 프레젠테이션 전환이다.</strong></p>
-
-      <p>여기서 한 가지 날카로운 의문이 생긴다. 15m 캐스팅 거리에 6m 수심, 정면과 좌우를 포함한 3D 공간 — 그 광활한 수중에서 특정 송어 한 마리가 내가 30분 동안 반복한 리트리브를 계속 지켜보고 있었을 가능성은 얼마나 될까? 사실상 거의 없다. 그렇다면 <strong>"학습된 송어를 리셋한다"는 개념 자체가 성립하지 않을 수 있다.</strong></p>
-
-      <div class="pullquote">
-        <p>"짜장면에 질린 녀석을 짬뽕으로 달래는 것이 아니라, 애초에 짬뽕을 좋아하는 녀석들을 찾아내는 일에 가깝다."</p>
-      </div>
-
-      <p>Roly-Poly를 "리셋"이라고 부른다면, 그것은 송어의 기억을 지우는 의미가 아니다. 같은 공간에 반복되던 프레젠테이션의 성격을 바꿔 — <strong>느린 움직임에는 반응하지 않던 다른 개체들에게 새로운 자극을 제시하는 것이다.</strong> 같은 수층, 같은 공간에 함께 있지만 전혀 다른 반응 코드를 가진 개체들. 그들에게 처음으로 인식되는 순간을 만드는 것.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0">
-        <div style="background:#faf7f2;border:1px solid var(--rule);border-radius:10px;padding:20px">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--water);margin-bottom:10px">색상 로테이션</div>
-          <div style="font-size:13px;color:var(--ink-mid);line-height:1.85">
-            대상: <strong style="color:var(--ink)">같은 개체</strong><br>
-            짜장에 질린 그 녀석에게<br>
-            다른 색의 짜장을 내민다<br>
-            → 시각 반응 전환
-          </div>
-        </div>
-        <div style="background:#faf7f2;border:1px solid var(--rule);border-radius:10px;padding:20px">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--water);margin-bottom:10px">Roly-Poly</div>
-          <div style="font-size:13px;color:var(--ink-mid);line-height:1.85">
-            대상: <strong style="color:var(--ink)">다른 개체</strong><br>
-            애초에 짬뽕을 좋아하는<br>
-            새로운 녀석을 찾아낸다<br>
-            → 행동 반응 전환
-          </div>
-        </div>
-      </div>
-
-      <!-- 해외 앵글러들도 말한다 -->
-      <div style="background:var(--paper-2);border-radius:12px;padding:28px 32px;margin:28px 0">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--water);margin-bottom:20px">해외 앵글러들도 말한다</div>
-
-        <div style="border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:16px">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink-soft);margin-bottom:6px">Phil Rowley · 스틸워터 전문가</div>
-          <p style="font-size:14px;color:var(--ink-mid);line-height:1.8">"Roly-Poly에서 <strong style="color:var(--ink)">Pause(멈춤)가 결정적이다</strong> — 빠른 움직임에 반응한 물고기가 목표물을 겨냥할 수 있도록 잠깐 멈추는 순간이 입질을 만든다. 수온이 높을수록 효과는 올라간다."</p>
-        </div>
-
-        <div style="border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:16px">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink-soft);margin-bottom:6px">Vail Valley Anglers · 스틸워터 전술 가이드</div>
-          <p style="font-size:14px;color:var(--ink-mid);line-height:1.8">"한 캐스팅 안에서 느린 스트립, 중속 스트립, 6초간 Roly-Poly를 섞어 쓴다. <strong style="color:var(--ink)">어떤 자연 먹이도 40피트를 완전히 같은 속도로 이동하지 않는다.</strong>"</p>
-        </div>
-
-        <div>
-          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ink-soft);margin-bottom:6px">영국 경쟁 낚시 앵글러들</div>
-          <p style="font-size:14px;color:var(--ink-mid);line-height:1.8">일부 영국 경쟁 낚시에서 Roly-Poly 허용 여부를 두고 논쟁이 벌어진 적이 있다. <strong style="color:var(--ink)">규정으로 제한할지 논의될 만큼 효과가 검증된 기법</strong>이라는 반증이다.</p>
-        </div>
-      </div>
-
-      <p>오늘 4시 이후 바닥 활성이 폭발한 구간에서 Roly-Poly에 반응이 왔다 — 수온이 높을수록 효과가 올라간다는 해외 데이터와 정확히 일치한다. 그리고 그 반응은 아마도 30분째 내 플라이를 지켜보던 송어가 아니라, <strong>그 순간 그 공간으로 막 유입된 짬뽕 좋아하는 녀석</strong>이었을 것이다.</p>
-    </div>
-
-    <div class="sci-item">
-      <span class="sci-num">분석 04</span>
-      <h3>인터미디어트가 전층을 훑는다 — 행마커 기하학으로 증명</h3>
-      <p>인터미디어트는 단순히 중층만 훑는 라인이 아니었다. 15m 정도 캐스팅 후 아주 느린 8자 리트리브를 이어가면, 회수 완료까지 약 2분~2분 30초가 걸린다. 싱크율 1.5~2.0 ips(Rio CamoLux WF5I 공식 스펙)를 고려하면 이 시간은 6m권 접근에 충분하다.</p>
-      <p>여기에 20ft 행마커가 로드 팁에 걸릴 무렵 라인이 수면과 약 80도를 이루는 점까지 감안하면, 플라이는 회수 후반부에 바닥권 또는 그 근처까지 접근했을 가능성이 높다. 즉, 이날의 인터미디어트 운용은 단순 중층 운용이 아니라 — <strong>표층에서 시작해 중층을 지나 바닥권까지 탐색하는 느린 전층 운용</strong>에 가까웠다.</p>
-      <p>이것으로 오래된 의문도 풀린다. 구매 초반 3~4m 수심의 필드에서 밑걸림이 자꾸 생겨 사용하지 않게 됐던 것 — 바로 이 때문이었다. 얕은 수심에서 천천히 끌면 플라이가 바닥에 닿을 수밖에 없다. <strong>6m 한터낚시터에서 비로소 이 채비의 진가가 발휘되는 것이다.</strong></p>
-    </div>
-
-    <div class="sci-item">
-      <span class="sci-num">경험 기반 가능성 · 다음 시즌 정밀 검증 예정</span>
-      <h3>느린 8자 리트리브 × 싱크율 = 라인 4개가 수층 4개를 커버한다</h3>
-      <p>오늘 인터미디어트의 전층 커버 능력이 증명되면서, 하나의 가능성이 완성됐다. <strong>라인의 공식 성격이 아니라, 리트리브 속도가 실제 운용 수층을 결정한다.</strong> 그리고 낚시대장의 느린 8자 리트리브는 모든 라인을 한 단계씩 더 아래로 끌어내린다.</p>
-
-      <p>그리고 이것은 단순한 이론이 아니다. 하버 라인을 구입 초기 실사용했을 때 — 던져서 끌고 온 뒤 회수 시점을 보면 <strong>라인이 수중에서 제법 깊은 각을 이루고 있었다.</strong> 당시 12ft(약 3.6m) 롱리더를 사용하고 있었으니, 리더 자체가 플라이를 추가로 더 깊이 끌어내린 것이다. 이것저것 감안하면 플라이는 생각보다 훨씬 깊이 내려갔던 것 — <strong>이미 경험으로 확인된 셈이다.</strong></p>
-
-      <p>여기서 한 가지 변수를 더 조정한다면 — <strong>숏리더</strong>로 교체. 롱리더가 플라이를 추가로 깊게 내리는 변수를 제거하면, 라인 싱크율만으로 궤적이 결정된다. 하버의 ~1cm/초 싱크율에 느린 8자 리트리브를 조합하면, <strong>착수에서 시작해 중층 2~3m권에서 회수되며 다시 상승하는 궤적</strong>이 충분히 가능하다.</p>
-
-      <div style="overflow-x:auto;margin:20px 0">
-      <table style="width:100%;border-collapse:collapse;font-size:13px;background:var(--paper-2);border-radius:10px;overflow:hidden">
-        <thead>
-          <tr style="background:var(--ink);color:#fff">
-            <th style="padding:11px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">라인</th>
-            <th style="padding:11px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">공식 성격</th>
-            <th style="padding:11px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">싱크율</th>
-            <th style="padding:11px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">느린 8자 실제 수층</th>
-            <th style="padding:11px 14px;text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">검증</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--rule)">
-            <td style="padding:11px 14px;font-weight:700;color:var(--ink)">풀싱킹 DI5</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">바텀 전용</td>
-            <td style="padding:11px 14px;font-family:'DM Mono',monospace;color:var(--water-dk)">13cm/초</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">바텀 6m 고정</td>
-            <td style="padding:11px 14px;text-align:center;color:var(--water-dk);font-weight:700">✅ 완료</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--rule);background:rgba(74,124,111,.05)">
-            <td style="padding:11px 14px;font-weight:700;color:var(--ink)">인터미디어트</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">중층</td>
-            <td style="padding:11px 14px;font-family:'DM Mono',monospace;color:var(--water-dk)">2.5~4cm/초</td>
-            <td style="padding:11px 14px;color:var(--water-dk);font-weight:700">착수 0m → 바텀 5.9m 전층</td>
-            <td style="padding:11px 14px;text-align:center;color:var(--water-dk);font-weight:700">✅ 완료</td>
-          </tr>
-          <tr style="border-bottom:1px solid var(--rule)">
-            <td style="padding:11px 14px;font-weight:700;color:var(--gold)">하버 WF5-H</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">극표층</td>
-            <td style="padding:11px 14px;font-family:'DM Mono',monospace;color:var(--gold)">~1cm/초</td>
-            <td style="padding:11px 14px;color:var(--gold);font-weight:700">착수 0m → 중층 2~3m권 회수<br><span style="font-size:11px;font-weight:400">숏리더 + 느린 8자 기준</span></td>
-            <td style="padding:11px 14px;text-align:center;color:var(--gold);font-weight:700">🔲 다음 시즌<br><span style="font-size:10px;font-weight:400;color:var(--ink-soft)">경험 근거 있음</span></td>
-          </tr>
-          <tr>
-            <td style="padding:11px 14px;font-weight:700;color:var(--ink)">플로팅</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">표층</td>
-            <td style="padding:11px 14px;font-family:'DM Mono',monospace;color:var(--ink-soft)">0 (침강 없음)</td>
-            <td style="padding:11px 14px;color:var(--ink-mid)">표층 고정</td>
-            <td style="padding:11px 14px;text-align:center;color:var(--water-dk);font-weight:700">✅ 완료</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-
-      <p>검증은 다음 시즌으로 넘긴다. 하지만 이 가능성은 오늘의 데이터와 구입 초기의 실사용 경험에서 논리적으로 도출된 것이다 — 기억해두자.</p>
+      <h3>인터미디어트가 전층을 훑는다 — 벡터 기하학으로 증명</h3>
+      <p>싱크율 평균 4.5 cm/초, 회수 속도 10 cm/초. 이 두 벡터의 합성 각도는 약 24°. 침강이 회수보다 약 2.2배 느리기 때문에 라인은 가파르게 떨어지지 않고 완만한 사선을 그린다. 착수 직후 거의 수평에 가까운 상태에서 시작해 — 8자 리트리브가 진행될수록, 즉 누적 시간이 쌓일수록 점점 깊어져 마지막엔 6m 바닥권에 도달한다.</p>
+      <p>이것이 "끌수록 더 깊이 내려간다"의 물리학적 본질이다. 리트리브를 빠르게 하면 수평 벡터가 커져 얕은 수층을 유지하고, 천천히 끌면 침강 벡터가 상대적으로 우세해져 깊은 수층에 도달한다. 리트리브 속도 = 수심 조절 손잡이.</p>
     </div>
 
     <div class="sci-summary">
-      <strong>종합:</strong> 오늘 하루는 두 가지 수층 전환의 정확한 타이밍이 48수를 만들었다. 표층 고온 → 바텀 피신이라는 수온 역학을 경험적으로 읽어냈고, Hang과 Roly-Poly라는 새로운 기법의 가능성까지 확인했다. 행마커 기하학으로 증명된 인터미디어트의 전층 커버 능력, 그리고 하버 라인의 가능성까지 — <strong>데이터는 쌓이고, 경험은 깊어지고, 퍼즐은 맞아떨어진다.</strong>
+      <strong>종합:</strong> 오늘 하루는 두 가지 수층 전환의 정확한 타이밍이 48수를 만들었다. 표층 고온 → 바텀 피신이라는 수온 역학을 경험적으로 읽어냈고, Hang과 Roly-Poly라는 새로운 기법의 가능성까지 확인했다. 벡터 기하학으로 증명된 인터미디어트의 전층 커버 능력 — <strong>데이터는 쌓이고, 경험은 깊어지고, 퍼즐은 맞아떨어진다.</strong>
     </div>
-    <p class="sci-ref">참고: CADDIS-GR 3/29·4/11 조행기 · Rainbow Trout 수온 행동 연구 · Chironomid Pupa 상승 패턴 · Roly-Poly Retrieve 기법 아카이브 · 행마커 sin80° 계산 · SA Sonar Stillwater Hover WF5-H 스펙</p>
+    <p class="sci-ref">참고: CADDIS-GR 3/29·4/11 조행기 · Rainbow Trout 수온 행동 연구 · Chironomid Pupa 상승 패턴 · Roly-Poly Retrieve 기법 아카이브 · Rio CamoLux WF5I 공식 스펙 (1.5~2.0 ips)</p>
   </div>
 </section>
 
@@ -919,7 +934,6 @@ footer p{font-size:12px}
   <div class="sec-title">현장 기록</div>
   <h2>2026 · 04 · 25 · 한터낚시터</h2>
 
-  <!-- 카운터 스트립 -->
   <div class="mg-counter-strip">
     <div class="mg-counter-item" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Counter01.PNG','09:47 · 20수')">
       <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Counter01.PNG" alt="20수" loading="lazy">
@@ -935,13 +949,11 @@ footer p{font-size:12px}
     </div>
   </div>
 
-  <!-- 피처드 — Trout09 파이팅 장면 -->
   <div class="mg-featured" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout09.JPEG','파이팅 · 4/25 한터낚시터')">
     <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout09.JPEG" alt="파이팅" loading="lazy">
     <div class="mg-featured-label">FEATURED</div>
   </div>
 
-  <!-- 2/3 + 1/3 — Trout04 피처드 + Trout05·06 스택 -->
   <div class="mg-row-a">
     <div class="mg-large" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout04.JPEG','바텀 랜딩 · 4/25')">
       <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout04.JPEG" alt="바텀 랜딩" loading="lazy">
@@ -956,7 +968,6 @@ footer p{font-size:12px}
     </div>
   </div>
 
-  <!-- 3균등 — Trout07·08 + Chironomid -->
   <div class="mg-row-b">
     <div class="mg-eq" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout07.JPEG','오후 바텀 랜딩')">
       <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout07.JPEG" alt="오후 바텀 랜딩" loading="lazy">
@@ -969,11 +980,11 @@ footer p{font-size:12px}
     </div>
   </div>
 
-  <!-- 풍경 풀와이드 -->
   <div class="mg-featured" style="height:260px;margin-top:12px" onclick="openLb('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Hanter.JPEG','한터낚시터 · 2026.04.25')">
     <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Hanter.JPEG" alt="한터낚시터 전경" loading="lazy">
     <div class="mg-featured-label">한터낚시터 · 2026 · 04 · 25</div>
   </div>
+</section>
 
 <!-- ── LIGHTBOX ── -->
 <div id="lb" onclick="closeLb()">
@@ -997,6 +1008,7 @@ footer p{font-size:12px}
 </footer>
 
 <script>
+/* ── LIGHTBOX ── */
 const LB_ITEMS = [
   { src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout02.JPEG', cap:'새벽 첫 수 · 인터미디어트' },
   { src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Trout03.JPEG', cap:'인터미디어트 중층 랜딩' },
@@ -1014,9 +1026,7 @@ const LB_ITEMS = [
 const FLY_ITEMS = [
   { src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0425/0425-Chironomid.JPEG', cap:'Chironomid Larva/Pupa · 오늘의 패턴' },
 ];
-let lbIdx = 0;
-let flyIdx = 0;
-
+let lbIdx = 0, flyIdx = 0;
 function openLb(src, cap) {
   document.getElementById('lb').dataset.mode = 'field';
   lbIdx = LB_ITEMS.findIndex(i => i.src === src);
@@ -1056,6 +1066,150 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') moveLb(-1);
   if (e.key === 'ArrowRight') moveLb(1);
 });
+
+/* ── TRAJECTORY ANIMATION ── */
+const trajMain = (function(){
+  const FLY   = document.getElementById('traj-fly');
+  const GLOW  = document.getElementById('traj-glow');
+  const LINE  = document.getElementById('traj-line');
+  const TRAIL = document.getElementById('traj-trail');
+  const DEPTH = document.getElementById('traj-depth');
+  const SINK  = document.getElementById('traj-sink');
+  const TIME  = document.getElementById('traj-time');
+  const BADGE = document.getElementById('traj-phase');
+  const BTN   = document.getElementById('traj-play-btn');
+  const SCRUB = document.getElementById('traj-scrub');
+  const HANG  = document.getElementById('traj-hang');
+  const VEC   = document.getElementById('traj-vector');
+
+  const ROD_X=638, ROD_Y=8, WATER_Y=60, BOTTOM_Y=315, CAST_X=100, HANG_X=495;
+  let trail=[], anim=null, startT=0, pausedAt=0;
+  const DUR=12000;
+
+  function dToY(d){ return WATER_Y+(BOTTOM_Y-WATER_Y)*(d/6); }
+
+  function state(t){
+    const s=t*150; let x,dm,phase,sr;
+    if(t<0.04){
+      phase='Cast · 착수 진입';
+      const k=t/0.04; x=ROD_X-(ROD_X-CAST_X)*k; dm=-0.4*(1-k); sr=null;
+    } else if(s<30){
+      phase='자유낙하 (0~30s)';
+      dm=4.5/100*s; x=CAST_X+(CAST_X*0.05)*(s/30); sr=4.5;
+    } else if(s<90){
+      phase='8자 리트리브 (30~90s) · 합성 24°';
+      const k=(s-30)/60; dm=1.35+(3.8-1.35)*k;
+      x=CAST_X*1.05+(300-CAST_X*1.05)*k; sr=4.0;
+    } else if(s<135){
+      phase='바닥권 진입 (90~135s) · 각도 가팔라짐';
+      const k=(s-90)/45, ke=k*k; dm=3.8+(5.9-3.8)*ke;
+      x=300+(HANG_X-300)*k; sr=4.7;
+    } else if(s<150){
+      phase='Hang · 수직 상승';
+      const k=(s-135)/15, ke=k*k; dm=5.9-5.5*ke;
+      x=HANG_X+(560-HANG_X)*k; sr=-22;
+    } else {
+      phase='회수 완료'; x=565; dm=0.3; sr=0;
+    }
+    const y=dm<0 ? WATER_Y+dm*30 : dToY(dm);
+    return {x,y,phase,dm:Math.max(0,dm),sr,s};
+  }
+
+  function curve(fx,fy,s){
+    if(s<30){
+      const m1=ROD_X-(ROD_X-fx)*0.33, m2=ROD_X-(ROD_X-fx)*0.66, wy=WATER_Y-4;
+      return `M ${ROD_X} ${ROD_Y} L ${ROD_X} ${wy} Q ${m1} ${wy+14} ${m2} ${wy+10} L ${fx} ${fy}`;
+    } else if(s<90){
+      const mx=(ROD_X+fx)/2, my=(WATER_Y+fy)/2+6;
+      return `M ${ROD_X} ${ROD_Y} L ${ROD_X} ${WATER_Y-2} Q ${mx} ${my} ${fx} ${fy}`;
+    } else if(s<135){
+      const mx=(ROD_X+fx)/2-8, my=(WATER_Y+fy)/2+2;
+      return `M ${ROD_X} ${ROD_Y} L ${ROD_X} ${WATER_Y-2} Q ${mx} ${my} ${fx} ${fy}`;
+    } else {
+      return `M ${ROD_X} ${ROD_Y} L ${ROD_X} ${WATER_Y-2} L ${fx} ${fy}`;
+    }
+  }
+
+  function fmt(t){
+    const s=Math.round(t*150), m=Math.floor(s/60), ss=s%60;
+    return m+':'+(ss<10?'0'+ss:ss);
+  }
+
+  function render(t){
+    const p=state(t);
+    FLY.setAttribute('cx',p.x); FLY.setAttribute('cy',p.y);
+    GLOW.setAttribute('cx',p.x); GLOW.setAttribute('cy',p.y);
+    LINE.setAttribute('d',curve(p.x,p.y,p.s));
+    DEPTH.textContent=p.dm.toFixed(2)+' m';
+    SINK.textContent=p.sr===null?'— cm/s':p.sr<0?'↑ '+Math.abs(p.sr).toFixed(0)+' cm/s':'↓ '+p.sr.toFixed(1)+' cm/s';
+    TIME.textContent=fmt(t);
+    BADGE.textContent=p.phase;
+
+    /* hang marker */
+    HANG.setAttribute('opacity', p.s>90&&p.s<135?'0.85':p.s>=135?'0.4':'0');
+
+    /* vector label fade */
+    if(p.s>=35&&p.s<88){
+      const fi=Math.min(1,(p.s-35)/5);
+      const fo=p.s>80?Math.max(0,1-(p.s-80)/8):1;
+      VEC.setAttribute('opacity',String(fi*fo));
+    } else { VEC.setAttribute('opacity','0'); }
+
+    /* trail */
+    if(t>0.04){
+      const last=trail[trail.length-1];
+      if(!last||Math.abs(p.x-last.x)>3||Math.abs(p.y-last.y)>3) trail.push({x:p.x,y:p.y});
+    }
+    if(trail.length>1){
+      let d=`M ${trail[0].x} ${trail[0].y}`;
+      for(let i=1;i<trail.length;i++) d+=` L ${trail[i].x} ${trail[i].y}`;
+      TRAIL.innerHTML=`<path d="${d}" stroke="#FCDE5A" stroke-width="1.4" fill="none" opacity="0.6" stroke-dasharray="2 3"/>`;
+    }
+  }
+
+  function step(now){
+    if(!startT) startT=now;
+    const elapsed=now-startT+pausedAt;
+    const t=Math.min(elapsed/DUR,1);
+    SCRUB.value=Math.round(t*1000);
+    render(t);
+    if(t<1){ anim=requestAnimationFrame(step); }
+    else { anim=null; BTN.textContent='▶ Replay'; pausedAt=0; startT=0; }
+  }
+
+  render(0);
+
+  return {
+    play(){
+      if(anim){
+        cancelAnimationFrame(anim); anim=null;
+        pausedAt=(performance.now()-startT)+pausedAt; startT=0;
+        BTN.textContent='▶ Resume'; return;
+      }
+      if(parseInt(SCRUB.value)>=1000){ this.reset(); }
+      BTN.textContent='❚❚ Pause';
+      anim=requestAnimationFrame(step);
+    },
+    reset(){
+      if(anim){ cancelAnimationFrame(anim); anim=null; }
+      startT=0; pausedAt=0; trail=[];
+      TRAIL.innerHTML=''; SCRUB.value=0;
+      BTN.textContent='▶ Play'; render(0);
+    },
+    scrub(v){
+      if(anim){ cancelAnimationFrame(anim); anim=null; BTN.textContent='▶ Resume'; }
+      const t=parseInt(v)/1000; pausedAt=t*DUR; startT=0;
+      trail=[]; TRAIL.innerHTML='';
+      if(t>0.04){
+        for(let i=1;i<=40;i++){
+          const ti=(t/40)*i;
+          if(ti>0.04){ const pp=state(ti); trail.push({x:pp.x,y:pp.y}); }
+        }
+      }
+      render(t);
+    }
+  };
+})();
 </script>
 </body>
 </html>
