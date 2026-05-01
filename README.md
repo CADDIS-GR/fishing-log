@@ -9,28 +9,43 @@
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
 
-**총 조행**: 10회
-**총 캐치**: 188마리
+**총 조행**: 13회
+**총 캐치**: 335마리
 **방문 낚시터**: 2곳
-**평균 마릿수**: 18.8마리
+**평균 마릿수**: 25.8마리
 
 ### 📍 방문 낚시터
-- 🏔️ **용인 한터낚시터** (7회)
-- 🌊 **신기사낚시터** (3회)
+- 🏔️ **용인 한터낚시터** (10회)
+- 🌊 **신기낚시터** (3회)
 
 ## 📅 조행 목록
 
 ### 🌸 2026 봄 시즌
 
-- **[03.29] 한터낚시터** - 작전명 "적공(積功), 판을 흔들다" — 침묵하는 바텀, 마이크로 님핑!! ⭐ NEW ([상세보기](logs/2026-03-29-hanter.html))
+- **[05.01] 한터낚시터** - "그대 이름은 바람" — 봄 똥바람 속 시즌 Last Dance ⭐ NEW ([상세보기](logs/2026-05-01-hanter.html))
+  - 📍 용인 한터낚시터 | 🎯 31마리 | 🌡️ 18°C | 🌬️ 종일 강풍
+  - 🎣 주요 패턴: Chironomid Red 그라데이션 Larva, Chironomid White Larva/Pupa, Midge Larva/Pupa
+  - 💡 핵심: 하버라인(Hover WF5-H) 표층 데뷔 / Hang 기법 약 10수 기여 / 오후 바텀 효율 저하 경향 확인 / Only Sinking 4채비 바람 내성 검증
+
+- **[04.25] 한터낚시터** - "올리고~ 올리고 🎶 내리고~ 내리고 🎵" — 수층을 읽은 48수 ([상세보기](logs/2026-04-25-hanter-log.html))
+  - 📍 용인 한터낚시터 | 🎯 48마리 | 🌡️ 10~23°C
+  - 🎣 주요 패턴: Chironomid Red 그라데이션 Larva, Chironomid White, Zonker Tail Mini Leech #16
+  - 💡 핵심: 수면 피딩 즉시 판단 → 인터미디어트 선제 대응 / 인터미디어트 전층 커버 증명 / Hang 기법 발견 / Roly-Poly 첫 랜딩
+
+- **[04.11] 한터낚시터** - 작전명 "경험이 집중을 만든다" — 58수 달성 ([상세보기](logs/2026-04-11-hanter.html))
+  - 📍 용인 한터낚시터 | 🎯 58마리 | 🌡️ 5~13.7°C
+  - 🎣 주요 패턴: Red Chironomid Larva FL, Mojo Nymph Yarn, Zebra Midge #18
+  - 💡 핵심: 인터미디어트 마이크로 님핑 재발견 / T&T Helix 863-4 데뷔 / SA Infinity + R8 Core 가능성 확인
+
+- **[03.29] 한터낚시터** - 작전명 "적공(積功), 판을 흔들다" — 침묵하는 바텀, 마이크로 님핑!! ([상세보기](logs/2026-03-29-hanter.html))
   - 📍 용인 한터낚시터 | 🎯 23마리 | 🌡️ 5~20°C
   - 🎣 주요 패턴: Chironomid Larva (Zebra Midge), White Chironomid Pupa, Egg Pattern
-  - 💡 핵심: 연일 통하던 바닥 패턴 침묵 / Airflo SS2 DI5 첫 등판 / 에그 실마리로 마이크로 님핑 전환 게임체인저 / Biostrike 인디케이터 3개 사선 입질
+  - 💡 핵심: 연일 통하던 바닥 패턴 침묵 / Airflo SS2 DI5 첫 등판 / 에그 실마리로 마이크로 님핑 전환 게임체인저
 
 - **[03.14] 한터낚시터** - 작전명 "침잠(沈潛)" — 51수 고지 달성 & 뉴노멀 정립 ([상세보기](logs/2026-03-14_daedae.html))
   - 📍 용인 한터낚시터 | 🎯 51마리 | 🌡️ 0~12°C
   - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (3대 컬러군 로테이션), Glow Bead Marabou #14
-  - 💡 핵심: 오직 싱킹채비만으로 바닥→중층 확장 / 새벽 싱킹 바닥 선점 성공 / 3대 컬러군 로테이션 뉴노멀 정립 / Camolux 인터미디어트 중층 첫 출전
+  - 💡 핵심: 오직 싱킹채비만으로 바닥→중층 확장 / 3대 컬러군 로테이션 뉴노멀 정립 / CamoLux 인터미디어트 중층 첫 출전
   - 📎 관련 문서: [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
 
 - **[03.01] 한터낚시터** - 작전명 "서울 대전 대구 부산 찍고!!" — 5색 컬러 로테이션 첫 실전 ([상세보기](logs/2026-03-01_daedae.html))
@@ -43,74 +58,68 @@
 - **[02.21] 한터낚시터** - 수중의 변주곡: 컬러 로테이션과 리액션 바이트 ([상세보기](logs/2026-02-21_daedae.html))
   - 📍 용인 한터낚시터 | 🎯 20마리 | 🌡️ 1~17°C
   - 🎣 주요 패턴: Zonker Tail Mini Leech #16 (올리브·블랙·화이트·퍼플 컬러 로테이션)
-  - 💡 핵심: 컬러 교체 직후 입질 재개 반복 확인 / 측면 훅킹으로 리액션 바이트 검증 / 해빙기 바닥층(4°C) 집결 패턴
+  - 💡 핵심: 컬러 교체 직후 입질 재개 반복 확인 / 리액션 바이트 검증
 
 - **[02.14] 한터낚시터** - 한파 끝, 32수의 정교한 기록 ([상세보기](logs/2026-02-14_hanter.html))
   - 📍 용인 한터낚시터 | 🎯 32마리 | 🌡️ 3°C
-  - 🎣 주요 패턴: Zonker Tail Mini Leech #16, White Chironomid, Chironomid Larva (Red Dot)
-  - 💡 핵심: 수평에서 수직으로 상승하는 슬로프 구간 입질 집중 / White MVP / Technical Trout Line 첫 투입
+  - 🎣 주요 패턴: Zonker Tail Mini Leech #16, White Chironomid, Chironomid Larva
+  - 💡 핵심: 슬로프 수직 상승 구간 입질 집중 / White MVP / Technical Trout Line 첫 투입
 
 ### ❄️ 2024-2025 겨울 시즌
 
 - **[01.04] 신기사 조행기 (2025)** - 새해 첫 출조 ([상세보기](logs/2025-01-04-singisa.html))
-  - 📍 신기사낚시터 | 🎯 10마리 | 🌡️ -5°C
-  - 🎣 주요 패턴: Streamer #8, Leech
-  - 💡 핵심: 강추위 느린 리트리브
+  - 📍 신기낚시터 | 🎯 10마리 | 🌡️ -5°C
 
 - **[12.20] 한터낚시터** - Deep Lining 검증 ([상세보기](logs/2024-12-20-hanteo.html))
   - 📍 용인 한터낚시터 | 🎯 18마리 | 🌡️ 0°C
-  - 🎣 주요 패턴: Chironomid, Bloodworm
-  - 💡 핵심: Deep Lining 효과 재확인
 
 - **[12.13] 신기사 조행기 (B)** - 한파 속 송어 공략 ([상세보기](logs/2024-12-13-singisa.html))
-  - 📍 신기사낚시터 | 🎯 8마리 | 🌡️ -2°C
-  - 🎣 주요 패턴: Woolly Bugger, Leech
-  - 💡 핵심: 한파 대응 바닥 집중
+  - 📍 신기낚시터 | 🎯 8마리 | 🌡️ -2°C
 
 ### 🍂 2024 가을 시즌
 
 - **[11.29] 신기사 조행기 (A)** - 늦가을 저수온 공략 ([상세보기](logs/2024-11-29-singisa.html))
-  - 📍 신기사낚시터 | 🎯 12마리 | 🌡️ 3°C
-  - 🎣 주요 패턴: Streamer, Nymph
-  - 💡 핵심: 저수온기 스트리머 전략
+  - 📍 신기낚시터 | 🎯 12마리 | 🌡️ 3°C
 
 - **[11.15] 한터낚시터** - 바닥 공략의 핵심 ([상세보기](logs/2024-11-15-hanteo.html))
   - 📍 용인 한터낚시터 | 🎯 15마리 | 🌡️ 5°C
-  - 🎣 주요 패턴: Vampire Leech, Chironomid
-  - 💡 핵심: Deep Lining 전략 수립
 
 ## 🛠️ 주요 장비
 
 ### 로드 & 라인
-- **SCOTT CENTRIC 690-4** + SA Sonar Titan 3D i/3/5 WF6S *(바닥 주력)*
-- **Sage Foundation 690-4** + Airflo Sixth Sense 2 DI5 *(바닥 서브 / 2026 신규)*
-- **Sage R8 Core 4100-4** + RIO Elite Sub-Surface CamoLux WF5I
-- **Vision Onki 3100-4** + Airflo Euro Nymph Short 22ft *(네오스타일 드리프트)*
-- **T&T Paradigm 905-4** + RIO Elite Gold Classic WF5F *(표층 / 마이크로님핑)*
-- **Sage DS2 690-2** + SA Sonar Titan 3D i/3/5 WF6S
+- **Scott Centric 690-4** + SA Sonar Titan 3D i/3/5 WF6S *(바닥 스트리머 주력)*
+- **Sage Foundation 690-4** + Rio Sub Surface CamoLux WF5I *(인터미디어트 중층)*
+- **Vision VPU 4906** + SA Sonar Stillwater Parabolic Sink WF5S *(중하층~바닥 위)*
+- **Sage DS2 690-2** + SA Sonar Stillwater Hover WF5-H *(표층~1~2m 저격)*
+- **T&T Helix 863-4** + Rio Elite Technical Trout WF4F *(표층 마이크로 님핑)*
 
 ### 효과적인 패턴
-- 🤍 **Zonker Tail Mini Leech #16** - 한터 바닥 뉴노멀 / 3대 컬러군 로테이션 *(2026)*
-- 💜 **Glow Bead Marabou Leech #14** - 새벽 깜깜 바닥 전용 *(2026 신규)*
-- 🔴 **Vampire Leech** - 한터지 최고 히트 패턴
-- ⚫ **Chironomid Larva / Zebra Midge** - 봄 수온 전환기 마이크로님핑 필수 *(2026 신규)*
-- 🤍 **White Chironomid Pupa** - 봄 상층 활성기 게임체인저 *(2026 신규)*
-- 🟤 **Woolly Bugger** - 만능 스트리머
-- 🔵 **Bloodworm** - 바닥 공략
+- 🔴 **Chironomid Red 그라데이션 Larva** — 봄 중층~표층 핵심 *(2026)*
+- 🤍 **Chironomid White Larva / Pupa** — 봄 표층 피딩 대응 *(2026)*
+- 🎣 **Midge Larva / Pupa** — Hang 기법 최적 패턴 *(2026)*
+- 🤍 **Zonker Tail Mini Leech #16** — 한터 바닥 뉴노멀 / 3대 컬러군 로테이션
+- 💜 **Glow Bead Marabou Leech #14** — 새벽 바닥 전용
+- 🔴 **Vampire Leech** — 한터지 클래식 히트 패턴
+- 🟤 **Woolly Bugger** — 만능 스트리머
 
 ## 📖 프로젝트 구조
 
 ```
 fishing-log/
 ├── index.html              # 메인 대시보드 (조행기 목록)
+├── data/
+│   └── OK-Song.m4a         # BGM
 ├── images/                 # 현장 사진
 │   ├── field-bg.jpg
-│   ├── 0329-*.JPEG/PNG     # 2026-03-29 출조 사진
-│   ├── 0314-*.JPEG/PNG     # 2026-03-14 출조 사진
-│   ├── 0301-*.JPEG/PNG     # 2026-03-01 출조 사진
-│   └── 0221-*.jpg/JPEG     # 2026-02-21 출조 사진
+│   ├── 0501/               # 2026-05-01 출조 사진
+│   ├── 0425/               # 2026-04-25 출조 사진
+│   ├── 0411/               # 2026-04-11 출조 사진
+│   └── ...
 ├── logs/                   # 개별 조행기 HTML 파일들
-│   ├── 2026-03-29-hanter.html   ⭐ NEW
+│   ├── 2026-05-01-hanter.html   ⭐ NEW
+│   ├── 2026-04-25-hanter-log.html
+│   ├── 2026-04-11-hanter.html
+│   ├── 2026-03-29-hanter.html
 │   ├── 2026-03-14_daedae.html
 │   ├── 2026-03-01_daedae.html
 │   ├── 2026-02-21_daedae.html
@@ -135,58 +144,30 @@ cd fishing-log
 # index.html을 브라우저로 열기
 ```
 
-## 🎯 조행기 작성 가이드
-
-새로운 조행기를 추가하려면:
-
-1. `logs/` 폴더에 `YYYY-MM-DD_location.html` 형식으로 파일 생성
-2. `index.html`의 `logsData` 배열에 항목 추가
-
-```javascript
-{
-    id: '2026-03-29-hanter',
-    date: '2026-03-29',
-    location: '용인 한터낚시터',
-    weather: '☀️',
-    temp: 20,
-    season: 'spring',
-    summary: '작전명 "적공(積功), 판을 흔들다". 마이크로 님핑 게임체인저. 23수.',
-    patterns: ['Chironomid Larva (Zebra Midge)', 'White Chironomid Pupa'],
-    species: ['무지개송어'],
-    catch: 23,
-    notes: '마이크로 님핑 전환, Airflo DI5 첫 실전',
-    file: 'logs/2026-03-29-hanter.html',
-    latest: true
-}
-```
-
 ## 💡 주요 인사이트
 
-### 한터낚시터 공략법
+### 한터낚시터 공략법 (2026 시즌 업데이트)
 - ✅ **수심**: 6m 깊은 저수지
-- ✅ **핵심**: 바닥(Bottom) 공략 — 새벽부터 싱킹채비로 선점
-- ✅ **전략**: 풀싱킹 라인 + 1.5m 짧은 형광카본 + 느린 8자 리트리브
-- ✅ **패턴**: Zonker Tail Mini Leech, Vampire Leech, Chironomid
-- ✅ **2026 발견**: 새벽 깜깜 바닥 = Glow Bead로 선점
-- ✅ **2026 뉴노멀**: 3대 컬러군 로테이션 (다크군 / 유채색군 / 브라이트군)
-- ✅ **2026 확장**: 인터미디어트(Camolux)로 중층권 탐색 시작
-- ✅ **2026 봄 발견**: 수온 전환기(3월 말~) 송어 중층 부상 → 마이크로 님핑 + 인디케이터로 대응
+- ✅ **겨울~초봄**: 풀싱킹 바닥 직공 — Titan 3D + Mini Leech 컬러 로테이션
+- ✅ **봄 중층**: 인터미디어트(CamoLux) 전층 커버 — Chironomid Larva/Pupa
+- ✅ **봄 표층**: Hover WF5-H 새벽 1시간 황금 구간 — 피딩 직접 대응
+- ✅ **Hang 기법**: 행마커에서 로드 천천히 세우기 — Larva/Pupa에 집중 반응
+- ✅ **Only Sinking**: 짧은 리더(5~6ft) → 바람 속 캐스팅 엉킴 최소화
+- ✅ **4월 말~5월**: 바텀 효율 저하, 중상층·Hang 구간 비중 높이기 권장
 
-### 신기사낚시터 공략법
+### 신기낚시터 공략법
 - ✅ **특징**: 저수온기 반응 좋음
-- ✅ **전략**: 스트리머 중심 공략
-- ✅ **패턴**: Woolly Bugger, Leech
-- ✅ **팁**: 느린 리트리브가 효과적
+- ✅ **전략**: 스트리머 중심 / 느린 리트리브
 
 ## 📈 시즌별 통계
 
 | 시즌 | 조행 | 캐치 | 평균 |
 |------|------|------|------|
-| 2025 가을 | 2회 | 27마리 | 13.5 |
-| 2025-26 겨울 | 3회 | 36마리 | 12.0 |
+| 2024 가을 | 2회 | 27마리 | 13.5 |
+| 2024-25 겨울 | 3회 | 36마리 | 12.0 |
 | 2026 겨울 | 2회 | 52마리 | 26.0 |
-| 2026 봄 | 3회 | 113마리 | 37.7 |
-| **합계** | **10회** | **228마리** | **22.8** |
+| 2026 봄 | 6회 | 220마리 | 36.7 |
+| **합계** | **13회** | **335마리** | **25.8** |
 
 ## 🔗 관련 프로젝트
 
@@ -211,6 +192,6 @@ MIT License - 자유롭게 참고하세요!
 
 ---
 
-**"32 + 20 + 39 + 51 + 23 = 積功"**
+**"39 + 51 + 23 + 58 + 48 + 31 = 2026 봄 시즌 完"**
 
 🎣 Tight Lines!
