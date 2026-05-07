@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="google-site-verification" content="zlvvH38VHirh0ppLFnqvqMaCH3RuCmdNtGjibnLGHys" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플라이낚시 조행기 아카이브</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 1200px; margin: 0 auto; background: white;
+            border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden;
+        }
+        header {
+            background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(52, 73, 94, 0.6)),
+                        url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0411/0411-View.JPEG') center 60%/cover no-repeat;
+
+            color: white; padding: 100px 40px; text-align: center; position: relative;
+        }
+        header h1 { font-size: 3em; margin-bottom: 15px; text-shadow: 3px 3px 6px rgba(0,0,0,0.5); font-weight: 800; }
+        header p { font-size: 1.3em; opacity: 0.95; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .filters {
+            padding: 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef;
+            display: flex; gap: 15px; flex-wrap: wrap; align-items: center;
+        }
+        .filter-group { display: flex; gap: 10px; align-items: center; }
+        .filter-group label { font-weight: 600; color: #495057; }
+        select, input {
+            padding: 8px 15px; border: 2px solid #dee2e6; border-radius: 8px;
+            font-size: 0.95em; transition: all 0.3s;
+        }
+        select:focus, input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+        .stats {
+            padding: 30px; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; background: #f8f9fa;
+        }
+        .stat-card {
+            background: white; padding: 20px; border-radius: 10px;
+            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card .number { font-size: 2.5em; font-weight: bold; color: #667eea; margin-bottom: 5px; }
+        .stat-card .label { color: #6c757d; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+        .logs-container { padding: 40px; }
+        .logs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .log-card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s;
+            cursor: pointer; border: 2px solid transparent;
+        }
+        .log-card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); border-color: #667eea; }
+        .log-card.latest { border-color: #667eea; box-shadow: 0 4px 20px rgba(102,126,234,0.25); }
+        .log-card.latest .log-image { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+        .latest-badge {
+            display: inline-block; background: #667eea; color: white;
+            font-size: 0.7em; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+            margin-left: 8px; vertical-align: middle; letter-spacing: 0.05em;
+        }
+        .log-image {
+            width: 100%; height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 4em;
+        }
+        .log-content { padding: 20px; }
+        .log-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
+        .log-date { font-size: 1.3em; font-weight: bold; color: #2c3e50; }
+        .log-weather { font-size: 1.5em; }
+        .log-location { color: #667eea; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .log-summary { color: #6c757d; font-size: 0.95em; margin-bottom: 15px; line-height: 1.5; }
+        .log-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .tag { padding: 5px 12px; background: #e9ecef; border-radius: 20px; font-size: 0.85em; color: #495057; font-weight: 500; }
+        .tag.season { background: #d4edda; color: #155724; }
+        .tag.catch { background: #fff3cd; color: #856404; }
+        .tag.method { background: #d1ecf1; color: #0c5460; }
+        .log-stats { display: flex; justify-content: space-around; padding-top: 15px; border-top: 1px solid #e9ecef; }
+        .log-stat { text-align: center; }
+        .log-stat .value { font-weight: bold; color: #667eea; font-size: 1.1em; }
+        .log-stat .label { font-size: 0.8em; color: #6c757d; margin-top: 3px; }
+        .empty-state { text-align: center; padding: 60px 20px; color: #6c757d; }
+        .empty-state h3 { font-size: 1.5em; margin-bottom: 10px; color: #495057; margin-top: 20px; }
+        @media (max-width: 768px) {
+            .logs-grid { grid-template-columns: 1fr; }
+            .filters { flex-direction: column; align-items: stretch; }
+            .filter-group { flex-direction: column; align-items: stretch; }
+            header h1 { font-size: 2em; }
+            header { padding: 60px 20px; background-attachment: scroll; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎣 플라이낚시 조행기</h1>
+            <p>관리형낚시터 플라이낚시 기록 아카이브</p>
+        </header>
+        <div class="filters">
+            <div class="filter-group">
+                <label>시즌</label>
+                <select id="seasonFilter">
+                    <option value="all">전체</option>
+                    <option value="spring">봄</option>
+                    <option value="summer">여름</option>
+                    <option value="fall">가을</option>
+                    <option value="winter">겨울</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>장소</label>
+                <select id="locationFilter"><option value="all">전체</option></select>
+            </div>
+            <div class="filter-group">
+                <label>검색</label>
+                <input type="text" id="searchInput" placeholder="패턴, 어종 등...">
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat-card"><div class="number" id="totalLogs">0</div><div class="label">총 조행</div></div>
+            <div class="stat-card"><div class="number" id="totalCatch">0</div><div class="label">총 캐치</div></div>
+            <div class="stat-card"><div class="number" id="totalLocations">0</div><div class="label">방문 낚시터</div></div>
+            <div class="stat-card"><div class="number" id="avgCatch">0</div><div class="label">평균 마릿수</div></div>
+        </div>
+        <div class="logs-container">
+            <div class="logs-grid" id="logsGrid"></div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div style="font-size: 4em;">🎣</div>
+                <h3>아직 조행기가 없습니다</h3>
+                <p>logs/ 폴더에 조행기를 추가해보세요!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const logsData = [
+            {
+                id: '2026-05-01-hanter',
+                date: '2026-05-01',
+                location: '용인 한터낚시터',
+                weather: '🌬️',
+                temp: 18,
+                waterTemp: null,
+                season: 'spring',
+                summary: '"그대 이름은 바람 바람 바람" — 종일 봄 똥바람 속 시즌 마지막 출조. 하버라인 표층 데뷔, Hang 기법 약 10수 기여, 오후 바텀 효율 저하 경향 확인. Only Sinking 4채비 완성. 31수.',
+                patterns: ['Chironomid Red 그라데이션 Larva', 'Chironomid White Larva/Pupa', 'Midge Larva/Pupa'],
+                species: ['무지개송어'],
+                catch: 31,
+                notes: '하버라인 표층 데뷔, Hang 기법 ~10수, 바텀 킬존 약화 경향 확인, Only Sinking 바람 내성',
+                file: 'logs/2026-05-01-hanter.html',
+                latest: true
+            },
+            {
+                id: '2026-04-25-hanter-log',
+                date: '2026-04-25',
+                location: '용인 한터낚시터',
+                weather: '☀️',
+                temp: 23,
+                waterTemp: null,
+                season: 'spring',
+                summary: '"올리고~ 올리고 🎶, 내리고~ 내리고 🎵" 수면 피딩을 읽고 즉시 인터미디어트로 시작. 오전 중층 공략 후 고온으로 바텀 전환, 4시 이후 폭발. Hang 기법 발견, Roly-Poly 첫 랜딩. 48수.',
+                patterns: ['Chironomid Red 그라데이션 Larva', 'Chironomid White', 'Zonker Tail Mini Leech #16'],
+                species: ['무지개송어'],
+                catch: 48,
+                notes: '인터미디어트 전층 커버 능력 증명, Hang 기법 발견, Roly-Poly 첫 랜딩',
+                file: 'logs/2026-04-25-hanter-log.html',
+                latest: false
+            },
+            {
+                id: '2026-04-11-hanter',
+                date: '2026-04-11',
+                location: '용인 한터낚시터',
+                weather: '⛅',
+                temp: 13.7,
+                waterTemp: null,
+                season: 'spring',
+                summary: '작전명 "경험이 집중을 만든다". 꽃샘추위와 이틀간의 비를 예측하고 전략을 수정. 바텀 공략으로 오전 30수, 인터미디어트 재발견, T&T Helix 데뷔전 20여수. 58수 달성.',
+                patterns: ['Red Chironomid Larva FL', 'Mojo Nymph Yarn', 'Zebra Midge #18'],
+                species: ['무지개송어'],
+                catch: 58,
+                notes: '인터미디어트 마이크로 님핑 재발견, T&T Helix 863-4 데뷔, SA Infinity + R8 Core 가능성 확인',
+                file: 'logs/2026-04-11-hanter.html',
+                latest: false
+            },
+            {
+                id: '2026-03-29-hanter',
+                date: '2026-03-29',
+                location: '용인 한터낚시터',
+                weather: '☀️',
+                temp: 20,
+                waterTemp: null,
+                season: 'spring',
+                summary: '작전명 "적공(積功), 판을 흔들다". 연일 통하던 바닥 패턴이 완전히 침묵. Airflo SS2 DI5 첫 등판. 에그 실마리로 마이크로 님핑 전환, 게임체인저. 23수.',
+                patterns: ['Chironomid Larva (Zebra Midge)', 'White Chironomid Pupa', 'Egg Pattern'],
+                species: ['무지개송어'],
+                catch: 23,
+                notes: '마이크로 님핑 게임체인저, Airflo DI5 첫 실전, Biostrike 인디케이터 3개 사선 입질',
+                file: 'logs/2026-03-29-hanter.html',
+                latest: false
+            },
+            {
+                id: '2026-03-14-daedae',
+                date: '2026-03-14',
+                location: '용인 한터낚시터',
+                weather: '💨',
+                temp: 6,
+                waterTemp: null,
+                season: 'spring',
+                summary: '작전명 "침잠(沈潛)". 오직 싱킹채비만으로 바닥에서 중층권으로 확장시킨 첫 번째 시도. 3대 컬러군 로테이션 뉴노멀 정립. 51수 Goal Reached!',
+                patterns: ['Zonker Tail Mini Leech #16', 'Glow Bead Marabou #14'],
+                species: ['무지개송어'],
+                catch: 51,
+                notes: '침잠 작전, 3대 컬러군 로테이션, Camolux 중층 첫 출전',
+                file: 'logs/2026-03-14_daedae.html',
+                latest: false
+            },
+            {
+                id: '2026-03-01-daedae',
+                date: '2026-03-01',
+                location: '용인 한터낚시터',
+                weather: '💨',
+                temp: 6,
+                waterTemp: null,
+                season: 'spring',
+                summary: '맞바람을 뚫은 39수의 기록. 5색 컬러 로테이션(올리브→블랙→챠트루즈→퍼플→화이트) 첫 실전 검증. 3D 싱킹 + 짧은 카본리더로 6m 바닥권을 완벽 공략.',
+                patterns: ['Zonker Tail Mini Leech #16'],
+                species: ['무지개송어'],
+                catch: 39,
+                notes: '5색 컬러 로테이션, Sage DS2, 풀싱킹 바닥 공략',
+                file: 'logs/2026-03-01_daedae.html',
+                latest: false
+            },
+            {
+                id: '2026-02-21-daedae',
+                date: '2026-02-21',
+                location: '용인 대대낚시터',
+                weather: '☀️',
+                temp: 17,
+                waterTemp: null,
+                season: 'winter',
+                summary: '해빙기 초입, 풀싱킹으로 6m 바닥층 공략. 컬러 로테이션(퍼플→화이트→올리브→블랙)으로 리액션 바이트 유도. 존커테일 미니 리치 단일 패턴으로 20수 달성.',
+                patterns: ['Zonker Tail Mini Leech'],
+                species: ['무지개송어'],
+                catch: 20,
+                notes: '컬러 로테이션 전략, 리액션 바이트, 주둥이 측면 훅킹',
+                file: 'logs/2026-02-21_daedae.html',
+                latest: false
+            },
+            {
+                id: '2026-02-14-hanter',
+                date: '2026-02-14',
+                location: '용인 한터낚시터',
+                weather: '☀️',
+                temp: 3,
+                waterTemp: 5,
+                season: 'winter',
+                summary: '한파 직후 슬로프 공략. 수평에서 수직으로 상승하는 Rising Action 구간에서 입질 집중. White MVP, Technical Trout Line 첫 투입.',
+                patterns: ['Chironomid Larva', 'White Leech'],
+                species: ['무지개송어'],
+                catch: 32,
+                notes: '슬로프 수직 상승 구간 입질 집중, White MVP',
+                file: 'logs/2026-02-14_hanter.html',
+                latest: false
+            },
+            {
+                id: '2024-11-15-hanteo',
+                date: '2025-11-15',
+                location: '용인 한터낚시터',
+                weather: '☀️',
+                temp: 5,
+                waterTemp: 8,
+                season: 'fall',
+                summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략',
+                patterns: ['Vampire Leech', 'Chironomid'],
+                species: ['무지개송어'],
+                catch: 15,
+                notes: '6m 수심, 바닥 공략이 핵심',
+                file: 'logs/2024-11-15-hanteo.html',
+                latest: false
+            },
+            {
+                id: '2024-11-29-singisa',
+                date: '2025-11-29',
+                location: '신기낚시터',
+                weather: '☁️',
+                temp: 3,
+                waterTemp: 6,
+                season: 'fall',
+                summary: '늦가을 신기사 공략. 저수온 대응 전략',
+                patterns: ['Streamer', 'Nymph'],
+                species: ['무지개송어'],
+                catch: 12,
+                notes: '저수온기 스트리머 공략',
+                file: 'logs/2024-11-29-singisa.html',
+                latest: false
+            },
+            {
+                id: '2024-12-13-singisa',
+                date: '2025-12-13',
+                location: '신기낚시터',
+                weather: '❄️',
+                temp: -2,
+                waterTemp: 4,
+                season: 'winter',
+                summary: '겨울 신기사 재방문. 한파 속 송어 공략',
+                patterns: ['Woolly Bugger', 'Leech'],
+                species: ['무지개송어', '산천어'],
+                catch: 8,
+                notes: '한파 대응, 바닥 집중',
+                file: 'logs/2024-12-13-singisa.html',
+                latest: false
+            },
+            {
+                id: '2024-12-20-hanteo',
+                date: '2025-12-20',
+                location: '용인 한터낚시터',
+                weather: '⛅',
+                temp: 0,
+                waterTemp: 5,
+                season: 'winter',
+                summary: '겨울 한터지 재공략. Deep Lining 검증',
+                patterns: ['Chironomid', 'Bloodworm'],
+                species: ['무지개송어'],
+                catch: 18,
+                notes: 'Deep Lining 효과 재확인',
+                file: 'logs/2024-12-20-hanteo.html',
+                latest: false
+            },
+            {
+                id: '2025-01-04-singisa',
+                date: '2026-01-04',
+                location: '신기낚시터',
+                weather: '☀️',
+                temp: -5,
+                waterTemp: 3,
+                season: 'winter',
+                summary: '2025년 첫 조행. 강추위 속 신기사 공략',
+                patterns: ['Streamer #8', 'Leech'],
+                species: ['무지개송어'],
+                catch: 10,
+                notes: '강추위, 느린 리트리브',
+                file: 'logs/2025-01-04-singisa.html',
+                latest: false
+            }
+        ];
+
+        logsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        let filteredLogs = [...logsData];
+
+        function initPage() { updateStats(); populateLocationFilter(); renderLogs(); }
+
+        function updateStats() {
+            document.getElementById('totalLogs').textContent = logsData.length;
+            const totalCatch = logsData.reduce((sum, log) => sum + log.catch, 0);
+            document.getElementById('totalCatch').textContent = totalCatch;
+            const locations = new Set(logsData.map(log => log.location));
+            document.getElementById('totalLocations').textContent = locations.size;
+            const avgCatch = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
+            document.getElementById('avgCatch').textContent = avgCatch;
+        }
+
+        function populateLocationFilter() {
+            const locations = [...new Set(logsData.map(log => log.location))];
+            const select = document.getElementById('locationFilter');
+            locations.forEach(location => {
+                const option = document.createElement('option');
+                option.value = location; option.textContent = location;
+                select.appendChild(option);
+            });
+        }
+
+        function renderLogs() {
+            const grid = document.getElementById('logsGrid');
+            const emptyState = document.getElementById('emptyState');
+            if (filteredLogs.length === 0) {
+                grid.style.display = 'none'; emptyState.style.display = 'block'; return;
+            }
+            grid.style.display = 'grid'; emptyState.style.display = 'none';
+            grid.innerHTML = filteredLogs.map(log => `
+                <div class="log-card${log.latest ? ' latest' : ''}" onclick="viewLog('${log.file}')">
+                    <div class="log-image">🎣</div>
+                    <div class="log-content">
+                        <div class="log-header">
+                            <div class="log-date">
+                                ${formatDate(log.date)}
+                                ${log.latest ? '<span class="latest-badge">NEW</span>' : ''}
+                            </div>
+                            <div class="log-weather">${log.weather}</div>
+                        </div>
+                        <div class="log-location">📍 ${log.location}</div>
+                        <div class="log-summary">${log.summary}</div>
+                        <div class="log-tags">
+                            <span class="tag season">${getSeasonName(log.season)}</span>
+                            <span class="tag catch">${log.catch}마리</span>
+                            <span class="tag method">${log.patterns[0]}</span>
+                        </div>
+                        <div class="log-stats">
+                            <div class="log-stat">
+                                <div class="value">${log.temp}°C</div>
+                                <div class="label">기온</div>
+                            </div>
+                            <div class="log-stat">
+                                <div class="value">${log.waterTemp !== null ? log.waterTemp + '°C' : '-'}</div>
+                                <div class="label">수온</div>
+                            </div>
+                            <div class="log-stat">
+                                <div class="value">${log.catch}마리</div>
+                                <div class="label">조과</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const dayName = days[date.getDay()];
+            return `${year}.${String(month).padStart(2,'0')}.${String(day).padStart(2,'0')} (${dayName})`;
+        }
+
+        function getSeasonName(season) {
+            const seasons = { spring: '봄', summer: '여름', fall: '가을', winter: '겨울' };
+            return seasons[season] || season;
+        }
+
+        function viewLog(file) { window.location.href = file; }
+
+        document.getElementById('seasonFilter').addEventListener('change', applyFilters);
+        document.getElementById('locationFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const season = document.getElementById('seasonFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            filteredLogs = logsData.filter(log => {
+                const matchSeason = season === 'all' || log.season === season;
+                const matchLocation = location === 'all' || log.location === location;
+                const matchSearch = search === '' ||
+                    log.summary.toLowerCase().includes(search) ||
+                    log.patterns.some(p => p.toLowerCase().includes(search)) ||
+                    log.species.some(s => s.toLowerCase().includes(search)) ||
+                    log.location.toLowerCase().includes(search);
+                return matchSeason && matchLocation && matchSearch;
+            });
+            renderLogs();
+        }
+
+        initPage();
+    </script>
+</body>
+</html>
