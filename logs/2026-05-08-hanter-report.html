@@ -130,6 +130,22 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .tt-win td{color:var(--ink) !important;font-weight:500}
 .tt-dead td{color:var(--ink-soft) !important}
 
+
+/* ── HANG MARKER ── */
+.marker-box{background:#faf7f2;border:1px solid var(--rule);border-radius:14px;padding:26px 28px;margin:30px 0 36px;box-shadow:0 4px 18px rgba(0,0,0,.045)}
+.marker-box h3{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin-bottom:10px}
+.marker-note{font-size:13px;color:var(--ink-soft);line-height:1.75;margin-bottom:18px}
+.marker-process{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 4px}
+.mp-item{background:rgba(74,124,111,.07);border:1px solid rgba(74,124,111,.16);border-radius:10px;padding:14px 14px 13px}
+.mp-step{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;color:var(--water);text-transform:uppercase;margin-bottom:6px}
+.mp-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.mp-desc{font-size:12px;color:var(--ink-mid);line-height:1.6}
+.marker-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0 4px}
+.marker-gallery .gallery-item{aspect-ratio:1}
+.marker-verdict{margin-top:18px;padding:16px 18px;border-left:4px solid var(--accent);background:var(--accent-lt);border-radius:0 10px 10px 0}
+.marker-verdict p{margin:0;font-size:14px;color:var(--ink-mid);line-height:1.75}
+.marker-verdict strong{color:var(--ink)}
+
 /* ── CLOSING ── */
 .closing{background:var(--water-dk);border-radius:12px;padding:40px 40px 36px;margin:48px 0 0;position:relative;overflow:hidden}
 .closing::before{content:'겸';font-family:'DM Serif Display',serif;font-size:200px;color:rgba(255,255,255,.04);position:absolute;right:-10px;top:-40px;line-height:1;pointer-events:none}
@@ -185,6 +201,8 @@ footer p{font-size:12px}
   .gear-box{padding:18px}
   .closing{padding:32px 22px}
   .gallery-split{grid-template-columns:1fr}
+  .marker-process{grid-template-columns:1fr}
+  .marker-gallery{grid-template-columns:repeat(2,1fr)}
   .g3{grid-template-columns:repeat(2,1fr)}
   .g-bottom{grid-template-columns:1fr}
 }
@@ -203,6 +221,7 @@ footer p{font-size:12px}
       <a href="#sec-series"  class="snl">시즌 시리즈</a>
       <a href="#sec-gear"    class="snl">채비</a>
       <a href="#sec-record"  class="snl">타임라인</a>
+      <a href="#sec-hangmarker" class="snl">행마커</a>
       <a href="#sec-closing" class="snl">마치며</a>
       <a href="#sec-gallery" class="snl">갤러리</a>
     </div>
@@ -320,7 +339,7 @@ footer p{font-size:12px}
 
   <!-- Ch 02 — 채비 -->
   <div class="sec-title" id="sec-gear">Chapter 02</div>
-  <h2>채비 라인업 — 4세트의 성적표</h2>
+  <h2>채비 라인업 — 5세트의 성적표</h2>
 
   <p>이날의 결론부터 말하면 — <strong>Titan 3D 외 채비는 실질적으로 무반응</strong>이었다. Chironomid Larva·Pupa 등 근래 장원급 반응을 보이던 패턴들에 단 한 번의 반응도 없었다는 것이 이날의 핵심이다.</p>
 
@@ -442,6 +461,53 @@ footer p{font-size:12px}
     <p>"칼로 콕콕 찔러도, 총으로 콩콩 쏴봐도 — 아무런 반응이 없으니, 더는 어찌할 바가 없더라."</p>
   </div>
 
+
+
+  <!-- Ch 05 — 완성! 행마커 -->
+  <div class="sec-title" id="sec-hangmarker">Chapter 05</div>
+  <h2>완성! 행마커</h2>
+
+  <p>이번 출조에서 또 하나 확인한 것이 있다. 바로 <strong>행마커 완성형</strong>이다. 기존처럼 라인 끝 구간을 감으로만 처리하지 않고, 회수 마지막 구간에서 플라이의 상승 전환 지점을 더 명확하게 읽기 위해 표시를 따로 만들었다.</p>
+
+  <p>방법은 단순하다. 먼저 라인 표면에 <strong>POSCA 마커펜</strong>으로 색을 올려 시인성을 만들고, 그 위를 <strong>Loon UV Knot Sense</strong>로 얇게 감싸 마감했다. 핵심은 딱딱한 코팅이 아니라, 손가락과 가이드에 걸림이 적은 <strong>말랑말랑한 보호막</strong>을 만드는 것. 색은 눈에 띄고, 표면은 너무 거칠지 않아야 한다.</p>
+
+  <div class="marker-box">
+    <h3>행마커 제작 방식</h3>
+    <p class="marker-note">라인 회수 후반부, 즉 행 동작으로 들어가는 구간을 눈으로 확인하기 위한 표시. 단순한 장식이 아니라 수중 궤적을 읽기 위한 기준점이다.</p>
+
+    <div class="marker-process">
+      <div class="mp-item">
+        <div class="mp-step">Step 01</div>
+        <div class="mp-title">색 표시</div>
+        <div class="mp-desc">POSCA 마커펜으로 라인 위에 선명한 색을 올린다. 목적은 캐스팅 중 식별이 아니라 회수 말미의 위치 확인이다.</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-step">Step 02</div>
+        <div class="mp-title">UV 코팅</div>
+        <div class="mp-desc">UV Knot Sense를 얇게 발라 색이 벗겨지지 않도록 보호한다. 너무 두껍게 올리면 가이드 통과감이 나빠질 수 있다.</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-step">Step 03</div>
+        <div class="mp-title">실전 검증</div>
+        <div class="mp-desc">종일 사용해 본 결과, 밀림이나 벗겨짐 없이 유지됐다. 시인성도 충분했고 내구성도 기대 이상이었다.</div>
+      </div>
+    </div>
+
+    <div class="marker-gallery">
+      <div class="gallery-item" onclick="openLbHang(0)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang01.JPEG" alt="완성 행마커 01"></div>
+      <div class="gallery-item" onclick="openLbHang(1)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang02.JPEG" alt="완성 행마커 02"></div>
+      <div class="gallery-item" onclick="openLbHang(2)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang03.JPEG" alt="완성 행마커 03"></div>
+      <div class="gallery-item" onclick="openLbHang(3)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang04.JPEG" alt="완성 행마커 04"></div>
+    </div>
+
+    <div class="marker-verdict">
+      <p><strong>결론.</strong> POSCA 색 표시 + UV Knot Sense 마감은 실전용 행마커로 충분히 쓸 만하다. 하루 종일 사용해도 내구성은 유지됐고, 회수 말미의 위치 확인도 명확했다. 이제 행마커는 임시 표시가 아니라, 내 싱킹라인 운용의 기준 장치가 됐다.</p>
+    </div>
+  </div>
+
+  <p>행마커가 생기면 회수 마지막 구간이 달라진다. 어디쯤부터 라인이 급격히 세워지는지, 어디서부터 플라이가 바닥권에서 떠오르기 시작하는지, 그리고 바로 그 지점에서 입질이 나는지를 더 분명하게 기록할 수 있다. 결국 이것도 조과를 바로 늘리는 장치라기보다, <strong>다음 캐스팅을 더 정확하게 만드는 장치</strong>다.</p>
+
+
   <!-- CLOSING -->
   <div class="closing" id="sec-closing">
     <h3>Closing — 2026 시즌을 마치며</h3>
@@ -519,8 +585,16 @@ const FLY_ITEMS = [
   {src:`${BASE}/0508-Trout09.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 09'},
 ];
 
+const HANG_ITEMS = [
+  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang01.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 01'},
+  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang02.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 02'},
+  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang03.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 03'},
+  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang04.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 04'},
+];
+
 let lbIdx = 0;
 let flyIdx = 0;
+let hangIdx = 0;
 
 function openLb(i){
   lbIdx = i;
@@ -536,6 +610,13 @@ function openLbFly(i){
   lb.classList.add('open');
   updateLb();
 }
+function openLbHang(i){
+  hangIdx = i;
+  const lb = document.getElementById('lb');
+  lb.dataset.mode = 'hang';
+  lb.classList.add('open');
+  updateLb();
+}
 function closeLb(){
   document.getElementById('lb').classList.remove('open');
 }
@@ -543,6 +624,8 @@ function moveLb(dir){
   const mode = document.getElementById('lb').dataset.mode;
   if(mode === 'fly'){
     flyIdx = (flyIdx + dir + FLY_ITEMS.length) % FLY_ITEMS.length;
+  } else if(mode === 'hang'){
+    hangIdx = (hangIdx + dir + HANG_ITEMS.length) % HANG_ITEMS.length;
   } else {
     lbIdx = (lbIdx + dir + LB_ITEMS.length) % LB_ITEMS.length;
   }
@@ -550,8 +633,8 @@ function moveLb(dir){
 }
 function updateLb(){
   const mode = document.getElementById('lb').dataset.mode;
-  const items = mode === 'fly' ? FLY_ITEMS : LB_ITEMS;
-  const idx   = mode === 'fly' ? flyIdx : lbIdx;
+  const items = mode === 'fly' ? FLY_ITEMS : (mode === 'hang' ? HANG_ITEMS : LB_ITEMS);
+  const idx   = mode === 'fly' ? flyIdx : (mode === 'hang' ? hangIdx : lbIdx);
   document.getElementById('lb-img').src = items[idx].src;
   document.getElementById('lb-cap').textContent = items[idx].cap + ' · ' + (idx+1) + ' / ' + items.length;
 }
@@ -564,7 +647,7 @@ document.addEventListener('keydown', e => {
 
 // ── sticky nav active ──
 const navLinks = document.querySelectorAll('.snl');
-const sections = ['sec-top','sec-summary','sec-series','sec-gear','sec-record','sec-closing','sec-gallery'];
+const sections = ['sec-top','sec-summary','sec-series','sec-gear','sec-record','sec-hangmarker','sec-closing','sec-gallery'];
 window.addEventListener('scroll', () => {
   let current = sections[0];
   sections.forEach(id => {
