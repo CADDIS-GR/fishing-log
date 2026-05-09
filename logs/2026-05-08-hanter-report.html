@@ -130,22 +130,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .tt-win td{color:var(--ink) !important;font-weight:500}
 .tt-dead td{color:var(--ink-soft) !important}
 
-
-/* ── HANG MARKER ── */
-.marker-box{background:#faf7f2;border:1px solid var(--rule);border-radius:14px;padding:26px 28px;margin:30px 0 36px;box-shadow:0 4px 18px rgba(0,0,0,.045)}
-.marker-box h3{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin-bottom:10px}
-.marker-note{font-size:13px;color:var(--ink-soft);line-height:1.75;margin-bottom:18px}
-.marker-process{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 4px}
-.mp-item{background:rgba(74,124,111,.07);border:1px solid rgba(74,124,111,.16);border-radius:10px;padding:14px 14px 13px}
-.mp-step{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;color:var(--water);text-transform:uppercase;margin-bottom:6px}
-.mp-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.mp-desc{font-size:12px;color:var(--ink-mid);line-height:1.6}
-.marker-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0 4px}
-.marker-gallery .gallery-item{aspect-ratio:1}
-.marker-verdict{margin-top:18px;padding:16px 18px;border-left:4px solid var(--accent);background:var(--accent-lt);border-radius:0 10px 10px 0}
-.marker-verdict p{margin:0;font-size:14px;color:var(--ink-mid);line-height:1.75}
-.marker-verdict strong{color:var(--ink)}
-
 /* ── CLOSING ── */
 .closing{background:var(--water-dk);border-radius:12px;padding:40px 40px 36px;margin:48px 0 0;position:relative;overflow:hidden}
 .closing::before{content:'겸';font-family:'DM Serif Display',serif;font-size:200px;color:rgba(255,255,255,.04);position:absolute;right:-10px;top:-40px;line-height:1;pointer-events:none}
@@ -171,6 +155,38 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .g-bottom{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:10px}
 .g-bottom .gallery-item.tall{aspect-ratio:.85}
 .g-bottom .gallery-item.wide{aspect-ratio:1.6}
+
+/* ── HANG MARKER (DIY 섹션) ── */
+.hm-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 32px}
+.hm-row .gallery-item{aspect-ratio:.78;border-radius:14px}
+.hm-card{
+  background-color:#faf7f2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='phm'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23fff8f0' surfaceScale='1.2'%3E%3CfeDistantLight azimuth='50' elevation='65'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23phm)' opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:500px 500px;
+  border-radius:12px;padding:28px 28px 24px;border:1px solid var(--rule);
+}
+.hm-process{display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.hm-process-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.hm-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hm-pill{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.04em;padding:5px 14px;border-radius:20px;color:#fff;white-space:nowrap}
+.hm-pill.ink{background:var(--ink)}
+.hm-pill.posca{background:#d63a1e}
+.hm-pill.uv{background:var(--water-dk)}
+.hm-pill.gold{background:var(--gold)}
+.hm-arrow{color:var(--ink-soft);font-size:13px}
+.hm-card p{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:14px}
+.hm-card p:last-of-type{margin-bottom:0}
+.hm-card strong{color:var(--ink);font-weight:700}
+.hm-rate{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.hm-rate-item{flex:1;min-width:110px;border-radius:8px;padding:12px 16px;text-align:center}
+.hm-rate-item.ok{background:rgba(74,124,111,.1);border:1px solid rgba(74,124,111,.25)}
+.hm-rate-item.gold{background:rgba(184,149,42,.1);border:1px solid rgba(184,149,42,.3)}
+.hm-rate-mark{font-family:'DM Serif Display',serif;font-size:24px;line-height:1}
+.hm-rate-item.ok .hm-rate-mark{color:var(--water-dk)}
+.hm-rate-item.gold .hm-rate-mark{color:var(--gold)}
+.hm-rate-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+.hm-rate-item.ok .hm-rate-label{color:var(--water-dk)}
+.hm-rate-item.gold .hm-rate-label{color:#8a6a10}
 
 /* ── LIGHTBOX ── */
 #lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,18,.92);backdrop-filter:blur(6px);align-items:center;justify-content:center}
@@ -201,10 +217,11 @@ footer p{font-size:12px}
   .gear-box{padding:18px}
   .closing{padding:32px 22px}
   .gallery-split{grid-template-columns:1fr}
-  .marker-process{grid-template-columns:1fr}
-  .marker-gallery{grid-template-columns:repeat(2,1fr)}
   .g3{grid-template-columns:repeat(2,1fr)}
   .g-bottom{grid-template-columns:1fr}
+  .hm-row{grid-template-columns:repeat(2,1fr)}
+  .hm-row .gallery-item{aspect-ratio:1;border-radius:10px}
+  .hm-card{padding:20px}
 }
 @media(max-width:540px){.lb-arr{display:none}}
 </style>
@@ -221,8 +238,8 @@ footer p{font-size:12px}
       <a href="#sec-series"  class="snl">시즌 시리즈</a>
       <a href="#sec-gear"    class="snl">채비</a>
       <a href="#sec-record"  class="snl">타임라인</a>
-      <a href="#sec-hangmarker" class="snl">행마커</a>
       <a href="#sec-closing" class="snl">마치며</a>
+      <a href="#sec-hang"    class="snl">행마커</a>
       <a href="#sec-gallery" class="snl">갤러리</a>
     </div>
   </div>
@@ -339,9 +356,9 @@ footer p{font-size:12px}
 
   <!-- Ch 02 — 채비 -->
   <div class="sec-title" id="sec-gear">Chapter 02</div>
-  <h2>채비 라인업</h2>
+  <h2>채비 라인업 — 5세트의 성적표</h2>
 
-  <p>이날의 결론부터 말하면 — <strong>Titan 3D 외 채비는 실질적으로 무반응</strong>이었다. Chironomid(Midge) Larva·Pupa 등 근래 장원급 반응을 보이던 패턴들에 단 한 번의 반응도 없었다는 것이 이날의 핵심이다.</p>
+  <p>이날의 결론부터 말하면 — <strong>Titan 3D 외 채비는 실질적으로 무반응</strong>이었다. Chironomid Larva·Pupa 등 근래 장원급 반응을 보이던 패턴들에 단 한 번의 반응도 없었다는 것이 이날의 핵심이다.</p>
 
   <div class="gear-box">
     <h3>5 · 08 채비 성적표</h3>
@@ -461,53 +478,6 @@ footer p{font-size:12px}
     <p>"칼로 콕콕 찔러도, 총으로 콩콩 쏴봐도 — 아무런 반응이 없으니, 더는 어찌할 바가 없더라."</p>
   </div>
 
-
-
-  <!-- Ch 05 — 완성! 행마커 -->
-  <div class="sec-title" id="sec-hangmarker">Chapter 05</div>
-  <h2>완성! 행마커</h2>
-
-  <p>이번 출조에서 또 하나 확인한 것이 있다. 바로 <strong>행마커 완성형</strong>이다. 기존처럼 라인 끝 구간을 감으로만 처리하지 않고, 회수 마지막 구간에서 플라이의 상승 전환 지점을 더 명확하게 읽기 위해 표시를 따로 만들었다.</p>
-
-  <p>방법은 단순하다. 먼저 라인 표면에 <strong>POSCA 마커펜</strong>으로 색을 올려 시인성을 만들고, 그 위를 <strong>Loon UV Knot Sense</strong>로 얇게 감싸 마감했다. 핵심은 딱딱한 코팅이 아니라, 손가락과 가이드에 걸림이 적은 <strong>말랑말랑한 보호막</strong>을 만드는 것. 색은 눈에 띄고, 표면은 너무 거칠지 않아야 한다.</p>
-
-  <div class="marker-box">
-    <h3>행마커 제작 방식</h3>
-    <p class="marker-note">라인 회수 후반부, 즉 행 동작으로 들어가는 구간을 눈으로 확인하기 위한 표시. 단순한 장식이 아니라 수중 궤적을 읽기 위한 기준점이다.</p>
-
-    <div class="marker-process">
-      <div class="mp-item">
-        <div class="mp-step">Step 01</div>
-        <div class="mp-title">색 표시</div>
-        <div class="mp-desc">POSCA 마커펜으로 라인 위에 선명한 색을 올린다. 목적은 캐스팅 중 식별이 아니라 회수 말미의 위치 확인이다.</div>
-      </div>
-      <div class="mp-item">
-        <div class="mp-step">Step 02</div>
-        <div class="mp-title">UV 코팅</div>
-        <div class="mp-desc">UV Knot Sense를 얇게 발라 색이 벗겨지지 않도록 보호한다. 너무 두껍게 올리면 가이드 통과감이 나빠질 수 있다.</div>
-      </div>
-      <div class="mp-item">
-        <div class="mp-step">Step 03</div>
-        <div class="mp-title">실전 검증</div>
-        <div class="mp-desc">종일 사용해 본 결과, 밀림이나 벗겨짐 없이 유지됐다. 시인성도 충분했고 내구성도 기대 이상이었다.</div>
-      </div>
-    </div>
-
-    <div class="marker-gallery">
-      <div class="gallery-item" onclick="openLbHang(0)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang01.JPEG" alt="완성 행마커 01"></div>
-      <div class="gallery-item" onclick="openLbHang(1)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang02.JPEG" alt="완성 행마커 02"></div>
-      <div class="gallery-item" onclick="openLbHang(2)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang03.JPEG" alt="완성 행마커 03"></div>
-      <div class="gallery-item" onclick="openLbHang(3)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang04.JPEG" alt="완성 행마커 04"></div>
-    </div>
-
-    <div class="marker-verdict">
-      <p><strong>결론.</strong> POSCA 색 표시 + UV Knot Sense 마감은 실전용 행마커로 충분히 쓸 만하다. 하루 종일 사용해도 내구성은 유지됐고, 회수 말미의 위치 확인도 명확했다. 이제 행마커는 임시 표시가 아니라, 내 싱킹라인 운용의 기준 장치가 됐다.</p>
-    </div>
-  </div>
-
-  <p>행마커가 생기면 회수 마지막 구간이 달라진다. 어디쯤부터 라인이 급격히 세워지는지, 어디서부터 플라이가 바닥권에서 떠오르기 시작하는지, 그리고 바로 그 지점에서 입질이 나는지를 더 분명하게 기록할 수 있다. 결국 이것도 조과를 바로 늘리는 장치라기보다, <strong>다음 캐스팅을 더 정확하게 만드는 장치</strong>다.</p>
-
-
   <!-- CLOSING -->
   <div class="closing" id="sec-closing">
     <h3>Closing — 2026 시즌을 마치며</h3>
@@ -534,6 +504,75 @@ footer p{font-size:12px}
     <div class="gallery-item" onclick="openLbFly(6)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout07.JPEG" alt="Trout 07"></div>
     <div class="gallery-item" onclick="openLbFly(7)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout08.JPEG" alt="Trout 08"></div>
     <div class="gallery-item" onclick="openLbFly(8)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout09.JPEG" alt="Trout 09"></div>
+  </div>
+</section>
+
+<!-- 행마커 DIY -->
+<section class="gallery-section wrap" id="sec-hang">
+  <div class="sec-title">DIY · Tackle</div>
+  <h2>완성! 행마커</h2>
+  <p class="gs-sub">Posca 마커펜 + UV Knot Sense — 직접 만든 행마커, 종일 써봤습니다</p>
+
+  <!-- 행마커 소개 -->
+  <p style="font-size:14px;color:var(--ink-mid);line-height:1.85;margin:0 0 24px;padding:14px 18px;background:rgba(74,124,111,.06);border-left:3px solid var(--water);border-radius:0 6px 6px 0;">
+    <strong style="color:var(--ink);">행마커(Hang marker)</strong>란 라인의 특정 지점에 표시해 둔 작은 색상 마킹이다. 회수 중 마커가 로드 끝까지 다가오면 그 지점에서 라인을 멈추고 로드를 세워 플라이를 들어 올리는 — <strong style="color:var(--ink);">행(Hang) 동작</strong>의 신호로 쓴다. 라인 종류·수심층·캐스팅 거리에 따라 마커 위치를 달리 두면, 매 캐스팅마다 같은 수심을 같은 타이밍으로 공략할 수 있다. 일부 싱킹 라인에는 공장 표시가 들어 있지만, 직접 만들면 색상·간격·시인성을 원하는 대로 잡을 수 있다.
+  </p>
+
+  <!-- 4컷 가로 일렬 -->
+  <div class="hm-row">
+    <div class="gallery-item" onclick="openLbHang(0)">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang01.JPEG" alt="UV Knot Sense">
+    </div>
+    <div class="gallery-item" onclick="openLbHang(1)">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang02.JPEG" alt="UV Knot Sense 사용 안내">
+    </div>
+    <div class="gallery-item" onclick="openLbHang(2)">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang03.JPEG" alt="완성된 행마커">
+    </div>
+    <div class="gallery-item" onclick="openLbHang(3)">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang04.JPEG" alt="Posca 마커펜 도구">
+    </div>
+  </div>
+
+  <!-- 설명 카드 -->
+  <div class="hm-card">
+
+    <!-- 제작 공정 흐름 -->
+    <div class="hm-process">
+      <span class="hm-process-label">Process</span>
+      <div class="hm-flow">
+        <span class="hm-pill ink">Mono 코어</span>
+        <span class="hm-arrow">→</span>
+        <span class="hm-pill posca">Posca 마커펜</span>
+        <span class="hm-arrow">→</span>
+        <span class="hm-pill uv">UV Knot Sense</span>
+        <span class="hm-arrow">→</span>
+        <span class="hm-pill gold">완성</span>
+      </div>
+    </div>
+
+    <p>
+      <strong>Posca 마커펜으로 색을 입히고, UV Knot Sense로 코팅해 마무리</strong>했다. 결과물은 말랑말랑하면서도 제법 탄탄한 질감 — 라인에 단단히 고정되면서도 유연성은 그대로 유지됐다.
+    </p>
+    <p>
+      이날 종일 실전에서 사용해 봤다. <strong>내구성도 합격, 시인성도 합격.</strong> 손쉬운 제작에 비해 퍼포먼스가 상당히 만족스러웠다 — 이 방식으로 계속 가기로. ㅎㅎ
+    </p>
+
+    <!-- 평가 배지 3개 -->
+    <div class="hm-rate">
+      <div class="hm-rate-item ok">
+        <div class="hm-rate-mark">✓</div>
+        <div class="hm-rate-label">내구성</div>
+      </div>
+      <div class="hm-rate-item ok">
+        <div class="hm-rate-mark">✓</div>
+        <div class="hm-rate-label">시인성</div>
+      </div>
+      <div class="hm-rate-item gold">
+        <div class="hm-rate-mark">◎</div>
+        <div class="hm-rate-label">제작 난이도</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -564,6 +603,7 @@ footer p{font-size:12px}
 
 <script>
 const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508';
+const HANG_BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data';
 
 const LB_ITEMS = [
   {src:`${BASE}/0508-Hanter01.JPEG`, cap:'한터낚시터 · 2026.05.08 · 01'},
@@ -586,10 +626,10 @@ const FLY_ITEMS = [
 ];
 
 const HANG_ITEMS = [
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang01.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 01'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang02.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 02'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang03.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 03'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/0509-hang04.JPEG', cap:'완성! 행마커 · POSCA + UV Knot Sense · 04'},
+  {src:`${HANG_BASE}/0509-hang01.JPEG`, cap:'완성된 행마커 세트 · 01'},
+  {src:`${HANG_BASE}/0509-hang02.JPEG`, cap:'Posca 마커펜으로 색 입히기 · 02'},
+  {src:`${HANG_BASE}/0509-hang03.JPEG`, cap:'UV Knot Sense 마무리 · 03'},
+  {src:`${HANG_BASE}/0509-hang04.JPEG`, cap:'실전 사용 — 시인성 확인 · 04'},
 ];
 
 let lbIdx = 0;
@@ -633,8 +673,10 @@ function moveLb(dir){
 }
 function updateLb(){
   const mode = document.getElementById('lb').dataset.mode;
-  const items = mode === 'fly' ? FLY_ITEMS : (mode === 'hang' ? HANG_ITEMS : LB_ITEMS);
-  const idx   = mode === 'fly' ? flyIdx : (mode === 'hang' ? hangIdx : lbIdx);
+  let items, idx;
+  if(mode === 'fly'){ items = FLY_ITEMS; idx = flyIdx; }
+  else if(mode === 'hang'){ items = HANG_ITEMS; idx = hangIdx; }
+  else { items = LB_ITEMS; idx = lbIdx; }
   document.getElementById('lb-img').src = items[idx].src;
   document.getElementById('lb-cap').textContent = items[idx].cap + ' · ' + (idx+1) + ' / ' + items.length;
 }
@@ -647,7 +689,7 @@ document.addEventListener('keydown', e => {
 
 // ── sticky nav active ──
 const navLinks = document.querySelectorAll('.snl');
-const sections = ['sec-top','sec-summary','sec-series','sec-gear','sec-record','sec-hangmarker','sec-closing','sec-gallery'];
+const sections = ['sec-top','sec-summary','sec-series','sec-gear','sec-record','sec-closing','sec-gallery','sec-hang'];
 window.addEventListener('scroll', () => {
   let current = sections[0];
   sections.forEach(id => {
