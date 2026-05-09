@@ -8,581 +8,127 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink:       #1a1a1a;
-      --ink-mid:   #444;
-      --ink-soft:  #888;
-      --paper:     #f7f4ef;
-      --paper-2:   #eeeae2;
-      --water:     #4a7c6f;
-      --water-dk:  #2d5248;
-      --water-lt:  #a8c5be;
-      --accent:    #c0392b;
-      --accent-lt: #f5e6e5;
-      --gold:      #b8952a;
-      --rule:      #d6d0c4;
-      --shadow-sm: 0 4px 16px rgba(26,26,26,.08);
-      --shadow-md: 0 12px 36px rgba(26,26,26,.12);
-      --shadow-lg: 0 22px 60px rgba(26,26,26,.16);
+      --ink:#1a1a1a; --ink-mid:#444; --ink-soft:#888;
+      --paper:#f7f4ef; --paper-2:#eeeae2;
+      --water:#4a7c6f; --water-dk:#2d5248; --water-lt:#a8c5be;
+      --accent:#c0392b; --accent-lt:#f5e6e5;
+      --gold:#b8952a; --rule:#d6d0c4;
+      --shadow-sm:0 4px 16px rgba(26,26,26,.08);
+      --shadow-md:0 12px 36px rgba(26,26,26,.12);
+      --shadow-lg:0 22px 60px rgba(26,26,26,.16);
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Noto Sans KR', -apple-system, sans-serif;
-      line-height: 1.65;
-      color: var(--ink);
-      background-color: #e8e2d8;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.6'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.88'/%3E%3C/svg%3E");
-      background-size: 500px 500px;
-      min-height: 100vh;
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Noto Sans KR',-apple-system,sans-serif;
+      line-height:1.65;color:var(--ink);
+      background-color:#e8e2d8;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.6'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.88'/%3E%3C/svg%3E");
+      background-size:500px 500px;min-height:100vh;
     }
-
-    .wrap {
-      width: min(1160px, calc(100% - 40px));
-      margin: 0 auto;
+    .wrap{width:min(1160px,calc(100% - 40px));margin:0 auto}
+    .topbar{padding:24px 0 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:900;color:var(--water-dk);font-size:.95rem;letter-spacing:-.01em}
+    .brand-mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--water-dk),var(--water));color:white;display:grid;place-items:center;font-size:1rem;box-shadow:0 6px 18px rgba(45,82,72,.28);flex-shrink:0}
+    .top-note{font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+    header.hero{
+      position:relative;overflow:hidden;border-radius:28px;min-height:440px;
+      background:linear-gradient(90deg,rgba(26,26,26,.92) 0%,rgba(26,26,26,.72) 44%,rgba(26,26,26,.22) 100%),
+        url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter04.JPEG') center 50% / cover no-repeat;
+      box-shadow:var(--shadow-lg);color:white;display:grid;align-items:end;padding:44px;margin-bottom:22px;
     }
-
-    /* ── TOPBAR ── */
-    .topbar {
-      padding: 24px 0 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
+    header.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.28));pointer-events:none}
+    .hero-content{position:relative;z-index:1;max-width:680px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:6px 14px;border:1px solid rgba(168,197,190,.4);border-radius:999px;background:rgba(168,197,190,.12);backdrop-filter:blur(10px);font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+    .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--water-lt)}
+    header.hero h1{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(2.4rem,6vw,5rem);line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,.3)}
+    header.hero p{max-width:620px;font-size:clamp(.95rem,2vw,1.18rem);color:rgba(255,255,255,.8);letter-spacing:-.01em;text-shadow:0 2px 10px rgba(0,0,0,.22);line-height:1.7}
+    .hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{border:0;border-radius:999px;padding:11px 20px;font-family:'Noto Sans KR',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:transform .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--paper);color:var(--water-dk);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+    .btn-ghost{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.24)}
+    .dashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:38px}
+    .panel{background:rgba(247,244,239,.9);border:1px solid rgba(214,208,196,.6);border-radius:22px;box-shadow:var(--shadow-sm);backdrop-filter:blur(12px)}
+    .filters{padding:20px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end}
+    .field label{display:block;margin-bottom:7px;font-family:'DM Mono',monospace;font-size:.72rem;font-weight:500;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase}
+    select,input[type="text"]{width:100%;padding:10px 13px;border:1px solid var(--rule);border-radius:12px;background:white;color:var(--ink);font-family:'Noto Sans KR',sans-serif;font-size:.92rem;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
+    select:focus,input[type="text"]:focus{border-color:var(--water);box-shadow:0 0 0 3px rgba(74,124,111,.12)}
+    .stats{padding:20px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .stat-card{background:linear-gradient(180deg,#ffffff,#fbf7f0);border:1px solid rgba(214,208,196,.5);border-radius:16px;padding:16px 14px;text-align:center}
+    .stat-card .number{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1;color:var(--water-dk);letter-spacing:-.03em}
+    .stat-card .label{margin-top:7px;font-family:'DM Mono',monospace;color:var(--ink-soft);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px}
+    .section-head h2{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.04em;color:var(--water-dk)}
+    .result-count{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--ink-soft);letter-spacing:.06em;white-space:nowrap}
+    .logs-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .log-card{
+      grid-column:span 4;position:relative;overflow:hidden;border-radius:22px;
+      background-color:#faf7f2;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.2'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.7'/%3E%3C/svg%3E");
+      background-size:300px 300px;
+      border:1px solid rgba(214,208,196,.6);box-shadow:var(--shadow-sm);cursor:pointer;
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 900;
-      color: var(--water-dk);
-      font-size: .95rem;
-      letter-spacing: -.01em;
+    .log-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(74,124,111,.4)}
+    .log-card.featured{grid-column:span 8;display:grid;grid-template-columns:.95fr 1.05fr;min-height:340px;background:var(--water-dk);border-color:transparent}
+    .log-visual{height:148px;background:linear-gradient(135deg,rgba(45,82,72,.88),rgba(74,124,111,.72));display:flex;align-items:center;justify-content:center;font-size:3rem}
+    .log-card.featured .log-visual{min-height:100%;height:auto;background-size:cover;background-position:center}
+    .log-content{padding:22px}
+    .log-card.featured .log-content{padding:28px 28px 28px 24px}
+    .log-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+    .log-date{font-family:'DM Mono',monospace;font-size:.82rem;font-weight:500;color:var(--ink-mid);letter-spacing:.04em}
+    .log-card.featured .log-date{color:rgba(255,255,255,.65)}
+    .badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;letter-spacing:.08em;white-space:nowrap;background:rgba(184,149,42,.14);color:var(--gold)}
+    .log-card.featured .badge{background:rgba(168,197,190,.2);color:var(--water-lt)}
+    .log-title{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:1.12rem;line-height:1.38;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px}
+    .log-card.featured .log-title{font-size:clamp(1.3rem,2.8vw,1.85rem);color:white}
+    .log-location{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--water);font-weight:500;margin-bottom:10px;letter-spacing:.04em}
+    .log-card.featured .log-location{color:var(--water-lt)}
+    .log-summary{color:var(--ink-soft);font-size:.9rem;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .log-card.featured .log-summary{color:rgba(255,255,255,.68);font-size:.96rem;-webkit-line-clamp:5}
+    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+    .chip{border:1px solid var(--rule);border-radius:999px;padding:4px 9px;background:rgba(255,255,255,.55);font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink-mid);letter-spacing:.04em}
+    .log-card.featured .chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.78)}
+    .log-meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .log-card.featured .log-meta{border-color:rgba(255,255,255,.14)}
+    .metric strong{display:block;font-family:'DM Serif Display',serif;color:var(--water-dk);font-size:1.12rem}
+    .log-card.featured .metric strong{color:white}
+    .metric span{font-family:'DM Mono',monospace;color:var(--ink-soft);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+    .log-card.featured .metric span{color:rgba(255,255,255,.5)}
+    .empty-state{display:none;text-align:center;padding:80px 20px;color:var(--ink-soft);font-size:1rem}
+    .empty-state h3{font-weight:900;color:var(--ink-mid);font-size:1.3rem;margin:14px 0 8px}
+    footer{margin-top:64px;padding:32px 0 40px;border-top:1px solid var(--rule);text-align:center}
+    .ft-nav{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
+    .ft-nav a{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color .2s}
+    .ft-nav a:hover{color:var(--water)}
+    footer p{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--rule);letter-spacing:.08em}
+    @media(max-width:980px){
+      .dashboard{grid-template-columns:1fr}
+      .log-card{grid-column:span 6}
+      .log-card.featured{grid-column:span 12;grid-template-columns:1fr}
+      .log-card.featured .log-visual{height:220px;min-height:unset}
     }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--water-dk), var(--water));
-      color: white;
-      display: grid;
-      place-items: center;
-      font-size: 1rem;
-      box-shadow: 0 6px 18px rgba(45,82,72,.28);
-      flex-shrink: 0;
+    @media(max-width:720px){
+      .wrap{width:calc(100% - 28px)}
+      .topbar{flex-direction:column;align-items:flex-start;gap:6px}
+      header.hero{min-height:360px;padding:26px 22px 30px;border-radius:20px}
+      .dashboard{gap:12px}
+      .filters{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .log-card{grid-column:span 12}
+      .log-card.featured{grid-column:span 12;grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head .result-count{margin-top:6px;display:block}
     }
-
-    .top-note {
-      font-family: 'DM Mono', monospace;
-      font-size: .78rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    /* ── HERO ── */
-    header.hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      min-height: 440px;
-      background:
-        linear-gradient(90deg, rgba(26,26,26,.92) 0%, rgba(26,26,26,.72) 44%, rgba(26,26,26,.22) 100%),
-        url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0411/0411-View.JPEG') center 58% / cover no-repeat;
-      box-shadow: var(--shadow-lg);
-      color: white;
-      display: grid;
-      align-items: end;
-      padding: 44px;
-      margin-bottom: 22px;
-    }
-
-    header.hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 30%;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.28));
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 680px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 18px;
-      padding: 6px 14px;
-      border: 1px solid rgba(168,197,190,.4);
-      border-radius: 999px;
-      background: rgba(168,197,190,.12);
-      backdrop-filter: blur(10px);
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.88);
-    }
-
-    .eyebrow-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--water-lt);
-    }
-
-    header.hero h1 {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 16px;
-      text-shadow: 0 4px 24px rgba(0,0,0,.3);
-    }
-
-    header.hero p {
-      max-width: 620px;
-      font-size: clamp(.95rem, 2vw, 1.18rem);
-      color: rgba(255,255,255,.8);
-      letter-spacing: -.01em;
-      text-shadow: 0 2px 10px rgba(0,0,0,.22);
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 999px;
-      padding: 11px 20px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: .9rem;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: var(--paper);
-      color: var(--water-dk);
-      box-shadow: 0 8px 22px rgba(0,0,0,.2);
-    }
-
-    .btn-ghost {
-      background: rgba(255,255,255,.12);
-      color: white;
-      border: 1px solid rgba(255,255,255,.24);
-    }
-
-    /* ── DASHBOARD ── */
-    .dashboard {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 18px;
-      margin-bottom: 38px;
-    }
-
-    .panel {
-      background: rgba(247,244,239,.9);
-      border: 1px solid rgba(214,208,196,.6);
-      border-radius: 22px;
-      box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(12px);
-    }
-
-    /* ── FILTERS ── */
-    .filters {
-      padding: 20px 22px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      align-items: end;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem;
-      font-weight: 500;
-      color: var(--ink-soft);
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    select, input[type="text"] {
-      width: 100%;
-      padding: 10px 13px;
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      background: white;
-      color: var(--ink);
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: .92rem;
-      outline: none;
-      transition: border-color .2s, box-shadow .2s;
-      appearance: none;
-    }
-
-    select:focus, input[type="text"]:focus {
-      border-color: var(--water);
-      box-shadow: 0 0 0 3px rgba(74,124,111,.12);
-    }
-
-    /* ── STATS ── */
-    .stats {
-      padding: 20px 22px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .stat-card {
-      background: linear-gradient(180deg, #ffffff, #fbf7f0);
-      border: 1px solid rgba(214,208,196,.5);
-      border-radius: 16px;
-      padding: 16px 14px;
-      text-align: center;
-    }
-
-    .stat-card .number {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2rem;
-      line-height: 1;
-      color: var(--water-dk);
-      letter-spacing: -.03em;
-    }
-
-    .stat-card .label {
-      margin-top: 7px;
-      font-family: 'DM Mono', monospace;
-      color: var(--ink-soft);
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    /* ── SECTION HEAD ── */
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .section-head h2 {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      letter-spacing: -.04em;
-      color: var(--water-dk);
-    }
-
-    .result-count {
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      color: var(--ink-soft);
-      letter-spacing: .06em;
-      white-space: nowrap;
-    }
-
-    /* ── LOGS GRID ── */
-    .logs-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-    }
-
-    /* ── LOG CARD ── */
-    .log-card {
-      grid-column: span 4;
-      position: relative;
-      overflow: hidden;
-      border-radius: 22px;
-      background-color: #faf7f2;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.2'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.7'/%3E%3C/svg%3E");
-      background-size: 300px 300px;
-      border: 1px solid rgba(214,208,196,.6);
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-
-    .log-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(74,124,111,.4);
-    }
-
-    /* Featured (최신) */
-    .log-card.featured {
-      grid-column: span 8;
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      min-height: 340px;
-      background: var(--water-dk);
-      border-color: transparent;
-    }
-
-    .log-visual {
-      height: 148px;
-      background:
-        linear-gradient(135deg, rgba(45,82,72,.88), rgba(74,124,111,.72));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-
-    .log-card.featured .log-visual {
-      min-height: 100%;
-      height: auto;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .log-content { padding: 22px; }
-    .log-card.featured .log-content { padding: 28px 28px 28px 24px; }
-
-    .log-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .log-date {
-      font-family: 'DM Mono', monospace;
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--ink-mid);
-      letter-spacing: .04em;
-    }
-
-    .log-card.featured .log-date { color: rgba(255,255,255,.65); }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 3px 9px;
-      font-family: 'DM Mono', monospace;
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      white-space: nowrap;
-      background: rgba(184,149,42,.14);
-      color: var(--gold);
-    }
-
-    .log-card.featured .badge {
-      background: rgba(168,197,190,.2);
-      color: var(--water-lt);
-    }
-
-    .log-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 900;
-      font-size: 1.12rem;
-      line-height: 1.38;
-      letter-spacing: -.03em;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-
-    .log-card.featured .log-title {
-      font-size: clamp(1.3rem, 2.8vw, 1.85rem);
-      color: white;
-    }
-
-    .log-location {
-      font-family: 'DM Mono', monospace;
-      font-size: .78rem;
-      color: var(--water);
-      font-weight: 500;
-      margin-bottom: 10px;
-      letter-spacing: .04em;
-    }
-
-    .log-card.featured .log-location { color: var(--water-lt); }
-
-    .log-summary {
-      color: var(--ink-soft);
-      font-size: .9rem;
-      line-height: 1.65;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .log-card.featured .log-summary {
-      color: rgba(255,255,255,.68);
-      font-size: .96rem;
-      -webkit-line-clamp: 5;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 14px;
-    }
-
-    .chip {
-      border: 1px solid var(--rule);
-      border-radius: 999px;
-      padding: 4px 9px;
-      background: rgba(255,255,255,.55);
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem;
-      color: var(--ink-mid);
-      letter-spacing: .04em;
-    }
-
-    .log-card.featured .chip {
-      background: rgba(255,255,255,.1);
-      border-color: rgba(255,255,255,.18);
-      color: rgba(255,255,255,.78);
-    }
-
-    .log-meta {
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .log-card.featured .log-meta {
-      border-color: rgba(255,255,255,.14);
-    }
-
-    .metric strong {
-      display: block;
-      font-family: 'DM Serif Display', serif;
-      color: var(--water-dk);
-      font-size: 1.12rem;
-    }
-
-    .log-card.featured .metric strong { color: white; }
-
-    .metric span {
-      font-family: 'DM Mono', monospace;
-      color: var(--ink-soft);
-      font-size: .7rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .log-card.featured .metric span { color: rgba(255,255,255,.5); }
-
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      display: none;
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--ink-soft);
-      font-size: 1rem;
-    }
-
-    .empty-state h3 {
-      font-weight: 900;
-      color: var(--ink-mid);
-      font-size: 1.3rem;
-      margin: 14px 0 8px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      margin-top: 64px;
-      padding: 32px 0 40px;
-      border-top: 1px solid var(--rule);
-      text-align: center;
-    }
-
-    .ft-nav {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .ft-nav a {
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      text-decoration: none;
-      transition: color .2s;
-    }
-
-    .ft-nav a:hover { color: var(--water); }
-
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: .76rem;
-      color: var(--rule);
-      letter-spacing: .08em;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 980px) {
-      .dashboard { grid-template-columns: 1fr; }
-      .log-card { grid-column: span 6; }
-      .log-card.featured {
-        grid-column: span 12;
-        grid-template-columns: 1fr;
-      }
-      .log-card.featured .log-visual { height: 220px; min-height: unset; }
-    }
-
-    @media (max-width: 720px) {
-      .wrap { width: calc(100% - 28px); }
-      .topbar { flex-direction: column; align-items: flex-start; gap: 6px; }
-      header.hero {
-        min-height: 360px;
-        padding: 26px 22px 30px;
-        border-radius: 20px;
-      }
-      .dashboard { gap: 12px; }
-      .filters { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .log-card { grid-column: span 12; }
-      .log-card.featured { grid-column: span 12; grid-template-columns: 1fr; }
-      .section-head { display: block; }
-      .section-head .result-count { margin-top: 6px; display: block; }
-    }
-
-    @media (max-width: 480px) {
-      header.hero h1 { font-size: 2.1rem; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
+    @media(max-width:480px){
+      header.hero h1{font-size:2.1rem}
+      .hero-actions{flex-direction:column;align-items:flex-start}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- TOPBAR -->
     <div class="topbar">
       <div class="brand">
         <span class="brand-mark">🎣</span>
@@ -590,8 +136,6 @@
       </div>
       <span class="top-note">Stillwater · Trout · Tactics Archive</span>
     </div>
-
-    <!-- HERO -->
     <header class="hero">
       <div class="hero-content">
         <div class="eyebrow">
@@ -606,8 +150,6 @@
         </div>
       </div>
     </header>
-
-    <!-- DASHBOARD -->
     <section class="dashboard">
       <div class="panel filters">
         <div class="field">
@@ -629,7 +171,6 @@
           <input type="text" id="searchInput" placeholder="패턴, 장소, 메모 검색…">
         </div>
       </div>
-
       <div class="panel stats">
         <div class="stat-card"><div class="number" id="totalLogs">0</div><div class="label">총 조행</div></div>
         <div class="stat-card"><div class="number" id="totalCatch">0</div><div class="label">총 캐치</div></div>
@@ -637,13 +178,9 @@
         <div class="stat-card"><div class="number" id="avgCatch">0</div><div class="label">평균</div></div>
       </div>
     </section>
-
-    <!-- LOGS -->
     <section id="logs">
       <div class="section-head">
-        <div>
-          <h2>조행 기록</h2>
-        </div>
+        <div><h2>조행 기록</h2></div>
         <span class="result-count" id="resultCount"></span>
       </div>
       <div class="logs-grid" id="logsGrid"></div>
@@ -653,8 +190,6 @@
         <p>필터나 검색어를 조정해 보십시오.</p>
       </div>
     </section>
-
-    <!-- FOOTER -->
     <footer>
       <div class="ft-nav">
         <a href="index.html">Home</a>
@@ -663,14 +198,12 @@
       </div>
       <p>© 2026 CADDIS-GR · 낚시대장</p>
     </footer>
-
-  </div><!-- /wrap -->
+  </div>
 
   <script>
     const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/';
 
     const logsData = [
-      // ── 2026 시즌 ──────────────────────────────────────────
       {
         id: '2026-05-08-hanter',
         date: '2026-05-08',
@@ -815,7 +348,6 @@
         file: 'logs/2026-02-14_hanter.html',
         thumbnail: 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/HanTer.JPEG'
       },
-      // ── 이전 시즌 ──────────────────────────────────────────
       {
         id: '2024-11-15-hanteo',
         date: '2025-11-15',
@@ -824,4 +356,185 @@
         temp: 5,
         waterTemp: 8,
         season: 'fall',
-        summary: '한터지의 핵심은
+        summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략.',
+        patterns: ['Vampire Leech', 'Chironomid'],
+        species: ['무지개송어'],
+        catch: 15,
+        notes: '6m 수심, 바닥 공략이 핵심',
+        file: 'logs/2024-11-15-hanteo.html',
+        thumbnail: null
+      },
+      {
+        id: '2024-11-29-singisa',
+        date: '2025-11-29',
+        location: '신기낚시터',
+        weather: '☁️',
+        temp: 3,
+        waterTemp: 6,
+        season: 'fall',
+        summary: '늦가을 신기사 공략. 저수온 대응 전략.',
+        patterns: ['Streamer', 'Nymph'],
+        species: ['무지개송어'],
+        catch: 12,
+        notes: '저수온기 스트리머 공략',
+        file: 'logs/2024-11-29-singisa.html',
+        thumbnail: null
+      },
+      {
+        id: '2024-12-13-singisa',
+        date: '2025-12-13',
+        location: '신기낚시터',
+        weather: '❄️',
+        temp: -2,
+        waterTemp: 4,
+        season: 'winter',
+        summary: '겨울 신기사 재방문. 한파 속 송어 공략.',
+        patterns: ['Woolly Bugger', 'Leech'],
+        species: ['무지개송어', '산천어'],
+        catch: 8,
+        notes: '한파 대응, 바닥 집중',
+        file: 'logs/2024-12-13-singisa.html',
+        thumbnail: null
+      },
+      {
+        id: '2024-12-20-hanteo',
+        date: '2025-12-20',
+        location: '용인 한터낚시터',
+        weather: '⛅',
+        temp: 0,
+        waterTemp: 5,
+        season: 'winter',
+        summary: '겨울 한터지 재공략. Deep Lining 검증.',
+        patterns: ['Chironomid', 'Bloodworm'],
+        species: ['무지개송어'],
+        catch: 18,
+        notes: 'Deep Lining 효과 재확인',
+        file: 'logs/2024-12-20-hanteo.html',
+        thumbnail: null
+      },
+      {
+        id: '2025-01-04-singisa',
+        date: '2026-01-04',
+        location: '신기낚시터',
+        weather: '☀️',
+        temp: -5,
+        waterTemp: 3,
+        season: 'winter',
+        summary: '2025년 첫 조행. 강추위 속 신기사 공략.',
+        patterns: ['Streamer #8', 'Leech'],
+        species: ['무지개송어'],
+        catch: 10,
+        notes: '강추위, 느린 리트리브',
+        file: 'logs/2025-01-04-singisa.html',
+        thumbnail: null
+      }
+    ];
+
+    logsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let filteredLogs = [...logsData];
+
+    function initPage() {
+      const latestYear = new Date(logsData[0].date).getFullYear();
+      document.getElementById('eyebrowYear').textContent = latestYear;
+      updateStats();
+      populateLocationFilter();
+      renderLogs();
+    }
+
+    function updateStats() {
+      document.getElementById('totalLogs').textContent = logsData.length;
+      const totalCatch = logsData.reduce((s, l) => s + l.catch, 0);
+      document.getElementById('totalCatch').textContent = totalCatch;
+      const locs = new Set(logsData.map(l => l.location));
+      document.getElementById('totalLocations').textContent = locs.size;
+      const avg = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
+      document.getElementById('avgCatch').textContent = avg;
+    }
+
+    function populateLocationFilter() {
+      const locations = [...new Set(logsData.map(l => l.location))];
+      const sel = document.getElementById('locationFilter');
+      locations.forEach(loc => {
+        const opt = document.createElement('option');
+        opt.value = loc; opt.textContent = loc;
+        sel.appendChild(opt);
+      });
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+      return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0') + ' ' + days[d.getDay()];
+    }
+
+    function getSeasonLabel(s) {
+      return {spring:'Spring',summer:'Summer',fall:'Fall',winter:'Winter'}[s] || s;
+    }
+
+    function truncate(str, n) {
+      const clean = str.replace(/["""]/g,'').split('—')[0].trim();
+      return clean.length > n ? clean.slice(0, n) + '…' : clean;
+    }
+
+    function renderLogs() {
+      const grid = document.getElementById('logsGrid');
+      const empty = document.getElementById('emptyState');
+      const count = document.getElementById('resultCount');
+      count.textContent = filteredLogs.length + '건';
+      if (filteredLogs.length === 0) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+      grid.style.display = 'grid';
+      empty.style.display = 'none';
+      grid.innerHTML = filteredLogs.map((log, idx) => {
+        const isFeatured = idx === 0 && log.id === logsData[0].id;
+        const visualStyle = isFeatured
+          ? log.thumbnail
+            ? 'style="background-image:linear-gradient(180deg,rgba(26,26,26,.12),rgba(26,26,26,.38)),url(\'' + log.thumbnail + '\');background-size:cover;background-position:center;"'
+            : 'style="background:linear-gradient(135deg,var(--water-dk),var(--water));"'
+          : '';
+        const badgeText = isFeatured ? 'NEWEST' : getSeasonLabel(log.season);
+        return '<article class="log-card' + (isFeatured ? ' featured' : '') + '" onclick="location.href=\'' + log.file + '\'">'
+          + '<div class="log-visual" ' + visualStyle + '>' + (isFeatured ? '' : log.weather) + '</div>'
+          + '<div class="log-content">'
+          + '<div class="log-top"><span class="log-date">' + formatDate(log.date) + '</span><span class="badge">' + badgeText + '</span></div>'
+          + '<h3 class="log-title">' + (isFeatured ? truncate(log.summary, 42) : log.catch + '수 · ' + truncate(log.summary, 28)) + '</h3>'
+          + '<div class="log-location">📍 ' + log.location + '</div>'
+          + '<p class="log-summary">' + log.summary + '</p>'
+          + '<div class="chips"><span class="chip">' + (log.patterns[0] || 'Pattern') + '</span><span class="chip">' + log.weather + ' ' + log.temp + '°C</span><span class="chip">' + (log.species[0] || '어종') + '</span></div>'
+          + '<div class="log-meta">'
+          + '<div class="metric"><strong>' + log.temp + '°C</strong><span>기온</span></div>'
+          + '<div class="metric"><strong>' + (log.waterTemp != null ? log.waterTemp + '°C' : '—') + '</strong><span>수온</span></div>'
+          + '<div class="metric"><strong>' + log.catch + '</strong><span>조과</span></div>'
+          + '</div></div></article>';
+      }).join('');
+    }
+
+    document.getElementById('seasonFilter').addEventListener('change', applyFilters);
+    document.getElementById('locationFilter').addEventListener('change', applyFilters);
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+    function applyFilters() {
+      const season = document.getElementById('seasonFilter').value;
+      const location = document.getElementById('locationFilter').value;
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      filteredLogs = logsData.filter(log => {
+        const mSeason   = season === 'all' || log.season === season;
+        const mLocation = location === 'all' || log.location === location;
+        const mSearch   = search === '' ||
+          log.summary.toLowerCase().includes(search) ||
+          (log.notes || '').toLowerCase().includes(search) ||
+          log.patterns.some(p => p.toLowerCase().includes(search)) ||
+          log.species.some(s => s.toLowerCase().includes(search)) ||
+          log.location.toLowerCase().includes(search);
+        return mSeason && mLocation && mSearch;
+      });
+      renderLogs();
+    }
+
+    initPage();
+  </script>
+</body>
+</html>
