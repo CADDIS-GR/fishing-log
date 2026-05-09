@@ -42,8 +42,10 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   position:relative;min-height:92vh;display:flex;flex-direction:column;
   justify-content:flex-end;padding:0 0 64px;overflow:hidden;
   background:linear-gradient(165deg,#1a3a32 0%,#2d5248 40%,#1a2a24 100%);
+  background-image:url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter04.JPEG');
+  background-size:cover;background-position:center;
 }
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,45,38,.2) 0%,rgba(10,20,15,.65) 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,25,20,.45) 0%,rgba(5,15,10,.78) 100%)}
 .hero>*{position:relative;z-index:1}
 .hero-inner{padding:0 48px;margin-bottom:0}
 .hero-avatar{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-top:48px}
@@ -264,7 +266,7 @@ footer p{font-size:12px}
     </div>
   </div>
   <div class="summary-verdict">
-    <strong>역대급 어려운 날.</strong> 송어는 바닥으로 깊게 내려앉아 먹이활동을 극도로 제한했다. 칼도 총도 통하지 않는 날이었지만 — 그나마 경험이 바텀으로 이끌었고, 두 자리 수를 지켰다. 오늘은 <strong>플로팅 인디케이터 채비의 완승을 인정</strong>하는 날이기도 하다.
+    <strong>역대급 어려운 날.</strong> 송어는 바닥으로 깊게 내려앉아 먹이활동을 극도로 제한했다. 그나마 경험이 바텀으로 이끌었고, 두 자리 수를 지켰다. 오늘은 <strong>플로팅 인디케이터 채비가 유효했음을 인정</strong>하는 날이기도 하다.
   </div>
 </div>
 
@@ -320,7 +322,7 @@ footer p{font-size:12px}
   <div class="sec-title" id="sec-gear">Chapter 02</div>
   <h2>채비 라인업 — 5세트의 성적표</h2>
 
-  <p>이날의 결론부터 말하면 — <strong>바텀 외 모든 채비는 실질적으로 무효</strong>였다. Chironomid Larva·Pupa 등 근래 장원급 반응을 보이던 패턴들에 단 한 번의 반응도 없었다는 것이 이날의 핵심이다.</p>
+  <p>이날의 결론부터 말하면 — <strong>Titan 3D 외 채비는 실질적으로 무반응</strong>이었다. Chironomid Larva·Pupa 등 근래 장원급 반응을 보이던 패턴들에 단 한 번의 반응도 없었다는 것이 이날의 핵심이다.</p>
 
   <div class="gear-box">
     <h3>5 · 08 채비 성적표</h3>
@@ -344,7 +346,7 @@ footer p{font-size:12px}
       <span class="gl-label gl-top">HOVER</span>
       <div class="gear-info">
         <strong>SA Sonar Stillwater Hover WF5-H + Sage DS2 690-2 — 표층</strong>
-        <span>새벽 표층 탐색 · 쎄한 수면창에 일찌감치 포기</span>
+        <span>새벽 표층 탐색 · CamoLux와 교대 30~40분 후 포기</span>
         <div><span class="gear-result gr-dead">✗ 완전 무반응</span></div>
       </div>
     </div>
@@ -416,18 +418,15 @@ footer p{font-size:12px}
   <!-- 갤러리 스플릿 -->
   <div class="gallery-split">
     <div class="gallery-split-left">
-      <div class="gallery-item sq" onclick="openLb(0)">
-        <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-01.JPEG"
-             alt="트라우트 1" onerror="this.style.background='#2d5248';this.alt=''"> <!-- URL 확인 필요 -->
+      <div class="gallery-item sq" onclick="openLbFly(1)">
+        <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout02.JPEG" alt="트라우트">
       </div>
-      <div class="gallery-item sq" onclick="openLb(1)">
-        <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Counter.PNG"
-             alt="카운터 12수" onerror="this.style.background='#1a3a32';this.alt=''"> <!-- URL 확인 필요 -->
+      <div class="gallery-item sq" onclick="openLb(0)">
+        <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter01.JPEG" alt="한터낚시터">
       </div>
     </div>
-    <div class="gallery-item featured" onclick="openLb(2)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-02.JPEG"
-           alt="트라우트 피처드" onerror="this.style.background='#1a2a24';this.alt=''"> <!-- URL 확인 필요 -->
+    <div class="gallery-item featured" onclick="openLbFly(0)">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout01.JPEG" alt="트라우트 피처드">
     </div>
   </div>
 
@@ -454,33 +453,37 @@ footer p{font-size:12px}
 </main>
 
 <!-- ── 갤러리 ── -->
+<!-- 트라우트 갤러리 -->
 <section class="gallery-section wrap" id="sec-gallery">
+  <div class="sec-title">Best Hook Gallery</div>
+  <h2>트라우트</h2>
+  <p class="gs-sub">2026 · 05 · 08 · Titan 3D 바텀 · 전량</p>
+  <div class="g3">
+    <div class="gallery-item" onclick="openLbFly(0)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout01.JPEG" alt="Trout 01"></div>
+    <div class="gallery-item" onclick="openLbFly(1)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout02.JPEG" alt="Trout 02"></div>
+    <div class="gallery-item" onclick="openLbFly(2)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout03.JPEG" alt="Trout 03"></div>
+    <div class="gallery-item" onclick="openLbFly(3)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout04.JPEG" alt="Trout 04"></div>
+    <div class="gallery-item" onclick="openLbFly(4)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout05.JPEG" alt="Trout 05"></div>
+    <div class="gallery-item" onclick="openLbFly(5)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout06.JPEG" alt="Trout 06"></div>
+    <div class="gallery-item" onclick="openLbFly(6)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout07.JPEG" alt="Trout 07"></div>
+    <div class="gallery-item" onclick="openLbFly(7)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout08.JPEG" alt="Trout 08"></div>
+    <div class="gallery-item" onclick="openLbFly(8)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout09.JPEG" alt="Trout 09"></div>
+  </div>
+</section>
+
+<!-- 현장 갤러리 -->
+<section class="gallery-section wrap">
   <div class="sec-title">Field Gallery</div>
   <h2>현장 스케치</h2>
   <p class="gs-sub">2026 · 05 · 08 한터낚시터</p>
   <div class="g3">
-    <div class="gallery-item" onclick="openLb(0)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Field-01.JPEG"
-           alt="현장 1" onerror="this.style.background='#2d3a30';this.style.aspectRatio='1'"> <!-- URL 확인 필요 -->
-    </div>
-    <div class="gallery-item" onclick="openLb(1)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Field-02.JPEG"
-           alt="현장 2" onerror="this.style.background='#3a3028';this.style.aspectRatio='1'"> <!-- URL 확인 필요 -->
-    </div>
-    <div class="gallery-item" onclick="openLb(2)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-01.JPEG"
-           alt="트라우트" onerror="this.style.background='#2a3a38';this.style.aspectRatio='1'"> <!-- URL 확인 필요 -->
-    </div>
+    <div class="gallery-item" onclick="openLb(0)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter01.JPEG" alt="한터 01"></div>
+    <div class="gallery-item" onclick="openLb(1)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter02.JPEG" alt="한터 02"></div>
+    <div class="gallery-item" onclick="openLb(2)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter03.JPEG" alt="한터 03"></div>
   </div>
   <div class="g-bottom">
-    <div class="gallery-item tall" onclick="openLb(3)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-02.JPEG"
-           alt="트라우트 2" onerror="this.style.background='#1a2a24'"> <!-- URL 확인 필요 -->
-    </div>
-    <div class="gallery-item wide" onclick="openLb(4)">
-      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Counter.PNG"
-           alt="카운터" onerror="this.style.background='#2a2020'"> <!-- URL 확인 필요 -->
-    </div>
+    <div class="gallery-item tall" onclick="openLb(3)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter04.JPEG" alt="한터 04"></div>
+    <div class="gallery-item wide" onclick="openLb(4)"><img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Counter.PNG" alt="카운터 12수"></div>
   </div>
 </section>
 
@@ -494,14 +497,30 @@ footer p{font-size:12px}
 </div>
 
 <script>
+const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508';
+
 const LB_ITEMS = [
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Field-01.JPEG', cap:'한터낚시터 · 2026.05.08'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Field-02.JPEG', cap:'한터낚시터 · 2026.05.08'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-01.JPEG', cap:'Rainbow Trout · Titan 3D 바텀'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Trout-02.JPEG', cap:'Rainbow Trout · Titan 3D 바텀'},
-  {src:'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Counter.PNG',   cap:'Final Count · 12수'},
+  {src:`${BASE}/0508-Hanter01.JPEG`, cap:'한터낚시터 · 2026.05.08 · 01'},
+  {src:`${BASE}/0508-Hanter02.JPEG`, cap:'한터낚시터 · 2026.05.08 · 02'},
+  {src:`${BASE}/0508-Hanter03.JPEG`, cap:'한터낚시터 · 2026.05.08 · 03'},
+  {src:`${BASE}/0508-Hanter04.JPEG`, cap:'한터낚시터 · 2026.05.08 · 04'},
+  {src:`${BASE}/0508-Counter.PNG`,   cap:'Final Count · 12수 · 풀세트'},
 ];
+
+const FLY_ITEMS = [
+  {src:`${BASE}/0508-Trout01.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 01'},
+  {src:`${BASE}/0508-Trout02.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 02'},
+  {src:`${BASE}/0508-Trout03.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 03'},
+  {src:`${BASE}/0508-Trout04.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 04'},
+  {src:`${BASE}/0508-Trout05.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 05'},
+  {src:`${BASE}/0508-Trout06.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 06'},
+  {src:`${BASE}/0508-Trout07.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 07'},
+  {src:`${BASE}/0508-Trout08.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 08'},
+  {src:`${BASE}/0508-Trout09.JPEG`, cap:'Rainbow Trout · Titan 3D 바텀 · 09'},
+];
+
 let lbIdx = 0;
+let flyIdx = 0;
 
 function openLb(i){
   lbIdx = i;
@@ -510,16 +529,31 @@ function openLb(i){
   lb.classList.add('open');
   updateLb();
 }
+function openLbFly(i){
+  flyIdx = i;
+  const lb = document.getElementById('lb');
+  lb.dataset.mode = 'fly';
+  lb.classList.add('open');
+  updateLb();
+}
 function closeLb(){
   document.getElementById('lb').classList.remove('open');
 }
 function moveLb(dir){
-  lbIdx = (lbIdx + dir + LB_ITEMS.length) % LB_ITEMS.length;
+  const mode = document.getElementById('lb').dataset.mode;
+  if(mode === 'fly'){
+    flyIdx = (flyIdx + dir + FLY_ITEMS.length) % FLY_ITEMS.length;
+  } else {
+    lbIdx = (lbIdx + dir + LB_ITEMS.length) % LB_ITEMS.length;
+  }
   updateLb();
 }
 function updateLb(){
-  document.getElementById('lb-img').src = LB_ITEMS[lbIdx].src;
-  document.getElementById('lb-cap').textContent = LB_ITEMS[lbIdx].cap + ' · ' + (lbIdx+1) + ' / ' + LB_ITEMS.length;
+  const mode = document.getElementById('lb').dataset.mode;
+  const items = mode === 'fly' ? FLY_ITEMS : LB_ITEMS;
+  const idx   = mode === 'fly' ? flyIdx : lbIdx;
+  document.getElementById('lb-img').src = items[idx].src;
+  document.getElementById('lb-cap').textContent = items[idx].cap + ' · ' + (idx+1) + ' / ' + items.length;
 }
 document.addEventListener('keydown', e => {
   if(!document.getElementById('lb').classList.contains('open')) return;
