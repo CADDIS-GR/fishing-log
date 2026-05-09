@@ -670,6 +670,23 @@
     const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/';
 
     const logsData = [
+      // ── 2026 시즌 ──────────────────────────────────────────
+      {
+        id: '2026-05-08-hanter',
+        date: '2026-05-08',
+        location: '용인 한터낚시터',
+        weather: '☀️💨',
+        temp: 22,
+        waterTemp: null,
+        season: 'spring',
+        summary: '"겸손은.... 힘들다!!" — 호기롭게 나선 평일 출조. 송어는 바닥으로 깊게 내려앉아 먹이활동 극도 제한. Titan 3D 외 채비 실질적 무반응. Chironomid 라바·퓨파 전량 무효. 플로팅 인디케이터 채비 유효 인정. 12수.',
+        patterns: ['Titan 3D 바텀', 'Chironomid Larva/Pupa — 무반응'],
+        species: ['무지개송어'],
+        catch: 12,
+        notes: '평일 극저활성, 바텀 전량, Chironomid 무반응, 플로팅 인디케이터 유효 인정, Sink Tip 판단 보류',
+        file: 'logs/2026-05-08-hanter-report.html',
+        thumbnail: BASE + '0508/0508-Hanter04.JPEG'
+      },
       {
         id: '2026-05-01-hanter',
         date: '2026-05-01',
@@ -798,6 +815,7 @@
         file: 'logs/2026-02-14_hanter.html',
         thumbnail: 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/HanTer.JPEG'
       },
+      // ── 이전 시즌 ──────────────────────────────────────────
       {
         id: '2024-11-15-hanteo',
         date: '2025-11-15',
@@ -806,210 +824,4 @@
         temp: 5,
         waterTemp: 8,
         season: 'fall',
-        summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략',
-        patterns: ['Vampire Leech', 'Chironomid'],
-        species: ['무지개송어'],
-        catch: 15,
-        notes: '6m 수심, 바닥 공략이 핵심',
-        file: 'logs/2024-11-15-hanteo.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-11-29-singisa',
-        date: '2025-11-29',
-        location: '신기낚시터',
-        weather: '☁️',
-        temp: 3,
-        waterTemp: 6,
-        season: 'fall',
-        summary: '늦가을 신기사 공략. 저수온 대응 전략',
-        patterns: ['Streamer', 'Nymph'],
-        species: ['무지개송어'],
-        catch: 12,
-        notes: '저수온기 스트리머 공략',
-        file: 'logs/2024-11-29-singisa.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-12-13-singisa',
-        date: '2025-12-13',
-        location: '신기낚시터',
-        weather: '❄️',
-        temp: -2,
-        waterTemp: 4,
-        season: 'winter',
-        summary: '겨울 신기사 재방문. 한파 속 송어 공략',
-        patterns: ['Woolly Bugger', 'Leech'],
-        species: ['무지개송어', '산천어'],
-        catch: 8,
-        notes: '한파 대응, 바닥 집중',
-        file: 'logs/2024-12-13-singisa.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-12-20-hanteo',
-        date: '2025-12-20',
-        location: '용인 한터낚시터',
-        weather: '⛅',
-        temp: 0,
-        waterTemp: 5,
-        season: 'winter',
-        summary: '겨울 한터지 재공략. Deep Lining 검증',
-        patterns: ['Chironomid', 'Bloodworm'],
-        species: ['무지개송어'],
-        catch: 18,
-        notes: 'Deep Lining 효과 재확인',
-        file: 'logs/2024-12-20-hanteo.html',
-        thumbnail: null
-      },
-      {
-        id: '2025-01-04-singisa',
-        date: '2026-01-04',
-        location: '신기낚시터',
-        weather: '☀️',
-        temp: -5,
-        waterTemp: 3,
-        season: 'winter',
-        summary: '2025년 첫 조행. 강추위 속 신기사 공략',
-        patterns: ['Streamer #8', 'Leech'],
-        species: ['무지개송어'],
-        catch: 10,
-        notes: '강추위, 느린 리트리브',
-        file: 'logs/2025-01-04-singisa.html',
-        thumbnail: null
-      }
-    ];
-
-    // ── 정렬 & 초기화 ──
-    logsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-    let filteredLogs = [...logsData];
-
-    function initPage() {
-      // eyebrow 연도 자동화
-      const latestYear = new Date(logsData[0].date).getFullYear();
-      document.getElementById('eyebrowYear').textContent = latestYear;
-
-      updateStats();
-      populateLocationFilter();
-      renderLogs();
-    }
-
-    function updateStats() {
-      document.getElementById('totalLogs').textContent = logsData.length;
-      const totalCatch = logsData.reduce((s, l) => s + l.catch, 0);
-      document.getElementById('totalCatch').textContent = totalCatch;
-      const locs = new Set(logsData.map(l => l.location));
-      document.getElementById('totalLocations').textContent = locs.size;
-      const avg = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
-      document.getElementById('avgCatch').textContent = avg;
-    }
-
-    function populateLocationFilter() {
-      const locations = [...new Set(logsData.map(l => l.location))];
-      const sel = document.getElementById('locationFilter');
-      locations.forEach(loc => {
-        const opt = document.createElement('option');
-        opt.value = loc; opt.textContent = loc;
-        sel.appendChild(opt);
-      });
-    }
-
-    function formatDate(dateStr) {
-      const d = new Date(dateStr + 'T00:00:00');
-      const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-      return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${days[d.getDay()]}`;
-    }
-
-    function getSeasonLabel(s) {
-      return { spring:'Spring', summer:'Summer', fall:'Fall', winter:'Winter' }[s] || s;
-    }
-
-    function truncate(str, n) {
-      const clean = str.replace(/["""]/g,'').split('—')[0].trim();
-      return clean.length > n ? clean.slice(0, n) + '…' : clean;
-    }
-
-    // ── 카드 렌더 ──
-    function renderLogs() {
-      const grid = document.getElementById('logsGrid');
-      const empty = document.getElementById('emptyState');
-      const count = document.getElementById('resultCount');
-
-      count.textContent = `${filteredLogs.length}건`;
-
-      if (filteredLogs.length === 0) {
-        grid.style.display = 'none';
-        empty.style.display = 'block';
-        return;
-      }
-
-      grid.style.display = 'grid';
-      empty.style.display = 'none';
-
-      grid.innerHTML = filteredLogs.map((log, idx) => {
-        const isFeatured = idx === 0 && log.id === logsData[0].id;
-
-        // featured: thumbnail 연동, 없으면 그라디언트 fallback
-        const visualStyle = isFeatured
-          ? log.thumbnail
-            ? `style="background-image: linear-gradient(180deg, rgba(26,26,26,.12), rgba(26,26,26,.38)), url('${log.thumbnail}'); background-size:cover; background-position:center;"`
-            : `style="background: linear-gradient(135deg, var(--water-dk), var(--water));"`
-          : '';
-
-        const badgeText = isFeatured ? 'NEWEST' : getSeasonLabel(log.season);
-
-        return `
-          <article class="log-card${isFeatured ? ' featured' : ''}" onclick="location.href='${log.file}'">
-            <div class="log-visual" ${visualStyle}>${isFeatured ? '' : log.weather}</div>
-            <div class="log-content">
-              <div class="log-top">
-                <span class="log-date">${formatDate(log.date)}</span>
-                <span class="badge">${badgeText}</span>
-              </div>
-              <h3 class="log-title">${isFeatured ? truncate(log.summary, 42) : log.catch + '수 · ' + truncate(log.summary, 28)}</h3>
-              <div class="log-location">📍 ${log.location}</div>
-              <p class="log-summary">${log.summary}</p>
-              <div class="chips">
-                <span class="chip">${log.patterns[0] || 'Pattern'}</span>
-                <span class="chip">${log.weather} ${log.temp}°C</span>
-                <span class="chip">${log.species[0] || '어종'}</span>
-              </div>
-              <div class="log-meta">
-                <div class="metric"><strong>${log.temp}°C</strong><span>기온</span></div>
-                <div class="metric"><strong>${log.waterTemp != null ? log.waterTemp + '°C' : '—'}</strong><span>수온</span></div>
-                <div class="metric"><strong>${log.catch}</strong><span>조과</span></div>
-              </div>
-            </div>
-          </article>`;
-      }).join('');
-    }
-
-    // ── 필터 ──
-    document.getElementById('seasonFilter').addEventListener('change', applyFilters);
-    document.getElementById('locationFilter').addEventListener('change', applyFilters);
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
-
-    function applyFilters() {
-      const season = document.getElementById('seasonFilter').value;
-      const location = document.getElementById('locationFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase().trim();
-
-      filteredLogs = logsData.filter(log => {
-        const mSeason   = season === 'all' || log.season === season;
-        const mLocation = location === 'all' || log.location === location;
-        const mSearch   = search === '' ||
-          log.summary.toLowerCase().includes(search) ||
-          (log.notes || '').toLowerCase().includes(search) ||
-          log.patterns.some(p => p.toLowerCase().includes(search)) ||
-          log.species.some(s => s.toLowerCase().includes(search)) ||
-          log.location.toLowerCase().includes(search);
-        return mSeason && mLocation && mSearch;
-      });
-
-      renderLogs();
-    }
-
-    initPage();
-  </script>
-</body>
-</html>
+        summary: '한터지의 핵심은
