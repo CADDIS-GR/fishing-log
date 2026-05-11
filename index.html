@@ -147,6 +147,7 @@
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="document.getElementById('logs').scrollIntoView({behavior:'smooth'})">최근 조행 보기</button>
           <button class="btn btn-ghost" onclick="document.getElementById('searchInput').focus()">패턴 검색 →</button>
+          <button class="btn btn-ghost" onclick="location.href='logs/2026-season-review-v2.html'">📖 시즌 리뷰</button>
         </div>
       </div>
     </header>
@@ -183,6 +184,25 @@
         <div><h2>조행 기록</h2></div>
         <span class="result-count" id="resultCount"></span>
       </div>
+      <!-- Season Review Banner -->
+      <div onclick="location.href='logs/2026-season-review-v2.html'" style="
+        cursor:pointer; margin-bottom:22px; border-radius:22px; overflow:hidden;
+        background:linear-gradient(90deg,var(--water-dk) 0%,var(--water) 100%);
+        border:1px solid rgba(74,124,111,.3);
+        box-shadow:var(--shadow-sm);
+        display:grid; grid-template-columns:1fr auto;
+        align-items:center; padding:28px 32px; gap:20px;
+        transition:transform .2s, box-shadow .2s;
+      " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(26,26,26,.16)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(168,197,190,.7);margin-bottom:10px;">2024–2026 · Season Review</div>
+          <div style="font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.5vw,1.5rem);color:white;letter-spacing:-.03em;margin-bottom:8px;">바닥에서 전층으로 — 2026 시즌 복기</div>
+          <div style="font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.6;">바닥 공략 확립 · 컬러 로테이션 · 마이크로 님핑 · 전층 운영 체계 · Hang 기법 · 플로팅 재인정</div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.1em;color:rgba(168,197,190,.8);white-space:nowrap;display:flex;align-items:center;gap:8px;">
+          읽기 →
+        </div>
+      </div>
       <div class="logs-grid" id="logsGrid"></div>
       <div class="empty-state" id="emptyState">
         <div style="font-size:3rem">🎣</div>
@@ -195,6 +215,7 @@
         <a href="index.html">Home</a>
         <a href="fishing-log/index.html">Fishing Log</a>
         <a href="fly-tying-archive/index.html">Fly Tying</a>
+        <a href="logs/2026-season-review-v2.html">Season Review</a>
       </div>
       <p>© 2026 CADDIS-GR · 낚시대장</p>
     </footer>
