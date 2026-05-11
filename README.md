@@ -17,7 +17,7 @@
 
 ---
 
-## 📊 2024-2026 시즌 통계
+## 📊 2025-2026 시즌 통계
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
 
