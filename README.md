@@ -5,6 +5,18 @@
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://caddis-gr.github.io/fishing-log/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+---
+
+## 📖 2026 시즌 리뷰
+
+> **바닥에서 전층으로** — 한터낚시터 6m 수심에서 축적한 한 시즌의 복기
+
+바닥 공략의 확립부터 컬러 로테이션, 마이크로 님핑 전환, 전층 운영 체계, Hang 기법의 발견, 플로팅의 재인정까지 — 프롤로그와 6개 챕터로 정리한 시즌 아카이브.
+
+👉 **[2026 시즌 리뷰 보기](logs/2026-season-review-v2.html)**
+
+---
+
 ## 📊 2024-2026 시즌 통계
 
 메인: https://caddis-gr.github.io/fishing-log/index.html
@@ -17,6 +29,8 @@
 ### 📍 방문 낚시터
 - 🏔️ **용인 한터낚시터** (11회)
 - 🌊 **신기낚시터** (3회)
+
+---
 
 ## 📅 조행 목록
 
@@ -89,6 +103,8 @@
 - **[11.15] 한터낚시터** - 바닥 공략의 핵심 ([상세보기](logs/2024-11-15-hanteo.html))
   - 📍 용인 한터낚시터 | 🎯 15마리 | 🌡️ 5°C
 
+---
+
 ## 🛠️ 주요 장비
 
 ### 로드 & 라인
@@ -107,22 +123,26 @@
 - 🔴 **Vampire Leech** — 한터지 클래식 히트 패턴
 - 🟤 **Woolly Bugger** — 만능 스트리머
 
+---
+
 ## 📖 프로젝트 구조
 
 ```
 fishing-log/
-├── index.html              # 메인 대시보드 (조행기 목록)
+├── index.html                      # 메인 대시보드 (조행기 목록)
 ├── data/
-│   └── OK-Song.m4a         # BGM
-├── images/                 # 현장 사진
+│   └── OK-Song.m4a                 # BGM
+├── images/                         # 현장 사진
 │   ├── field-bg.jpg
-│   ├── 0508/               # 2026-05-08 출조 사진
-│   ├── 0501/               # 2026-05-01 출조 사진
-│   ├── 0425/               # 2026-04-25 출조 사진
-│   ├── 0411/               # 2026-04-11 출조 사진
+│   ├── HanTer.JPEG
+│   ├── 0508/                       # 2026-05-08 출조 사진
+│   ├── 0501/                       # 2026-05-01 출조 사진
+│   ├── 0425/                       # 2026-04-25 출조 사진
+│   ├── 0411/                       # 2026-04-11 출조 사진
 │   └── ...
-├── logs/                   # 개별 조행기 HTML 파일들
-│   ├── 2026-05-08-hanter-report.html   ⭐ NEW
+├── logs/                           # 개별 조행기 HTML 파일들
+│   ├── 2026-season-review-v2.html  ⭐ 2026 시즌 복기
+│   ├── 2026-05-08-hanter-report.html
 │   ├── 2026-05-01-hanter.html
 │   ├── 2026-04-25-hanter-log.html
 │   ├── 2026-04-11-hanter.html
@@ -139,6 +159,8 @@ fishing-log/
 └── README.md
 ```
 
+---
+
 ## 🚀 사용 방법
 
 ### 웹에서 보기
@@ -150,6 +172,8 @@ git clone https://github.com/CADDIS-GR/fishing-log.git
 cd fishing-log
 # index.html을 브라우저로 열기
 ```
+
+---
 
 ## 💡 주요 인사이트
 
@@ -167,6 +191,8 @@ cd fishing-log
 - ✅ **특징**: 저수온기 반응 좋음
 - ✅ **전략**: 스트리머 중심 / 느린 리트리브
 
+---
+
 ## 📈 시즌별 통계
 
 | 시즌 | 조행 | 캐치 | 평균 |
@@ -177,12 +203,16 @@ cd fishing-log
 | 2026 봄 | 7회 | 232마리 | 33.1 |
 | **합계** | **14회** | **347마리** | **24.8** |
 
+---
+
 ## 🔗 관련 프로젝트
 
 - **[Fly Fishing Techniques](https://caddis-gr.github.io/fishing-technique/)**: 테크닉 아카이브
   - [컬러 로테이션 전략 가이드](https://caddis-gr.github.io/fishing-technique/techniques/Color_Rotation_Strategy_Guide.html)
 - **[Fly Tying Archive](https://caddis-gr.github.io/fly-tying-archive/)**: 플라이 타잉 패턴 아카이브
 - **[Fishing Gear](https://github.com/CADDIS-GR/fishing-gear)**: 낚시 장비 정보
+
+---
 
 ## 🤝 기여하기
 
