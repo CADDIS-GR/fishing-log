@@ -561,6 +561,78 @@ footer p {
   color: var(--ink4);
 }
 
+
+
+/* ── SEASON POSTER ── */
+.poster-section {
+  padding: 90px 40px;
+  background: linear-gradient(180deg, var(--bg2), var(--bg));
+  border-bottom: 1px solid var(--border);
+}
+.poster-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+}
+.poster-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.poster-copy h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.poster-copy h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.poster-copy p {
+  font-size: .98rem;
+  line-height: 1.9;
+  color: var(--ink3);
+  max-width: 380px;
+}
+.season-poster {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 42px rgba(0,0,0,.12);
+}
+.season-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.season-poster figcaption {
+  padding: 12px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  color: var(--ink4);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 800px) {
+  .poster-section { padding: 70px 24px; }
+  .poster-wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .poster-copy p { max-width: none; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .hero { padding-left: 24px; padding-right: 24px; }
@@ -681,6 +753,26 @@ footer p {
       <div class="toc-item-tag">Next Season</div>
       <div class="toc-item-title">다음 시즌 준비표</div>
     </a>
+  </div>
+</section>
+
+
+<!-- SEASON POSTER -->
+<section class="poster-section">
+  <div class="poster-wrap">
+    <div class="poster-copy">
+      <div class="poster-label">Season Poster</div>
+      <h2>낚시대장의<br><em>2026 시즌 기록</em></h2>
+      <p>
+        바닥을 찍기 위해 시작했지만, 결국 전층을 읽게 된 시즌.
+        한터 6m 수심에서 쌓아 올린 장비, 수심층, 패턴, 그리고 Hang 기법의 기록을
+        하나의 시즌 포스터로 먼저 보여준다.
+      </p>
+    </div>
+    <figure class="season-poster">
+      <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/data/Avart-02.PNG" alt="낚시대장 2026 시즌 포스터">
+      <figcaption>낚시대장 · 2026 Season Review Poster</figcaption>
+    </figure>
   </div>
 </section>
 
