@@ -71,6 +71,11 @@
       transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
     }
     .log-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(74,124,111,.4)}
+    .log-card.plan{border:2px dashed var(--gold);background-color:#faf6ec}
+    .log-card.plan .log-visual{background:linear-gradient(135deg,#2d5248,#4a7c6f);position:relative;overflow:hidden}
+    .log-card.plan .log-visual::after{content:'PLAN';font-family:'DM Serif Display',serif;font-size:56px;color:rgba(255,255,255,.1);position:absolute;right:10px;bottom:-4px;line-height:1;letter-spacing:-.02em;pointer-events:none}
+    .log-card.plan .badge{background:rgba(184,149,42,.18);color:var(--gold);border:1px solid rgba(184,149,42,.3)}
+    .log-card.plan .metric strong{color:var(--gold)}
     .log-card.featured{grid-column:span 8;display:grid;grid-template-columns:.95fr 1.05fr;min-height:340px;background:var(--water-dk);border-color:transparent}
     .log-visual{height:148px;background:linear-gradient(135deg,rgba(45,82,72,.88),rgba(74,124,111,.72));display:flex;align-items:center;justify-content:center;font-size:3rem}
     .log-card.featured .log-visual{min-height:100%;height:auto;background-size:cover;background-position:center}
@@ -225,6 +230,23 @@
     const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/';
 
     const logsData = [
+      {
+        id: '2026-05-16-hanter',
+        type: 'plan',
+        date: '2026-05-16',
+        location: '용인 한터낚시터',
+        weather: '☀️',
+        temp: 29,
+        waterTemp: null,
+        season: 'spring',
+        summary: '헝거게임 — 라스트 찬스 / 번외편, 패자부활전. 시즌 종료 후 스스로 만든 번외전. DI5 바텀 · CamoLux 인터미디어트 · T&T HELIX 마이크로님핑 · Rio Xtreme Indicator 6m 고정 드리프트 4채비 구성.',
+        patterns: ['Airflo DI5 바텀', 'Rio Xtreme Indicator 6m 드리프트'],
+        species: ['무지개송어'],
+        catch: null,
+        notes: '번외편, 시즌 종료 후 자발적 출조, DI5 단독 바텀 재확인, 인디케이터 첫 정식 운용',
+        file: 'logs/2026-05-16-hanter.html',
+        thumbnail: null
+      },
       {
         id: '2026-05-08-hanter',
         date: '2026-05-08',
@@ -463,12 +485,13 @@
     }
 
     function updateStats() {
-      document.getElementById('totalLogs').textContent = logsData.length;
-      const totalCatch = logsData.reduce((s, l) => s + l.catch, 0);
+      const reports = logsData.filter(l => l.catch != null);
+      document.getElementById('totalLogs').textContent = reports.length;
+      const totalCatch = reports.reduce((s, l) => s + l.catch, 0);
       document.getElementById('totalCatch').textContent = totalCatch;
       const locs = new Set(logsData.map(l => l.location));
       document.getElementById('totalLocations').textContent = locs.size;
-      const avg = logsData.length > 0 ? (totalCatch / logsData.length).toFixed(1) : 0;
+      const avg = reports.length > 0 ? (totalCatch / reports.length).toFixed(1) : 0;
       document.getElementById('avgCatch').textContent = avg;
     }
 
@@ -488,8 +511,9 @@
       return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0') + ' ' + days[d.getDay()];
     }
 
-    function getSeasonLabel(s) {
-      return {spring:'Spring',summer:'Summer',fall:'Fall',winter:'Winter'}[s] || s;
+    function getSeasonLabel(log) {
+      if (log.type === 'plan') return 'PLAN';
+      return {spring:'Spring',summer:'Summer',fall:'Fall',winter:'Winter'}[log.season] || log.season;
     }
 
     function truncate(str, n) {
@@ -510,25 +534,28 @@
       grid.style.display = 'grid';
       empty.style.display = 'none';
       grid.innerHTML = filteredLogs.map((log, idx) => {
-        const isFeatured = idx === 0 && log.id === logsData[0].id;
+        const isPlan = log.type === 'plan';
+        const isFeatured = idx === 0 && log.id === logsData[0].id && !isPlan;
         const visualStyle = isFeatured
           ? log.thumbnail
             ? 'style="background-image:linear-gradient(180deg,rgba(26,26,26,.12),rgba(26,26,26,.38)),url(\'' + log.thumbnail + '\');background-size:cover;background-position:center;"'
             : 'style="background:linear-gradient(135deg,var(--water-dk),var(--water));"'
           : '';
-        const badgeText = isFeatured ? 'NEWEST' : getSeasonLabel(log.season);
-        return '<article class="log-card' + (isFeatured ? ' featured' : '') + '" onclick="location.href=\'' + log.file + '\'">'
+        const badgeText = isFeatured ? 'NEWEST' : getSeasonLabel(log);
+        const catchDisplay = log.catch != null ? log.catch : '?';
+        const titleText = isFeatured ? truncate(log.summary, 42) : (isPlan ? truncate(log.summary, 32) : log.catch + '수 · ' + truncate(log.summary, 28));
+        return '<article class="log-card' + (isFeatured ? ' featured' : '') + (isPlan ? ' plan' : '') + '" onclick="location.href=\'' + log.file + '\'">'
           + '<div class="log-visual" ' + visualStyle + '>' + (isFeatured ? '' : log.weather) + '</div>'
           + '<div class="log-content">'
           + '<div class="log-top"><span class="log-date">' + formatDate(log.date) + '</span><span class="badge">' + badgeText + '</span></div>'
-          + '<h3 class="log-title">' + (isFeatured ? truncate(log.summary, 42) : log.catch + '수 · ' + truncate(log.summary, 28)) + '</h3>'
+          + '<h3 class="log-title">' + titleText + '</h3>'
           + '<div class="log-location">📍 ' + log.location + '</div>'
           + '<p class="log-summary">' + log.summary + '</p>'
           + '<div class="chips"><span class="chip">' + (log.patterns[0] || 'Pattern') + '</span><span class="chip">' + log.weather + ' ' + log.temp + '°C</span><span class="chip">' + (log.species[0] || '어종') + '</span></div>'
           + '<div class="log-meta">'
           + '<div class="metric"><strong>' + log.temp + '°C</strong><span>기온</span></div>'
           + '<div class="metric"><strong>' + (log.waterTemp != null ? log.waterTemp + '°C' : '—') + '</strong><span>수온</span></div>'
-          + '<div class="metric"><strong>' + log.catch + '</strong><span>조과</span></div>'
+          + '<div class="metric"><strong>' + catchDisplay + '</strong><span>조과</span></div>'
           + '</div></div></article>';
       }).join('');
     }
