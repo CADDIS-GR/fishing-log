@@ -1,588 +1,393 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta name="google-site-verification" content="zlvvH38VHirh0ppLFnqvqMaCH3RuCmdNtGjibnLGHys" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>플라이낚시 조행기 아카이브 · CADDIS-GR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink:#1a1a1a; --ink-mid:#444; --ink-soft:#888;
-      --paper:#f7f4ef; --paper-2:#eeeae2;
-      --water:#4a7c6f; --water-dk:#2d5248; --water-lt:#a8c5be;
-      --accent:#c0392b; --accent-lt:#f5e6e5;
-      --gold:#b8952a; --rule:#d6d0c4;
-      --shadow-sm:0 4px 16px rgba(26,26,26,.08);
-      --shadow-md:0 12px 36px rgba(26,26,26,.12);
-      --shadow-lg:0 22px 60px rgba(26,26,26,.16);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Noto Sans KR',-apple-system,sans-serif;
-      line-height:1.65;color:var(--ink);
-      background-color:#e8e2d8;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.6'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.88'/%3E%3C/svg%3E");
-      background-size:500px 500px;min-height:100vh;
-    }
-    .wrap{width:min(1160px,calc(100% - 40px));margin:0 auto}
-    .topbar{padding:24px 0 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:900;color:var(--water-dk);font-size:.95rem;letter-spacing:-.01em}
-    .brand-mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--water-dk),var(--water));color:white;display:grid;place-items:center;font-size:1rem;box-shadow:0 6px 18px rgba(45,82,72,.28);flex-shrink:0}
-    .top-note{font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
-    header.hero{
-      position:relative;overflow:hidden;border-radius:28px;min-height:440px;
-      background:linear-gradient(90deg,rgba(26,26,26,.92) 0%,rgba(26,26,26,.72) 44%,rgba(26,26,26,.22) 100%),
-        url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0508/0508-Hanter04.JPEG') center 50% / cover no-repeat;
-      box-shadow:var(--shadow-lg);color:white;display:grid;align-items:end;padding:44px;margin-bottom:22px;
-    }
-    header.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.28));pointer-events:none}
-    .hero-content{position:relative;z-index:1;max-width:680px}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:6px 14px;border:1px solid rgba(168,197,190,.4);border-radius:999px;background:rgba(168,197,190,.12);backdrop-filter:blur(10px);font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88)}
-    .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--water-lt)}
-    header.hero h1{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(2.4rem,6vw,5rem);line-height:1.05;letter-spacing:-.04em;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,.3)}
-    header.hero p{max-width:620px;font-size:clamp(.95rem,2vw,1.18rem);color:rgba(255,255,255,.8);letter-spacing:-.01em;text-shadow:0 2px 10px rgba(0,0,0,.22);line-height:1.7}
-    .hero-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
-    .btn{border:0;border-radius:999px;padding:11px 20px;font-family:'Noto Sans KR',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:transform .2s,box-shadow .2s}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:var(--paper);color:var(--water-dk);box-shadow:0 8px 22px rgba(0,0,0,.2)}
-    .btn-ghost{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.24)}
-    .dashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:38px}
-    .panel{background:rgba(247,244,239,.9);border:1px solid rgba(214,208,196,.6);border-radius:22px;box-shadow:var(--shadow-sm);backdrop-filter:blur(12px)}
-    .filters{padding:20px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end}
-    .field label{display:block;margin-bottom:7px;font-family:'DM Mono',monospace;font-size:.72rem;font-weight:500;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase}
-    select,input[type="text"]{width:100%;padding:10px 13px;border:1px solid var(--rule);border-radius:12px;background:white;color:var(--ink);font-family:'Noto Sans KR',sans-serif;font-size:.92rem;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
-    select:focus,input[type="text"]:focus{border-color:var(--water);box-shadow:0 0 0 3px rgba(74,124,111,.12)}
-    .stats{padding:20px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .stat-card{background:linear-gradient(180deg,#ffffff,#fbf7f0);border:1px solid rgba(214,208,196,.5);border-radius:16px;padding:16px 14px;text-align:center}
-    .stat-card .number{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1;color:var(--water-dk);letter-spacing:-.03em}
-    .stat-card .label{margin-top:7px;font-family:'DM Mono',monospace;color:var(--ink-soft);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px}
-    .section-head h2{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.04em;color:var(--water-dk)}
-    .result-count{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--ink-soft);letter-spacing:.06em;white-space:nowrap}
-    .logs-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-    .log-card{
-      grid-column:span 4;position:relative;overflow:hidden;border-radius:22px;
-      background-color:#faf7f2;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23fff8f0' surfaceScale='1.2'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23t)' opacity='0.7'/%3E%3C/svg%3E");
-      background-size:300px 300px;
-      border:1px solid rgba(214,208,196,.6);box-shadow:var(--shadow-sm);cursor:pointer;
-      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
-    }
-    .log-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(74,124,111,.4)}
-    .log-card.plan{border:2px dashed var(--gold);background-color:#faf6ec}
-    .log-card.plan .log-visual{background:linear-gradient(135deg,#2d5248,#4a7c6f);position:relative;overflow:hidden}
-    .log-card.plan .log-visual::after{content:'PLAN';font-family:'DM Serif Display',serif;font-size:56px;color:rgba(255,255,255,.1);position:absolute;right:10px;bottom:-4px;line-height:1;letter-spacing:-.02em;pointer-events:none}
-    .log-card.plan .badge{background:rgba(184,149,42,.18);color:var(--gold);border:1px solid rgba(184,149,42,.3)}
-    .log-card.plan .metric strong{color:var(--gold)}
-    .log-card.featured{grid-column:span 8;display:grid;grid-template-columns:.95fr 1.05fr;min-height:340px;background:var(--water-dk);border-color:transparent}
-    .log-visual{height:148px;background:linear-gradient(135deg,rgba(45,82,72,.88),rgba(74,124,111,.72));display:flex;align-items:center;justify-content:center;font-size:3rem}
-    .log-card.featured .log-visual{min-height:100%;height:auto;background-size:cover;background-position:center}
-    .log-content{padding:22px}
-    .log-card.featured .log-content{padding:28px 28px 28px 24px}
-    .log-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
-    .log-date{font-family:'DM Mono',monospace;font-size:.82rem;font-weight:500;color:var(--ink-mid);letter-spacing:.04em}
-    .log-card.featured .log-date{color:rgba(255,255,255,.65)}
-    .badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;letter-spacing:.08em;white-space:nowrap;background:rgba(184,149,42,.14);color:var(--gold)}
-    .log-card.featured .badge{background:rgba(168,197,190,.2);color:var(--water-lt)}
-    .log-title{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:1.12rem;line-height:1.38;letter-spacing:-.03em;color:var(--ink);margin-bottom:6px}
-    .log-card.featured .log-title{font-size:clamp(1.3rem,2.8vw,1.85rem);color:white}
-    .log-location{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--water);font-weight:500;margin-bottom:10px;letter-spacing:.04em}
-    .log-card.featured .log-location{color:var(--water-lt)}
-    .log-summary{color:var(--ink-soft);font-size:.9rem;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-    .log-card.featured .log-summary{color:rgba(255,255,255,.68);font-size:.96rem;-webkit-line-clamp:5}
-    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-    .chip{border:1px solid var(--rule);border-radius:999px;padding:4px 9px;background:rgba(255,255,255,.55);font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink-mid);letter-spacing:.04em}
-    .log-card.featured .chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.78)}
-    .log-meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .log-card.featured .log-meta{border-color:rgba(255,255,255,.14)}
-    .metric strong{display:block;font-family:'DM Serif Display',serif;color:var(--water-dk);font-size:1.12rem}
-    .log-card.featured .metric strong{color:white}
-    .metric span{font-family:'DM Mono',monospace;color:var(--ink-soft);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
-    .log-card.featured .metric span{color:rgba(255,255,255,.5)}
-    .empty-state{display:none;text-align:center;padding:80px 20px;color:var(--ink-soft);font-size:1rem}
-    .empty-state h3{font-weight:900;color:var(--ink-mid);font-size:1.3rem;margin:14px 0 8px}
-    footer{margin-top:64px;padding:32px 0 40px;border-top:1px solid var(--rule);text-align:center}
-    .ft-nav{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
-    .ft-nav a{font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color .2s}
-    .ft-nav a:hover{color:var(--water)}
-    footer p{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--rule);letter-spacing:.08em}
-    @media(max-width:980px){
-      .dashboard{grid-template-columns:1fr}
-      .log-card{grid-column:span 6}
-      .log-card.featured{grid-column:span 12;grid-template-columns:1fr}
-      .log-card.featured .log-visual{height:220px;min-height:unset}
-    }
-    @media(max-width:720px){
-      .wrap{width:calc(100% - 28px)}
-      .topbar{flex-direction:column;align-items:flex-start;gap:6px}
-      header.hero{min-height:360px;padding:26px 22px 30px;border-radius:20px}
-      .dashboard{gap:12px}
-      .filters{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .log-card{grid-column:span 12}
-      .log-card.featured{grid-column:span 12;grid-template-columns:1fr}
-      .section-head{display:block}
-      .section-head .result-count{margin-top:6px;display:block}
-    }
-    @media(max-width:480px){
-      header.hero h1{font-size:2.1rem}
-      .hero-actions{flex-direction:column;align-items:flex-start}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>낚시대장의 실전 조행기 · CADDIS-GR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:      #1a1a1a;
+  --ink-mid:  #444;
+  --ink-soft: #888;
+  --paper:    #f7f4ef;
+  --paper-2:  #eeeae2;
+  --water:    #4a7c6f;
+  --water-dk: #2d5248;
+  --water-lt: #a8c5be;
+  --accent:   #c0392b;
+  --gold:     #b8952a;
+  --rule:     #d6d0c4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background-color:#e8e2d8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='6' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23fff8f0' surfaceScale='1.6'%3E%3CfeDistantLight azimuth='50' elevation='65'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23p)' opacity='0.88'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:500px 500px;
+  color:var(--ink);line-height:1.7;
+}
+a{color:inherit;text-decoration:none}
+
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:72vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 0 56px;overflow:hidden;
+  background:url('https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/0516/0516-Hanter03.JPEG') center/cover no-repeat;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(10,20,16,.10) 0%,rgba(10,20,16,.22) 50%,rgba(10,20,16,.72) 100%);
+}
+.hero::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;
+}
+.hero>*{position:relative;z-index:2}
+.hero-tag{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);
+  padding:48px 48px 0;margin-bottom:auto;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-tag img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.4)}
+.hero h1{
+  font-family:'DM Serif Display',serif;font-size:clamp(36px,6vw,72px);
+  color:#fff;line-height:1.05;padding:0 48px;margin-bottom:12px;
+}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.62);padding:0 48px;margin-bottom:24px;max-width:600px}
+.hero-stats{display:flex;gap:32px;padding:0 48px}
+.hs-item{text-align:center}
+.hs-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--gold);line-height:1;display:block}
+.hs-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:3px}
+.hero-wave{position:absolute;bottom:-1px;left:0;width:100%;pointer-events:none;z-index:3}
+
+/* ── WRAP ── */
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* ── SECTION TITLE ── */
+.sec-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:12px;margin:56px 0 20px}
+.sec-h2{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:22px;color:var(--ink);margin-bottom:24px}
+
+/* ── SEASON REVIEW 카드 ── */
+.review-card{
+  background:var(--water-dk);color:#fff;border-radius:16px;
+  padding:36px 40px;margin-bottom:48px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  position:relative;overflow:hidden;
+}
+.review-card::before{
+  content:'復';font-family:'Noto Sans KR',sans-serif;
+  font-size:200px;color:rgba(255,255,255,.04);
+  position:absolute;right:-10px;top:-30px;line-height:1;pointer-events:none;
+}
+.review-card>*{position:relative;z-index:1}
+.rc-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--water-lt);margin-bottom:10px}
+.rc-title{font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:clamp(20px,3vw,28px);line-height:1.2;margin-bottom:10px}
+.rc-sub{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;max-width:440px}
+.rc-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:#fff;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:10px 20px;border-radius:8px;white-space:nowrap;flex-shrink:0;
+  transition:opacity .2s;
+}
+.rc-btn:hover{opacity:.88}
+
+/* ── LOG LIST ── */
+.log-list{display:flex;flex-direction:column;gap:12px;margin-bottom:48px}
+.log-item{
+  background:#faf7f2;border:1px solid var(--rule);border-radius:12px;
+  padding:20px 24px;display:flex;align-items:flex-start;gap:20px;
+  transition:box-shadow .2s;
+}
+.log-item:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.log-item.new{border-left:3px solid var(--gold)}
+.log-item.extra{border-left:3px solid var(--accent)}
+.li-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-soft);white-space:nowrap;padding-top:2px;min-width:52px}
+.li-body{flex:1}
+.li-title{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px;line-height:1.4}
+.li-title a:hover{color:var(--water)}
+.li-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:8px}
+.li-tags{display:flex;flex-wrap:wrap;gap:6px}
+.li-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;background:var(--paper-2);color:var(--ink-soft)}
+.li-tag.win{background:var(--water-dk);color:#fff}
+.li-tag.gold{background:rgba(184,149,42,.15);color:var(--gold)}
+.li-catch{font-family:'DM Serif Display',serif;font-size:28px;color:var(--water-dk);line-height:1;white-space:nowrap;padding-top:2px}
+.li-catch small{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);display:block;text-align:center;letter-spacing:.1em}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:48px}
+.stat-item{background:#faf7f2;border:1px solid var(--rule);border-radius:12px;padding:20px 16px;text-align:center}
+.stat-num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--water-dk);line-height:1;display:block}
+.stat-num.gold{color:var(--gold)}
+.stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;display:block}
+
+footer{background:var(--ink);color:rgba(255,255,255,.4);padding:40px 24px;text-align:center;margin-top:80px}
+.ft-nav{display:flex;justify-content:center;gap:24px;margin-bottom:14px;flex-wrap:wrap}
+.ft-nav a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);transition:color .2s}
+.ft-nav a:hover{color:var(--water-lt)}
+footer p{font-size:12px}
+
+@media(max-width:640px){
+  .hero h1,.hero-sub,.hero-tag,.hero-stats{padding-left:20px;padding-right:20px}
+  .hero-stats{gap:18px}
+  .hs-num{font-size:24px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .review-card{flex-direction:column;padding:28px 24px}
+  .log-item{flex-wrap:wrap}
+  .li-catch{width:100%;text-align:left}
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <span class="brand-mark">🎣</span>
-        CADDIS-GR · Fly Fishing Logbook
-      </div>
-      <span class="top-note">Stillwater · Trout · Tactics Archive</span>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-tag">
+    <img src="https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/data/prof.PNG" alt="낚시대장">
+    낚시대장 · CADDIS-GR · Fly Fishing Log
+  </div>
+  <h1>실전 조행기</h1>
+  <p class="hero-sub">관리형 저수지 플라이낚시 — 한터낚시터 6m 수심의 기록과 데이터</p>
+  <div class="hero-stats">
+    <div class="hs-item">
+      <span class="hs-num">15</span>
+      <span class="hs-label">총 출조</span>
     </div>
-    <header class="hero">
-      <div class="hero-content">
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          <span id="eyebrowYear">2026</span> Season Archive
-        </div>
-        <h1>플라이낚시<br>조행기 아카이브</h1>
-        <p>관리형낚시터에서 축적한 채비·수심층·패턴·리트리브 데이터를<br>조행기 형태로 정리한 개인 기록 저장소입니다.</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="document.getElementById('logs').scrollIntoView({behavior:'smooth'})">최근 조행 보기</button>
-          <button class="btn btn-ghost" onclick="document.getElementById('searchInput').focus()">패턴 검색 →</button>
-          <button class="btn btn-ghost" onclick="location.href='logs/2026-season-review-v2.html'">📖 시즌 리뷰</button>
-        </div>
-      </div>
-    </header>
-    <section class="dashboard">
-      <div class="panel filters">
-        <div class="field">
-          <label for="seasonFilter">Season</label>
-          <select id="seasonFilter">
-            <option value="all">전체 시즌</option>
-            <option value="spring">봄</option>
-            <option value="summer">여름</option>
-            <option value="fall">가을</option>
-            <option value="winter">겨울</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="locationFilter">Location</label>
-          <select id="locationFilter"><option value="all">전체 장소</option></select>
-        </div>
-        <div class="field">
-          <label for="searchInput">Search</label>
-          <input type="text" id="searchInput" placeholder="패턴, 장소, 메모 검색…">
-        </div>
-      </div>
-      <div class="panel stats">
-        <div class="stat-card"><div class="number" id="totalLogs">0</div><div class="label">총 조행</div></div>
-        <div class="stat-card"><div class="number" id="totalCatch">0</div><div class="label">총 캐치</div></div>
-        <div class="stat-card"><div class="number" id="totalLocations">0</div><div class="label">방문지</div></div>
-        <div class="stat-card"><div class="number" id="avgCatch">0</div><div class="label">평균</div></div>
-      </div>
-    </section>
-    <section id="logs">
-      <div class="section-head">
-        <div><h2>조행 기록</h2></div>
-        <span class="result-count" id="resultCount"></span>
-      </div>
-      <!-- Season Review Banner -->
-      <div onclick="location.href='logs/2026-season-review-v2.html'" style="
-        cursor:pointer; margin-bottom:22px; border-radius:22px; overflow:hidden;
-        background:linear-gradient(90deg,var(--water-dk) 0%,var(--water) 100%);
-        border:1px solid rgba(74,124,111,.3);
-        box-shadow:var(--shadow-sm);
-        display:grid; grid-template-columns:1fr auto;
-        align-items:center; padding:28px 32px; gap:20px;
-        transition:transform .2s, box-shadow .2s;
-      " onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(26,26,26,.16)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div>
-          <div style="font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(168,197,190,.7);margin-bottom:10px;">2025–2026 · Season Review</div>
-          <div style="font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.5vw,1.5rem);color:white;letter-spacing:-.03em;margin-bottom:8px;">바닥에서 전층으로 — 2026 시즌 복기</div>
-          <div style="font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.6;">바닥 공략 확립 · 컬러 로테이션 · 마이크로 님핑 · 전층 운영 체계 · Hang 기법 · 플로팅 재인정</div>
-        </div>
-        <div style="font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.1em;color:rgba(168,197,190,.8);white-space:nowrap;display:flex;align-items:center;gap:8px;">
-          읽기 →
-        </div>
-      </div>
-      <div class="logs-grid" id="logsGrid"></div>
-      <div class="empty-state" id="emptyState">
-        <div style="font-size:3rem">🎣</div>
-        <h3>검색 결과가 없습니다</h3>
-        <p>필터나 검색어를 조정해 보십시오.</p>
-      </div>
-    </section>
-    <footer>
-      <div class="ft-nav">
-        <a href="index.html">Home</a>
-        <a href="fishing-log/index.html">Fishing Log</a>
-        <a href="fly-tying-archive/index.html">Fly Tying</a>
-        <a href="logs/2026-season-review-v2.html">Season Review</a>
-      </div>
-      <p>© 2026 CADDIS-GR · 낚시대장</p>
-    </footer>
+    <div class="hs-item">
+      <span class="hs-num">370</span>
+      <span class="hs-label">총 조과</span>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">24.7</span>
+      <span class="hs-label">평균 (수)</span>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">2</span>
+      <span class="hs-label">방문 낚시터</span>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 48 C360 0 1080 0 1440 48 L1440 48 L0 48Z" fill="#e8e2d8"/>
+  </svg>
+</header>
+
+<div class="wrap" style="padding-top:56px">
+
+  <!-- 시즌 리뷰 카드 -->
+  <div class="review-card">
+    <div>
+      <div class="rc-label">2025–2026 Season Review</div>
+      <div class="rc-title">바닥에서 전층으로</div>
+      <div class="rc-sub">한터낚시터 6m 수심에서 시작된 한 시즌의 복기. 바닥 공략, 싱킹라인 체계, 마이크로 님핑, Hang 기법, 그리고 플로팅 인디케이터의 재인정까지.</div>
+    </div>
+    <a href="logs/2026-season-review-v2.html" class="rc-btn">시즌 리뷰 보기 →</a>
   </div>
 
-  <script>
-    const BASE = 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/';
+  <!-- 2026 봄 시즌 -->
+  <p class="sec-label">2026 Spring Season</p>
+  <h2 class="sec-h2">봄 시즌 조행기</h2>
+  <div class="log-list">
 
-    const logsData = [
-      {
-        id: '2026-05-16-hanter',
-        type: 'plan',
-        date: '2026-05-16',
-        location: '용인 한터낚시터',
-        weather: '☀️',
-        temp: 29,
-        waterTemp: null,
-        season: 'spring',
-        summary: '헝거게임 — 라스트 찬스 / 번외편, 패자부활전. 시즌 종료 후 스스로 만든 번외전. DI5 바텀 · CamoLux 인터미디어트 · T&T HELIX 마이크로님핑 · Rio Xtreme Indicator 6m 고정 드리프트 4채비 구성.',
-        patterns: ['Airflo DI5 바텀', 'Rio Xtreme Indicator 6m 드리프트'],
-        species: ['무지개송어'],
-        catch: null,
-        notes: '번외편, 시즌 종료 후 자발적 출조, DI5 단독 바텀 재확인, 인디케이터 첫 정식 운용',
-        file: 'logs/2026-05-16-hanter.html',
-        thumbnail: null
-      },
-      {
-        id: '2026-05-08-hanter',
-        date: '2026-05-08',
-        location: '용인 한터낚시터',
-        weather: '☀️💨',
-        temp: 22,
-        waterTemp: null,
-        season: 'spring',
-        summary: '"겸손은.... 힘들다!!" — 호기롭게 나선 평일 출조. 송어는 바닥으로 깊게 내려앉아 먹이활동 극도 제한. Titan 3D 외 채비 실질적 무반응. Chironomid 라바·퓨파 전량 무효. 플로팅 인디케이터 채비 유효 인정. 12수.',
-        patterns: ['Titan 3D 바텀', 'Chironomid Larva/Pupa — 무반응'],
-        species: ['무지개송어'],
-        catch: 12,
-        notes: '평일 극저활성, 바텀 전량, Chironomid 무반응, 플로팅 인디케이터 유효 인정, Sink Tip 판단 보류',
-        file: 'logs/2026-05-08-hanter-report.html',
-        thumbnail: BASE + '0508/0508-Hanter04.JPEG'
-      },
-      {
-        id: '2026-05-01-hanter',
-        date: '2026-05-01',
-        location: '용인 한터낚시터',
-        weather: '🌬️',
-        temp: 18,
-        waterTemp: null,
-        season: 'spring',
-        summary: '"그대 이름은 바람 바람 바람" — 종일 봄 똥바람 속 시즌 마지막 출조. 하버라인 표층 데뷔, Hang 기법 약 10수 기여, 오후 바텀 효율 저하 경향 확인. Only Sinking 4채비 완성. 31수.',
-        patterns: ['Chironomid Red 그라데이션 Larva', 'Chironomid White Larva/Pupa', 'Midge Larva/Pupa'],
-        species: ['무지개송어'],
-        catch: 31,
-        notes: '하버라인 표층 데뷔, Hang 기법 ~10수, 바텀 킬존 약화 경향 확인, Only Sinking 바람 내성',
-        file: 'logs/2026-05-01-hanter.html',
-        thumbnail: BASE + '0501/0501-Hanter.JPEG'
-      },
-      {
-        id: '2026-04-25-hanter-log',
-        date: '2026-04-25',
-        location: '용인 한터낚시터',
-        weather: '☀️',
-        temp: 23,
-        waterTemp: null,
-        season: 'spring',
-        summary: '"올리고~ 올리고 🎶, 내리고~ 내리고 🎵" 수면 피딩을 읽고 즉시 인터미디어트로 시작. 오전 중층 공략 후 고온으로 바텀 전환, 4시 이후 폭발. Hang 기법 발견, Roly-Poly 첫 랜딩. 48수.',
-        patterns: ['Chironomid Red 그라데이션 Larva', 'Chironomid White', 'Zonker Tail Mini Leech #16'],
-        species: ['무지개송어'],
-        catch: 48,
-        notes: '인터미디어트 전층 커버 능력 증명, Hang 기법 발견, Roly-Poly 첫 랜딩',
-        file: 'logs/2026-04-25-hanter-log.html',
-        thumbnail: BASE + '0425/0425-Hanter.JPEG'
-      },
-      {
-        id: '2026-04-11-hanter',
-        date: '2026-04-11',
-        location: '용인 한터낚시터',
-        weather: '⛅',
-        temp: 13.7,
-        waterTemp: null,
-        season: 'spring',
-        summary: '작전명 "경험이 집중을 만든다". 꽃샘추위와 이틀간의 비를 예측하고 전략을 수정. 바텀 공략으로 오전 30수, 인터미디어트 재발견, T&T Helix 데뷔전 20여수. 58수 달성.',
-        patterns: ['Red Chironomid Larva FL', 'Mojo Nymph Yarn', 'Zebra Midge #18'],
-        species: ['무지개송어'],
-        catch: 58,
-        notes: '인터미디어트 마이크로 님핑 재발견, T&T Helix 863-4 데뷔, SA Infinity + R8 Core 가능성 확인',
-        file: 'logs/2026-04-11-hanter.html',
-        thumbnail: BASE + '0411/0411-View.JPEG'
-      },
-      {
-        id: '2026-03-29-hanter',
-        date: '2026-03-29',
-        location: '용인 한터낚시터',
-        weather: '☀️',
-        temp: 20,
-        waterTemp: null,
-        season: 'spring',
-        summary: '작전명 "적공(積功), 판을 흔들다". 연일 통하던 바닥 패턴이 완전히 침묵. Airflo SS2 DI5 첫 등판. 에그 실마리로 마이크로 님핑 전환, 게임체인저. 23수.',
-        patterns: ['Chironomid Larva (Zebra Midge)', 'White Chironomid Pupa', 'Egg Pattern'],
-        species: ['무지개송어'],
-        catch: 23,
-        notes: '마이크로 님핑 게임체인저, Airflo DI5 첫 실전, Biostrike 인디케이터 3개 사선 입질',
-        file: 'logs/2026-03-29-hanter.html',
-        thumbnail: BASE + '0329/0329-Field-01.JPEG'
-      },
-      {
-        id: '2026-03-14-daedae',
-        date: '2026-03-14',
-        location: '용인 대대낚시터',
-        weather: '💨',
-        temp: 6,
-        waterTemp: null,
-        season: 'spring',
-        summary: '작전명 "침잠(沈潛)". 오직 싱킹채비만으로 바닥에서 중층권으로 확장시킨 첫 번째 시도. 3대 컬러군 로테이션 뉴노멀 정립. 51수 Goal Reached!',
-        patterns: ['Zonker Tail Mini Leech #16', 'Glow Bead Marabou #14'],
-        species: ['무지개송어'],
-        catch: 51,
-        notes: '침잠 작전, 3대 컬러군 로테이션, Camolux 중층 첫 출전',
-        file: 'logs/2026-03-14_daedae.html',
-        thumbnail: BASE + '0314-filed.JPEG'
-      },
-      {
-        id: '2026-03-01-daedae',
-        date: '2026-03-01',
-        location: '용인 대대낚시터',
-        weather: '💨',
-        temp: 6,
-        waterTemp: null,
-        season: 'spring',
-        summary: '맞바람을 뚫은 39수의 기록. 5색 컬러 로테이션(올리브→블랙→챠트루즈→퍼플→화이트) 첫 실전 검증. 3D 싱킹 + 짧은 카본리더로 6m 바닥권을 완벽 공략.',
-        patterns: ['Zonker Tail Mini Leech #16'],
-        species: ['무지개송어'],
-        catch: 39,
-        notes: '5색 컬러 로테이션, Sage DS2, 풀싱킹 바닥 공략',
-        file: 'logs/2026-03-01_daedae.html',
-        thumbnail: BASE + '0301-Field01.JPEG'
-      },
-      {
-        id: '2026-02-21-daedae',
-        date: '2026-02-21',
-        location: '용인 대대낚시터',
-        weather: '☀️',
-        temp: 17,
-        waterTemp: null,
-        season: 'winter',
-        summary: '해빙기 초입, 풀싱킹으로 6m 바닥층 공략. 컬러 로테이션(퍼플→화이트→올리브→블랙)으로 리액션 바이트 유도. 존커테일 미니 리치 단일 패턴으로 20수 달성.',
-        patterns: ['Zonker Tail Mini Leech'],
-        species: ['무지개송어'],
-        catch: 20,
-        notes: '컬러 로테이션 전략, 리액션 바이트, 주둥이 측면 훅킹',
-        file: 'logs/2026-02-21_daedae.html',
-        thumbnail: BASE + '0221-Trout-01.jpg'
-      },
-      {
-        id: '2026-02-14-hanter',
-        date: '2026-02-14',
-        location: '용인 한터낚시터',
-        weather: '☀️',
-        temp: 3,
-        waterTemp: 5,
-        season: 'winter',
-        summary: '한파 직후 슬로프 공략. 수평에서 수직으로 상승하는 Rising Action 구간에서 입질 집중. White MVP, Technical Trout Line 첫 투입.',
-        patterns: ['Chironomid Larva', 'White Leech'],
-        species: ['무지개송어'],
-        catch: 32,
-        notes: '슬로프 수직 상승 구간 입질 집중, White MVP',
-        file: 'logs/2026-02-14_hanter.html',
-        thumbnail: 'https://raw.githubusercontent.com/CADDIS-GR/fishing-log/main/images/HanTer.JPEG'
-      },
-      {
-        id: '2024-11-15-hanteo',
-        date: '2025-11-15',
-        location: '용인 한터낚시터',
-        weather: '☀️',
-        temp: 5,
-        waterTemp: 8,
-        season: 'fall',
-        summary: '한터지의 핵심은 바닥(Bottom). 풀싱킹과 Deep Lining으로 바닥권 집중 공략.',
-        patterns: ['Vampire Leech', 'Chironomid'],
-        species: ['무지개송어'],
-        catch: 15,
-        notes: '6m 수심, 바닥 공략이 핵심',
-        file: 'logs/2024-11-15-hanteo.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-11-29-singisa',
-        date: '2025-11-29',
-        location: '신기낚시터',
-        weather: '☁️',
-        temp: 3,
-        waterTemp: 6,
-        season: 'fall',
-        summary: '늦가을 신기사 공략. 저수온 대응 전략.',
-        patterns: ['Streamer', 'Nymph'],
-        species: ['무지개송어'],
-        catch: 12,
-        notes: '저수온기 스트리머 공략',
-        file: 'logs/2024-11-29-singisa.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-12-13-singisa',
-        date: '2025-12-13',
-        location: '신기낚시터',
-        weather: '❄️',
-        temp: -2,
-        waterTemp: 4,
-        season: 'winter',
-        summary: '겨울 신기사 재방문. 한파 속 송어 공략.',
-        patterns: ['Woolly Bugger', 'Leech'],
-        species: ['무지개송어', '산천어'],
-        catch: 8,
-        notes: '한파 대응, 바닥 집중',
-        file: 'logs/2024-12-13-singisa.html',
-        thumbnail: null
-      },
-      {
-        id: '2024-12-20-hanteo',
-        date: '2025-12-20',
-        location: '용인 한터낚시터',
-        weather: '⛅',
-        temp: 0,
-        waterTemp: 5,
-        season: 'winter',
-        summary: '겨울 한터지 재공략. Deep Lining 검증.',
-        patterns: ['Chironomid', 'Bloodworm'],
-        species: ['무지개송어'],
-        catch: 18,
-        notes: 'Deep Lining 효과 재확인',
-        file: 'logs/2024-12-20-hanteo.html',
-        thumbnail: null
-      },
-      {
-        id: '2025-01-04-singisa',
-        date: '2026-01-04',
-        location: '신기낚시터',
-        weather: '☀️',
-        temp: -5,
-        waterTemp: 3,
-        season: 'winter',
-        summary: '2025년 첫 조행. 강추위 속 신기사 공략.',
-        patterns: ['Streamer #8', 'Leech'],
-        species: ['무지개송어'],
-        catch: 10,
-        notes: '강추위, 느린 리트리브',
-        file: 'logs/2025-01-04-singisa.html',
-        thumbnail: null
-      }
-    ];
+    <!-- 05.16 번외편 -->
+    <div class="log-item extra">
+      <div class="li-date">05 · 16</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-05-16-hanter-report.html">Finale — 번외편, 내가 만든 마지막 한 판</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; ☀️ 맑음 · 15~29°C &nbsp;|&nbsp; ⏱ 06:00~19:10</div>
+        <div class="li-tags">
+          <span class="li-tag gold">番外篇</span>
+          <span class="li-tag win">White Chironomid Pupa</span>
+          <span class="li-tag win">Balanced Leech #14</span>
+          <span class="li-tag">DI5 바텀 피날레</span>
+          <span class="li-tag">수심 4m 재발견</span>
+          <span class="li-tag">배수기 저수위</span>
+        </div>
+      </div>
+      <div class="li-catch">23<small>수</small></div>
+    </div>
 
-    logsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-    let filteredLogs = [...logsData];
+    <!-- 05.08 -->
+    <div class="log-item">
+      <div class="li-date">05 · 08</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-05-08-hanter-report.html">겸손은.... 힘들다!! — 평일 극저활성, 바텀 12수 전량</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; ☀️💨 맑음 후 강풍 · 22°C</div>
+        <div class="li-tags">
+          <span class="li-tag">Titan 3D 바텀</span>
+          <span class="li-tag">Chironomid 완전 무반응</span>
+          <span class="li-tag">플로팅 인디케이터 유효</span>
+          <span class="li-tag">2026 시즌 최종화</span>
+        </div>
+      </div>
+      <div class="li-catch">12<small>수</small></div>
+    </div>
 
-    function initPage() {
-      const latestYear = new Date(logsData[0].date).getFullYear();
-      document.getElementById('eyebrowYear').textContent = latestYear;
-      updateStats();
-      populateLocationFilter();
-      renderLogs();
-    }
+    <!-- 05.01 -->
+    <div class="log-item">
+      <div class="li-date">05 · 01</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-05-01-hanter.html">그대 이름은 바람 — 봄 똥바람 속 시즌 Last Dance</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 🌬️ 종일 강풍 · 18°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">Hover WF5-H 데뷔</span>
+          <span class="li-tag win">Hang 기법 ~10수</span>
+          <span class="li-tag">Only Sinking 4채비</span>
+          <span class="li-tag">오후 바텀 효율 저하</span>
+        </div>
+      </div>
+      <div class="li-catch">31<small>수</small></div>
+    </div>
 
-    function updateStats() {
-      const reports = logsData.filter(l => l.catch != null);
-      document.getElementById('totalLogs').textContent = reports.length;
-      const totalCatch = reports.reduce((s, l) => s + l.catch, 0);
-      document.getElementById('totalCatch').textContent = totalCatch;
-      const locs = new Set(logsData.map(l => l.location));
-      document.getElementById('totalLocations').textContent = locs.size;
-      const avg = reports.length > 0 ? (totalCatch / reports.length).toFixed(1) : 0;
-      document.getElementById('avgCatch').textContent = avg;
-    }
+    <!-- 04.25 -->
+    <div class="log-item">
+      <div class="li-date">04 · 25</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-04-25-hanter-log.html">올리고~ 올리고 🎶 내리고~ 내리고 🎵 — 수층을 읽은 48수</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 10~23°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">Hang 기법 발견</span>
+          <span class="li-tag win">인터미디어트 전층 커버</span>
+          <span class="li-tag">수면 피딩 즉시 대응</span>
+          <span class="li-tag">Roly-Poly 첫 랜딩</span>
+        </div>
+      </div>
+      <div class="li-catch">48<small>수</small></div>
+    </div>
 
-    function populateLocationFilter() {
-      const locations = [...new Set(logsData.map(l => l.location))];
-      const sel = document.getElementById('locationFilter');
-      locations.forEach(loc => {
-        const opt = document.createElement('option');
-        opt.value = loc; opt.textContent = loc;
-        sel.appendChild(opt);
-      });
-    }
+    <!-- 04.11 -->
+    <div class="log-item">
+      <div class="li-date">04 · 11</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-04-11-hanter.html">경험이 집중을 만든다 — 58수 달성</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~13.7°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">T&T Helix 863-4 데뷔</span>
+          <span class="li-tag win">마이크로 님핑 재발견</span>
+          <span class="li-tag">Red Chironomid Larva FL</span>
+        </div>
+      </div>
+      <div class="li-catch">58<small>수</small></div>
+    </div>
 
-    function formatDate(dateStr) {
-      const d = new Date(dateStr + 'T00:00:00');
-      const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-      return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0') + ' ' + days[d.getDay()];
-    }
+    <!-- 03.29 -->
+    <div class="log-item">
+      <div class="li-date">03 · 29</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-03-29-hanter.html">적공(積功), 판을 흔들다 — 침묵하는 바텀, 마이크로 님핑으로 전환</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~20°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">Airflo SS2 DI5 등판</span>
+          <span class="li-tag">바텀 패턴 침묵</span>
+          <span class="li-tag">에그→마이크로 님핑</span>
+        </div>
+      </div>
+      <div class="li-catch">23<small>수</small></div>
+    </div>
 
-    function getSeasonLabel(log) {
-      if (log.type === 'plan') return 'PLAN';
-      return {spring:'Spring',summer:'Summer',fall:'Fall',winter:'Winter'}[log.season] || log.season;
-    }
+    <!-- 03.14 -->
+    <div class="log-item">
+      <div class="li-date">03 · 14</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-03-14_daedae.html">침잠(沈潛) — 51수 & 뉴노멀 정립</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 0~12°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">3대 컬러군 로테이션 정립</span>
+          <span class="li-tag win">CamoLux 중층 첫 출전</span>
+          <span class="li-tag">Only Sinking</span>
+        </div>
+      </div>
+      <div class="li-catch">51<small>수</small></div>
+    </div>
 
-    function truncate(str, n) {
-      const clean = str.replace(/["""]/g,'').split('—')[0].trim();
-      return clean.length > n ? clean.slice(0, n) + '…' : clean;
-    }
+    <!-- 03.01 -->
+    <div class="log-item">
+      <div class="li-date">03 · 01</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-03-01_daedae.html">서울 대전 대구 부산 찍고!! — 5색 컬러 로테이션 첫 실전</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~12°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">5색 컬러 로테이션 검증</span>
+          <span class="li-tag">풀싱킹 바닥 39수</span>
+        </div>
+      </div>
+      <div class="li-catch">39<small>수</small></div>
+    </div>
+  </div>
 
-    function renderLogs() {
-      const grid = document.getElementById('logsGrid');
-      const empty = document.getElementById('emptyState');
-      const count = document.getElementById('resultCount');
-      count.textContent = filteredLogs.length + '건';
-      if (filteredLogs.length === 0) {
-        grid.style.display = 'none';
-        empty.style.display = 'block';
-        return;
-      }
-      grid.style.display = 'grid';
-      empty.style.display = 'none';
-      grid.innerHTML = filteredLogs.map((log, idx) => {
-        const isPlan = log.type === 'plan';
-        const isFeatured = idx === 0 && log.id === logsData[0].id && !isPlan;
-        const visualStyle = isFeatured
-          ? log.thumbnail
-            ? 'style="background-image:linear-gradient(180deg,rgba(26,26,26,.12),rgba(26,26,26,.38)),url(\'' + log.thumbnail + '\');background-size:cover;background-position:center;"'
-            : 'style="background:linear-gradient(135deg,var(--water-dk),var(--water));"'
-          : '';
-        const badgeText = isFeatured ? 'NEWEST' : getSeasonLabel(log);
-        const catchDisplay = log.catch != null ? log.catch : '?';
-        const titleText = isFeatured ? truncate(log.summary, 42) : (isPlan ? truncate(log.summary, 32) : log.catch + '수 · ' + truncate(log.summary, 28));
-        return '<article class="log-card' + (isFeatured ? ' featured' : '') + (isPlan ? ' plan' : '') + '" onclick="location.href=\'' + log.file + '\'">'
-          + '<div class="log-visual" ' + visualStyle + '>' + (isFeatured ? '' : log.weather) + '</div>'
-          + '<div class="log-content">'
-          + '<div class="log-top"><span class="log-date">' + formatDate(log.date) + '</span><span class="badge">' + badgeText + '</span></div>'
-          + '<h3 class="log-title">' + titleText + '</h3>'
-          + '<div class="log-location">📍 ' + log.location + '</div>'
-          + '<p class="log-summary">' + log.summary + '</p>'
-          + '<div class="chips"><span class="chip">' + (log.patterns[0] || 'Pattern') + '</span><span class="chip">' + log.weather + ' ' + log.temp + '°C</span><span class="chip">' + (log.species[0] || '어종') + '</span></div>'
-          + '<div class="log-meta">'
-          + '<div class="metric"><strong>' + log.temp + '°C</strong><span>기온</span></div>'
-          + '<div class="metric"><strong>' + (log.waterTemp != null ? log.waterTemp + '°C' : '—') + '</strong><span>수온</span></div>'
-          + '<div class="metric"><strong>' + catchDisplay + '</strong><span>조과</span></div>'
-          + '</div></div></article>';
-      }).join('');
-    }
+  <!-- 2026 겨울 시즌 -->
+  <p class="sec-label">2026 Winter Season</p>
+  <h2 class="sec-h2">겨울 시즌 조행기</h2>
+  <div class="log-list">
 
-    document.getElementById('seasonFilter').addEventListener('change', applyFilters);
-    document.getElementById('locationFilter').addEventListener('change', applyFilters);
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    <div class="log-item">
+      <div class="li-date">02 · 21</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-02-21_daedae.html">수중의 변주곡 — 컬러 로테이션과 리액션 바이트</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 1~17°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">컬러 교체→입질 재개 반복</span>
+          <span class="li-tag">리액션 바이트 검증</span>
+        </div>
+      </div>
+      <div class="li-catch">20<small>수</small></div>
+    </div>
 
-    function applyFilters() {
-      const season = document.getElementById('seasonFilter').value;
-      const location = document.getElementById('locationFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase().trim();
-      filteredLogs = logsData.filter(log => {
-        const mSeason   = season === 'all' || log.season === season;
-        const mLocation = location === 'all' || log.location === location;
-        const mSearch   = search === '' ||
-          log.summary.toLowerCase().includes(search) ||
-          (log.notes || '').toLowerCase().includes(search) ||
-          log.patterns.some(p => p.toLowerCase().includes(search)) ||
-          log.species.some(s => s.toLowerCase().includes(search)) ||
-          log.location.toLowerCase().includes(search);
-        return mSeason && mLocation && mSearch;
-      });
-      renderLogs();
-    }
+    <div class="log-item">
+      <div class="li-date">02 · 14</div>
+      <div class="li-body">
+        <div class="li-title"><a href="logs/2026-02-14_hanter.html">한파 끝, 32수의 정교한 기록</a></div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 3°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">Technical Trout Line 첫 투입</span>
+          <span class="li-tag">슬로프 수직 상승 구간</span>
+          <span class="li-tag">White MVP</span>
+        </div>
+      </div>
+      <div class="li-catch">32<small>수</small></div>
+    </div>
+  </div>
 
-    initPage();
-  </script>
+  <!-- 통계 -->
+  <p class="sec-label">Season Stats</p>
+  <h2 class="sec-h2">시즌 통계</h2>
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-num gold">15</span>
+      <span class="stat-label">총 출조</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">370</span>
+      <span class="stat-label">총 조과</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24.7</span>
+      <span class="stat-label">회당 평균</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">58</span>
+      <span class="stat-label">최고 (04·11)</span>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="ft-nav">
+    <a href="https://caddis-gr.github.io/">CADDIS-GR Home</a>
+    <a href="https://caddis-gr.github.io/fishing-log/">Fishing Log</a>
+    <a href="https://caddis-gr.github.io/fly-tying-archive/">Fly Tying</a>
+    <a href="https://caddis-gr.github.io/fishing-technique/">Technique</a>
+  </div>
+  <p>© 2026 CADDIS-GR · 낚시대장 &nbsp;·&nbsp; 32+20+39+51+23+58+48+31+12+23 = 337 (2026 시즌 完)</p>
+</footer>
+
 </body>
 </html>
