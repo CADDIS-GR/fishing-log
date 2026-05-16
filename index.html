@@ -105,21 +105,25 @@ a{color:inherit;text-decoration:none}
 .log-item{
   background:#faf7f2;border:1px solid var(--rule);border-radius:12px;
   padding:20px 24px;display:flex;align-items:flex-start;gap:20px;
-  transition:box-shadow .2s;
+  transition:box-shadow .2s, transform .15s;
+  position:relative;
 }
-.log-item:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.log-item:hover{box-shadow:0 6px 24px rgba(0,0,0,.10);transform:translateY(-1px)}
 .log-item.new{border-left:3px solid var(--gold)}
 .log-item.extra{border-left:3px solid var(--accent)}
-.li-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-soft);white-space:nowrap;padding-top:2px;min-width:52px}
-.li-body{flex:1}
+/* 카드 전체 클릭 오버레이 */
+.log-item .li-link{
+  position:absolute;inset:0;z-index:1;border-radius:12px;
+}
+.li-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-soft);white-space:nowrap;padding-top:2px;min-width:52px;position:relative;z-index:2}
+.li-body{flex:1;position:relative;z-index:2}
 .li-title{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px;line-height:1.4}
-.li-title a:hover{color:var(--water)}
 .li-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:8px}
 .li-tags{display:flex;flex-wrap:wrap;gap:6px}
 .li-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;background:var(--paper-2);color:var(--ink-soft)}
 .li-tag.win{background:var(--water-dk);color:#fff}
 .li-tag.gold{background:rgba(184,149,42,.15);color:var(--gold)}
-.li-catch{font-family:'DM Serif Display',serif;font-size:28px;color:var(--water-dk);line-height:1;white-space:nowrap;padding-top:2px}
+.li-catch{font-family:'DM Serif Display',serif;font-size:28px;color:var(--water-dk);line-height:1;white-space:nowrap;padding-top:2px;position:relative;z-index:2}
 .li-catch small{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);display:block;text-align:center;letter-spacing:.1em}
 
 /* ── STATS ── */
@@ -198,9 +202,10 @@ footer p{font-size:12px}
 
     <!-- 05.16 번외편 -->
     <div class="log-item extra">
+      <a href="logs/2026-05-16-hanter-report.html" class="li-link"></a>
       <div class="li-date">05 · 16</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-05-16-hanter-report.html">Finale — 번외편, 내가 만든 마지막 한 판</a></div>
+        <div class="li-title">Finale — 번외편, 내가 만든 마지막 한 판</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; ☀️ 맑음 · 15~29°C &nbsp;|&nbsp; ⏱ 06:00~19:10</div>
         <div class="li-tags">
           <span class="li-tag gold">番外篇</span>
@@ -216,9 +221,10 @@ footer p{font-size:12px}
 
     <!-- 05.08 -->
     <div class="log-item">
+      <a href="logs/2026-05-08-hanter-report.html" class="li-link"></a>
       <div class="li-date">05 · 08</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-05-08-hanter-report.html">겸손은.... 힘들다!! — 평일 극저활성, 바텀 12수 전량</a></div>
+        <div class="li-title">겸손은.... 힘들다!! — 평일 극저활성, 바텀 12수 전량</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; ☀️💨 맑음 후 강풍 · 22°C</div>
         <div class="li-tags">
           <span class="li-tag">Titan 3D 바텀</span>
@@ -232,9 +238,10 @@ footer p{font-size:12px}
 
     <!-- 05.01 -->
     <div class="log-item">
+      <a href="logs/2026-05-01-hanter.html" class="li-link"></a>
       <div class="li-date">05 · 01</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-05-01-hanter.html">그대 이름은 바람 — 봄 똥바람 속 시즌 Last Dance</a></div>
+        <div class="li-title">그대 이름은 바람 — 봄 똥바람 속 시즌 Last Dance</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 🌬️ 종일 강풍 · 18°C</div>
         <div class="li-tags">
           <span class="li-tag win">Hover WF5-H 데뷔</span>
@@ -248,9 +255,10 @@ footer p{font-size:12px}
 
     <!-- 04.25 -->
     <div class="log-item">
+      <a href="logs/2026-04-25-hanter-log.html" class="li-link"></a>
       <div class="li-date">04 · 25</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-04-25-hanter-log.html">올리고~ 올리고 🎶 내리고~ 내리고 🎵 — 수층을 읽은 48수</a></div>
+        <div class="li-title">올리고~ 올리고 🎶 내리고~ 내리고 🎵 — 수층을 읽은 48수</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 10~23°C</div>
         <div class="li-tags">
           <span class="li-tag win">Hang 기법 발견</span>
@@ -264,9 +272,10 @@ footer p{font-size:12px}
 
     <!-- 04.11 -->
     <div class="log-item">
+      <a href="logs/2026-04-11-hanter.html" class="li-link"></a>
       <div class="li-date">04 · 11</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-04-11-hanter.html">경험이 집중을 만든다 — 58수 달성</a></div>
+        <div class="li-title">경험이 집중을 만든다 — 58수 달성</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~13.7°C</div>
         <div class="li-tags">
           <span class="li-tag win">T&T Helix 863-4 데뷔</span>
@@ -279,9 +288,10 @@ footer p{font-size:12px}
 
     <!-- 03.29 -->
     <div class="log-item">
+      <a href="logs/2026-03-29-hanter.html" class="li-link"></a>
       <div class="li-date">03 · 29</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-03-29-hanter.html">적공(積功), 판을 흔들다 — 침묵하는 바텀, 마이크로 님핑으로 전환</a></div>
+        <div class="li-title">적공(積功), 판을 흔들다 — 침묵하는 바텀, 마이크로 님핑으로 전환</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~20°C</div>
         <div class="li-tags">
           <span class="li-tag win">Airflo SS2 DI5 등판</span>
@@ -294,9 +304,10 @@ footer p{font-size:12px}
 
     <!-- 03.14 -->
     <div class="log-item">
+      <a href="logs/2026-03-14_daedae.html" class="li-link"></a>
       <div class="li-date">03 · 14</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-03-14_daedae.html">침잠(沈潛) — 51수 & 뉴노멀 정립</a></div>
+        <div class="li-title">침잠(沈潛) — 51수 & 뉴노멀 정립</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 0~12°C</div>
         <div class="li-tags">
           <span class="li-tag win">3대 컬러군 로테이션 정립</span>
@@ -309,9 +320,10 @@ footer p{font-size:12px}
 
     <!-- 03.01 -->
     <div class="log-item">
+      <a href="logs/2026-03-01_daedae.html" class="li-link"></a>
       <div class="li-date">03 · 01</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-03-01_daedae.html">서울 대전 대구 부산 찍고!! — 5색 컬러 로테이션 첫 실전</a></div>
+        <div class="li-title">서울 대전 대구 부산 찍고!! — 5색 컬러 로테이션 첫 실전</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 5~12°C</div>
         <div class="li-tags">
           <span class="li-tag win">5색 컬러 로테이션 검증</span>
@@ -328,9 +340,10 @@ footer p{font-size:12px}
   <div class="log-list">
 
     <div class="log-item">
+      <a href="logs/2026-02-21_daedae.html" class="li-link"></a>
       <div class="li-date">02 · 21</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-02-21_daedae.html">수중의 변주곡 — 컬러 로테이션과 리액션 바이트</a></div>
+        <div class="li-title">수중의 변주곡 — 컬러 로테이션과 리액션 바이트</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 1~17°C</div>
         <div class="li-tags">
           <span class="li-tag win">컬러 교체→입질 재개 반복</span>
@@ -341,9 +354,10 @@ footer p{font-size:12px}
     </div>
 
     <div class="log-item">
+      <a href="logs/2026-02-14_hanter.html" class="li-link"></a>
       <div class="li-date">02 · 14</div>
       <div class="li-body">
-        <div class="li-title"><a href="logs/2026-02-14_hanter.html">한파 끝, 32수의 정교한 기록</a></div>
+        <div class="li-title">한파 끝, 32수의 정교한 기록</div>
         <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 3°C</div>
         <div class="li-tags">
           <span class="li-tag win">Technical Trout Line 첫 투입</span>
@@ -352,6 +366,88 @@ footer p{font-size:12px}
         </div>
       </div>
       <div class="li-catch">32<small>수</small></div>
+    </div>
+  </div>
+
+  <!-- 2025-2026 겨울 시즌 -->
+  <p class="sec-label">2025–2026 Winter Season</p>
+  <h2 class="sec-h2">2025-2026 겨울 시즌 조행기</h2>
+  <div class="log-list">
+
+    <div class="log-item">
+      <a href="logs/2025-01-04-singisa.html" class="li-link"></a>
+      <div class="li-date">25 · 01 · 04</div>
+      <div class="li-body">
+        <div class="li-title">새해 첫 출조 — 신기낚시터</div>
+        <div class="li-meta">📍 신기낚시터 &nbsp;|&nbsp; 🌡️ -5°C</div>
+        <div class="li-tags">
+          <span class="li-tag">스트리머 중심</span>
+          <span class="li-tag">저수온기</span>
+        </div>
+      </div>
+      <div class="li-catch">10<small>수</small></div>
+    </div>
+
+    <div class="log-item">
+      <a href="logs/2024-12-20-hanteo.html" class="li-link"></a>
+      <div class="li-date">24 · 12 · 20</div>
+      <div class="li-body">
+        <div class="li-title">Deep Lining 검증 — 한터낚시터</div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 🌡️ 0°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">Deep Lining 검증</span>
+          <span class="li-tag">풀싱킹 바닥</span>
+        </div>
+      </div>
+      <div class="li-catch">18<small>수</small></div>
+    </div>
+
+    <div class="log-item">
+      <a href="logs/2024-12-13-singisa.html" class="li-link"></a>
+      <div class="li-date">24 · 12 · 13</div>
+      <div class="li-body">
+        <div class="li-title">한파 속 송어 공략 — 신기낚시터 (B)</div>
+        <div class="li-meta">📍 신기낚시터 &nbsp;|&nbsp; 🌡️ -2°C</div>
+        <div class="li-tags">
+          <span class="li-tag">스트리머</span>
+          <span class="li-tag">한파</span>
+        </div>
+      </div>
+      <div class="li-catch">8<small>수</small></div>
+    </div>
+  </div>
+
+  <!-- 2025 가을 시즌 -->
+  <p class="sec-label">2024 Autumn Season</p>
+  <h2 class="sec-h2">2024 가을 시즌 조행기</h2>
+  <div class="log-list">
+
+    <div class="log-item">
+      <a href="logs/2024-11-29-singisa.html" class="li-link"></a>
+      <div class="li-date">24 · 11 · 29</div>
+      <div class="li-body">
+        <div class="li-title">늦가을 저수온 공략 — 신기낚시터 (A)</div>
+        <div class="li-meta">📍 신기낚시터 &nbsp;|&nbsp; 🌡️ 3°C</div>
+        <div class="li-tags">
+          <span class="li-tag">늦가을 저수온</span>
+          <span class="li-tag">스트리머</span>
+        </div>
+      </div>
+      <div class="li-catch">12<small>수</small></div>
+    </div>
+
+    <div class="log-item">
+      <a href="logs/2024-11-15-hanteo.html" class="li-link"></a>
+      <div class="li-date">24 · 11 · 15</div>
+      <div class="li-body">
+        <div class="li-title">바닥 공략의 핵심 — 한터낚시터</div>
+        <div class="li-meta">📍 한터낚시터, 용인 &nbsp;|&nbsp; 🌡️ 5°C</div>
+        <div class="li-tags">
+          <span class="li-tag win">바닥 공략 체계 수립</span>
+          <span class="li-tag">풀싱킹</span>
+        </div>
+      </div>
+      <div class="li-catch">15<small>수</small></div>
     </div>
   </div>
 
